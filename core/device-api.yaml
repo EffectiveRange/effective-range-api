@@ -1,0 +1,64 @@
+openapi: 3.0.3
+info:
+  version: 0.1.0
+  title: Device API
+  description: Effective Range device API
+paths:
+  /device:
+    get:
+      responses:
+        '200':
+          description: Returned devices
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: 'model.yaml#/components/schemas/Device'
+      operationId: get-devices
+      summary: Get devices
+    parameters: []
+    post:
+      summary: Add device
+      tags: []
+      responses:
+        '201':
+          description: Added
+      operationId: add-device
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: 'model.yaml#/components/schemas/Device'
+  /device/active:
+    get:
+      responses:
+        '200':
+          description: Returned active devices
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: 'model.yaml#/components/schemas/Device'
+      operationId: get-active-devices
+      summary: Get active devices
+    parameters: []
+  '/device/{id}':
+    get:
+      responses:
+        '200':
+          description: Returned device
+          content:
+            application/json:
+              schema:
+                $ref: 'model.yaml#/components/schemas/Device'
+      operationId: get-device
+      summary: Get device
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: Device ID
