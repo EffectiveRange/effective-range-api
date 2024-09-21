@@ -1,13 +1,27 @@
-openapi: 3.0.3
+openapi: 3.1.0
+tags:
+  - name: range
+    description: Shooting range
+  - name: session
+    description: Shooting session
 info:
   version: 0.1.0
   title: Range API
-  description: Effective Range range API
+  summary: Effective Range range API
+  description: Shooting range related operations
+  contact:
+    name: Effective Range
+    email: info@effective-range.com
+    url: www.effective-range.com
+  license:
+    name: MIT
+    url: 'https://raw.githubusercontent.com/EffectiveRange/effective-range-api/refs/heads/main/LICENSE'
 paths:
   /range:
     get:
       summary: Get ranges
-      tags: [ ]
+      tags:
+        - range
       responses:
         '200':
           description: OK
@@ -16,15 +30,18 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: 'model.yaml#/components/schemas/Range'
+                  $ref: model.yaml#/components/schemas/Range
       operationId: get-ranges
+      description: Get all shooting ranges
     post:
       summary: Add range
-      tags: [ ]
+      tags:
+        - range
       responses:
         '201':
           description: Added
       operationId: add-range
+      description: Add a shooting range
   '/range/{id}':
     parameters:
       - schema:
@@ -35,15 +52,17 @@ paths:
         description: Range ID
     get:
       summary: Get range
-      tags: [ ]
+      tags:
+        - range
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: 'model.yaml#/components/schemas/Range'
+                $ref: model.yaml#/components/schemas/Range
       operationId: get-range
+      description: Get a shooting range by ID
   '/range/{id}/session':
     parameters:
       - schema:
@@ -54,12 +73,15 @@ paths:
         description: Range ID
     get:
       summary: Get active session
-      tags: [ ]
+      tags:
+        - range
+        - session
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: 'model.yaml#/components/schemas/Session'
+                $ref: model.yaml#/components/schemas/Session
       operationId: get-active-session
+      description: Get the active shooting session on a shooting range
