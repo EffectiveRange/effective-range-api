@@ -1,0 +1,65 @@
+openapi: 3.0.3
+info:
+  version: 0.1.0
+  title: Range API
+  description: Effective Range range API
+paths:
+  /range:
+    get:
+      summary: Get ranges
+      tags: [ ]
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: 'model.yaml#/components/schemas/Range'
+      operationId: get-ranges
+    post:
+      summary: Add range
+      tags: [ ]
+      responses:
+        '201':
+          description: Added
+      operationId: add-range
+  '/range/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: Range ID
+    get:
+      summary: Get range
+      tags: [ ]
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: 'model.yaml#/components/schemas/Range'
+      operationId: get-range
+  '/range/{id}/session':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: Range ID
+    get:
+      summary: Get active session
+      tags: [ ]
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: 'model.yaml#/components/schemas/Session'
+      operationId: get-active-session

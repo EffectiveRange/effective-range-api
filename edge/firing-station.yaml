@@ -1,0 +1,5 @@
+openapi: 3.0.3
+info:
+  version: 0.1.0
+  title: Firing station API
+  description: Effective Range firing station API
