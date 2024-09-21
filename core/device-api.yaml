@@ -1,8 +1,19 @@
-openapi: 3.0.3
+openapi: 3.1.0
+tags:
+  - name: device
+    description: Edge device
 info:
   version: 0.1.0
   title: Device API
-  description: Effective Range device API
+  summary: Effective Range device API
+  description: Edge device related operations
+  contact:
+    name: Effective Range
+    email: info@effective-range.com
+    url: www.effective-range.com
+  license:
+    name: MIT
+    url: 'https://raw.githubusercontent.com/EffectiveRange/effective-range-api/refs/heads/main/LICENSE'
 paths:
   /device:
     get:
@@ -14,13 +25,17 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: 'model.yaml#/components/schemas/Device'
+                  $ref: model.yaml#/components/schemas/Device
       operationId: get-devices
       summary: Get devices
+      description: Get a list of all devices
+      tags:
+        - device
     parameters: []
     post:
       summary: Add device
-      tags: []
+      tags:
+        - device
       responses:
         '201':
           description: Added
@@ -29,7 +44,8 @@ paths:
         content:
           application/json:
             schema:
-              $ref: 'model.yaml#/components/schemas/Device'
+              $ref: model.yaml#/components/schemas/Device
+      description: Add a new device
   /device/active:
     get:
       responses:
@@ -40,9 +56,12 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: 'model.yaml#/components/schemas/Device'
+                  $ref: model.yaml#/components/schemas/Device
       operationId: get-active-devices
       summary: Get active devices
+      description: Get a list of currently active devices
+      tags:
+        - device
     parameters: []
   '/device/{id}':
     get:
@@ -52,9 +71,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'model.yaml#/components/schemas/Device'
+                $ref: model.yaml#/components/schemas/Device
       operationId: get-device
       summary: Get device
+      description: Get a device by ID
+      tags:
+        - device
     parameters:
       - schema:
           type: string

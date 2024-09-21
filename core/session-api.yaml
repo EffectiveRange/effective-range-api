@@ -1,13 +1,25 @@
-openapi: 3.0.3
+openapi: 3.1.0
+tags:
+  - name: session
+    description: Shooting session
 info:
   version: 0.1.0
   title: Session API
-  description: Effective Range session API
+  summary: Effective Range session API
+  description: Shooting session related operations
+  contact:
+    name: Effective Range
+    email: info@effective-range.com
+    url: www.effective-range.com
+  license:
+    name: MIT
+    url: 'https://raw.githubusercontent.com/EffectiveRange/effective-range-api/refs/heads/main/LICENSE'
 paths:
   /session:
     get:
       summary: Get sessions
-      tags: [ ]
+      tags:
+        - session
       responses:
         '200':
           description: Returned sessions
@@ -16,8 +28,9 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: 'model.yaml#/components/schemas/Session'
+                  $ref: model.yaml#/components/schemas/Session
       operationId: get-sessions
+      description: Get all shooting sessions
     post:
       operationId: create-session
       summary: Create session
@@ -39,6 +52,9 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateSession'
+      tags:
+        - session
+      description: Create a new shooting session on a shooting range
   '/session/{id}':
     parameters:
       - schema:
@@ -49,15 +65,17 @@ paths:
         description: Session ID
     get:
       summary: Get session
-      tags: [ ]
+      tags:
+        - session
       responses:
         '200':
           description: Returned session
           content:
             application/json:
               schema:
-                $ref: 'model.yaml#/components/schemas/Session'
+                $ref: model.yaml#/components/schemas/Session
       operationId: get-session
+      description: Get a shooting session by ID
   '/session/{id}/start':
     parameters:
       - schema:
@@ -68,11 +86,14 @@ paths:
         description: Session ID
     post:
       summary: Start session
-      tags: [ ]
+      tags:
+        - session
       responses:
         '200':
           description: Started
+          content: {}
       operationId: start-session
+      description: Start a shooting session
   '/session/{id}/end':
     parameters:
       - schema:
@@ -83,11 +104,13 @@ paths:
         description: Session ID
     post:
       summary: End session
-      tags: [ ]
+      tags:
+        - session
       responses:
         '200':
           description: Ended
       operationId: end-session
+      description: End a shooting session
   '/session/{id}/pause':
     parameters:
       - schema:
@@ -98,11 +121,13 @@ paths:
         description: Session ID
     post:
       summary: Pause session
-      tags: [ ]
+      tags:
+        - session
       responses:
         '200':
           description: Paused
       operationId: pause-session
+      description: Pause a shooting session
   '/session/{id}/resume':
     parameters:
       - schema:
@@ -113,11 +138,13 @@ paths:
         description: Session ID
     post:
       summary: Resume session
-      tags: [ ]
+      tags:
+        - session
       responses:
         '200':
           description: Resumed
       operationId: resume-session
+      description: Resume a shooting session
   '/session/{id}/rewind':
     parameters:
       - schema:
@@ -128,11 +155,13 @@ paths:
         description: Session ID
     post:
       summary: Rewind session
-      tags: [ ]
+      tags:
+        - session
       responses:
         '200':
           description: Rewinded
       operationId: rewind-session
+      description: Rewind a shooting session
   '/session/{id}/launch':
     parameters:
       - schema:
@@ -143,7 +172,8 @@ paths:
         description: Session ID
     post:
       summary: Manual launch
-      tags: [ ]
+      tags:
+        - session
       responses:
         '200':
           description: Rewinded
@@ -153,6 +183,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/ManualLaunch'
+      description: Initiate manual launch for a shooting session
 components:
   schemas:
     CreateSession:
