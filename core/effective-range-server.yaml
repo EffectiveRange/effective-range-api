@@ -1,0 +1,420 @@
+openapi: 3.1.0
+tags:
+  - name: device
+    description: Edge device
+  - name: range
+    description: Shooting range
+  - name: session
+    description: Shooting session
+info:
+  version: 0.1.0
+  title: Server API
+  summary: Effective Range server API
+  description: Backend server API for the Effective Range system
+  contact:
+    name: Effective Range
+    email: info@effective-range.com
+    url: www.effective-range.com
+  license:
+    name: MIT
+    url: 'https://raw.githubusercontent.com/EffectiveRange/effective-range-api/refs/heads/main/LICENSE'
+paths:
+  /device:
+    get:
+      responses:
+        '200':
+          description: Returned devices
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Device'
+      operationId: get-devices
+      summary: Get devices
+      description: Get a list of all devices
+      tags:
+        - device
+    parameters: [ ]
+    post:
+      summary: Add device
+      tags:
+        - device
+      responses:
+        '201':
+          description: Added
+      operationId: add-device
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Device'
+      description: Add a new device
+  /device/active:
+    get:
+      responses:
+        '200':
+          description: Returned active devices
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Device'
+      operationId: get-active-devices
+      summary: Get active devices
+      description: Get a list of currently active devices
+      tags:
+        - device
+    parameters: [ ]
+  '/device/{id}':
+    get:
+      responses:
+        '200':
+          description: Returned device
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+      operationId: get-device
+      summary: Get device
+      description: Get a device by ID
+      tags:
+        - device
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: Device ID
+  /range:
+    get:
+      summary: Get ranges
+      tags:
+        - range
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Range'
+      operationId: get-ranges
+      description: Get all shooting ranges
+    post:
+      summary: Add range
+      tags:
+        - range
+      responses:
+        '201':
+          description: Added
+      operationId: add-range
+      description: Add a shooting range
+  '/range/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: Range ID
+    get:
+      summary: Get range
+      tags:
+        - range
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Range'
+      operationId: get-range
+      description: Get a shooting range by ID
+  '/range/{id}/session':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: Range ID
+    get:
+      summary: Get active session
+      tags:
+        - range
+        - session
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Session'
+      operationId: get-active-session
+      description: Get the active shooting session on a shooting range
+  /session:
+    get:
+      summary: Get sessions
+      tags:
+        - session
+      responses:
+        '200':
+          description: Returned sessions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Session'
+      operationId: get-sessions
+      description: Get all shooting sessions
+    post:
+      operationId: create-session
+      summary: Create session
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Session'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSessionRequest'
+      tags:
+        - session
+      description: Create a new shooting session on a shooting range
+  '/session/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: Session ID
+    get:
+      summary: Get session
+      tags:
+        - session
+      responses:
+        '200':
+          description: Returned session
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Session'
+      operationId: get-session
+      description: Get a shooting session by ID
+  '/session/{id}/start':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: Session ID
+    post:
+      summary: Start session
+      tags:
+        - session
+      responses:
+        '200':
+          description: Started
+          content: { }
+      operationId: start-session
+      description: Start a shooting session
+  '/session/{id}/end':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: Session ID
+    post:
+      summary: End session
+      tags:
+        - session
+      responses:
+        '200':
+          description: Ended
+      operationId: end-session
+      description: End a shooting session
+  '/session/{id}/pause':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: Session ID
+    post:
+      summary: Pause session
+      tags:
+        - session
+      responses:
+        '200':
+          description: Paused
+      operationId: pause-session
+      description: Pause a shooting session
+  '/session/{id}/resume':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: Session ID
+    post:
+      summary: Resume session
+      tags:
+        - session
+      responses:
+        '200':
+          description: Resumed
+      operationId: resume-session
+      description: Resume a shooting session
+  '/session/{id}/rewind':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: Session ID
+    post:
+      summary: Rewind session
+      tags:
+        - session
+      responses:
+        '200':
+          description: Rewinded
+      operationId: rewind-session
+      description: Rewind a shooting session
+  '/session/{id}/launch':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: Session ID
+    post:
+      summary: Manual launch
+      tags:
+        - session
+      responses:
+        '200':
+          description: Rewinded
+      operationId: manual-launch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ManualLaunchRequest'
+      description: Initiate manual launch for a shooting session
+components:
+  schemas:
+    Device:
+      title: Device
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          x-stoplight:
+            id: g104uanwf6e9g
+        role:
+          type: string
+        active:
+          type: boolean
+        in_use:
+          type: boolean
+          x-stoplight:
+            id: sv9jrp9ugffkl
+    Range:
+      title: Range
+      type: object
+      properties:
+        id:
+          type: string
+        devices:
+          type: array
+          x-stoplight:
+            id: xubasdthzxrgr
+          items:
+            $ref: '#/components/schemas/Device'
+        disciplines:
+          type: array
+          x-stoplight:
+            id: n1fdieap3rn6u
+          items:
+            x-stoplight:
+              id: iwnlxyoq3sf0g
+            type: string
+    Shooter:
+      title: Shooter
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          x-stoplight:
+            id: 57uhi42bwfcva
+    Session:
+      title: Session
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        range:
+          $ref: '#/components/schemas/Range'
+        discipline:
+          type: string
+          x-stoplight:
+            id: ol4hpgadilpne
+        shooters:
+          type: array
+          x-stoplight:
+            id: s35m5h0hqxuqx
+          items:
+            $ref: '#/components/schemas/Shooter'
+    CreateSessionRequest:
+      title: Create session
+      type: object
+      properties:
+        range_id:
+          type: string
+          x-stoplight:
+            id: aart5dimk9z5l
+        discipline_id:
+          type: string
+          x-stoplight:
+            id: 2rf02b3dse
+        shooter_order:
+          x-stoplight:
+            id: lkl3oq9ef4efj
+          type: array
+          items:
+            x-stoplight:
+              id: g2nle7t6sq5a7
+            type: string
+    ManualLaunchRequest:
+      title: Manual launch
+      type: object
+      properties:
+        devices:
+          type: array
+          items:
+            x-stoplight:
+              id: mdoep5xdf3yuf
+            type: string
