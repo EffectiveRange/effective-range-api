@@ -560,33 +560,33 @@ components:
       x-stoplight:
         id: x6ebnxf7td1be
       enum:
-        - SEQUENTIAL
-        - ROTATIONAL
-      default: SEQUENTIAL
+        - sequential
+        - rotational
+      default: sequential
     DelayType:
       title: DelayType
       x-stoplight:
         id: b2gcrfade4f2k
       enum:
-        - NO_DELAY
-        - FIXED
-        - RANDOM
-      default: NO_DELAY
+        - no_delay
+        - fixed
+        - random
+      default: no_delay
     TriggerType:
       title: TriggerType
       x-stoplight:
         id: mv4bimzewwjq6
       enum:
-        - ON_CALL
-        - ON_SHOT
-        - MANUAL
-      default: ON_CALL
+        - on_call
+        - on_shot
+        - manual
+      default: on_call
     MachineOrder:
       title: MachineOrder
       x-stoplight:
         id: 6dcglqdba1vl0
       enum:
-        - SEQUENTIAL
-        - RANDOMIZED
-        - SIMULTANEOUS
-      default: SEQUENTIAL
+        - sequential
+        - randomized
+        - simultaneous
+      default: sequential
