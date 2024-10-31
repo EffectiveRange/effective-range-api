@@ -35,7 +35,7 @@ paths:
       description: Get a list of all devices
       tags:
         - device
-    parameters: [ ]
+    parameters: []
     post:
       summary: Add device
       tags:
@@ -66,7 +66,7 @@ paths:
       description: Get a list of currently active devices
       tags:
         - device
-    parameters: [ ]
+    parameters: []
   '/device/{id}':
     get:
       responses:
@@ -226,7 +226,7 @@ paths:
       responses:
         '200':
           description: Started
-          content: { }
+          content: {}
       operationId: start-session
       description: Start a shooting session
   '/session/{id}/end':
@@ -319,6 +319,23 @@ paths:
             schema:
               $ref: '#/components/schemas/ManualLaunchRequest'
       description: Initiate manual launch for a shooting session
+  /discipline:
+    post:
+      summary: Add discipline
+      tags: []
+      responses:
+        '201':
+          description: Created
+      operationId: add-discipline
+      x-stoplight:
+        id: a4qjcud5e3muc
+      description: Add a clay shooting discipline
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              $ref: '#/components/schemas/DisciplineConfig'
 components:
   schemas:
     Device:
@@ -418,3 +435,136 @@ components:
             x-stoplight:
               id: mdoep5xdf3yuf
             type: string
+    DisciplineConfig:
+      title: Discipline
+      x-stoplight:
+        id: cfx7mrbspij2o
+      type: object
+      required:
+        - id
+        - name
+        - shooter_order
+        - target_limit
+        - turns
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: gikqrl1sxhvss
+        name:
+          type: string
+          x-stoplight:
+            id: eqogwyyqjfl2x
+        shooter_order:
+          x-stoplight:
+            id: yp1c3nul58q91
+          enum:
+            - SEQUENTIAL
+            - ROTATIONAL
+          default: SEQUENTIAL
+        target_limit:
+          type: integer
+          x-stoplight:
+            id: scbb6b9swu8ec
+          minimum: 1
+          default: 25
+        launch_delay:
+          type: integer
+          x-stoplight:
+            id: mlw82lz284by5
+          minimum: 0
+          default: 0
+        delay_type:
+          x-stoplight:
+            id: 617lmg3186txa
+          enum:
+            - NO_DELAY
+            - FIXED
+            - RANDOM
+          default: NO_DELAY
+        option_bird:
+          type: boolean
+          x-stoplight:
+            id: m07jgxznqngkd
+          default: false
+        turns:
+          type: array
+          x-stoplight:
+            id: hzd80qhbrn7gt
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/TurnConfig'
+            x-stoplight:
+              id: wrr1cn7k6gyjl
+    TurnConfig:
+      title: TurnConfig
+      x-stoplight:
+        id: w9tza4t5cdgul
+      type: object
+      required:
+        - stations
+        - launches
+      properties:
+        stations:
+          type: array
+          x-stoplight:
+            id: 99toevkner4rj
+          minItems: 1
+          uniqueItems: true
+          items:
+            x-stoplight:
+              id: qs87p05dytoho
+            type: string
+        launches:
+          type: array
+          x-stoplight:
+            id: plns501xqp2th
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/LaunchConfig'
+            x-stoplight:
+              id: qmqtmacalc2x5
+    LaunchConfig:
+      title: LaunchConfig
+      x-stoplight:
+        id: 7dy7smsffj66j
+      type: object
+      required:
+        - machines
+      properties:
+        machines:
+          type: array
+          x-stoplight:
+            id: e1ynjrxovj7po
+          minItems: 1
+          uniqueItems: true
+          items:
+            x-stoplight:
+              id: gp1fmnfup0gaw
+            type: string
+        trigger:
+          x-stoplight:
+            id: 482z99z9eyd4n
+          enum:
+            - ON_CALL
+            - ON_SHOT
+          default: ON_CALL
+        order:
+          x-stoplight:
+            id: keepmifbwehi9
+          enum:
+            - SEQUENTIAL
+            - RANDOMIZED
+            - SIMULTANEOUS
+          default: SEQUENTIAL
+        targets:
+          type: integer
+          x-stoplight:
+            id: typ5iras3n7oi
+          minimum: 1
+          default: 1
+        condition:
+          type: string
+          x-stoplight:
+            id: 89u80rwo0jwc9
+      description: Launch configuration
