@@ -459,12 +459,9 @@ components:
           x-stoplight:
             id: eqogwyyqjfl2x
         shooter_order:
+          $ref: '#/components/schemas/ShooterOrder'
           x-stoplight:
             id: yp1c3nul58q91
-          enum:
-            - SEQUENTIAL
-            - ROTATIONAL
-          default: SEQUENTIAL
         target_limit:
           type: integer
           x-stoplight:
@@ -478,13 +475,9 @@ components:
           minimum: 0
           default: 0
         delay_type:
+          $ref: '#/components/schemas/DelayType'
           x-stoplight:
             id: 617lmg3186txa
-          enum:
-            - NO_DELAY
-            - FIXED
-            - RANDOM
-          default: NO_DELAY
         option_bird:
           type: boolean
           x-stoplight:
@@ -532,6 +525,7 @@ components:
       x-stoplight:
         id: 7dy7smsffj66j
       type: object
+      description: Launch configuration
       required:
         - machines
       properties:
@@ -546,20 +540,13 @@ components:
               id: gp1fmnfup0gaw
             type: string
         trigger:
+          $ref: '#/components/schemas/TriggerType'
           x-stoplight:
             id: 482z99z9eyd4n
-          enum:
-            - ON_CALL
-            - ON_SHOT
-          default: ON_CALL
         order:
+          $ref: '#/components/schemas/MachineOrder'
           x-stoplight:
             id: keepmifbwehi9
-          enum:
-            - SEQUENTIAL
-            - RANDOMIZED
-            - SIMULTANEOUS
-          default: SEQUENTIAL
         targets:
           type: integer
           x-stoplight:
@@ -570,4 +557,38 @@ components:
           type: string
           x-stoplight:
             id: 89u80rwo0jwc9
-      description: Launch configuration
+    ShooterOrder:
+      title: ShooterOrder
+      x-stoplight:
+        id: x6ebnxf7td1be
+      enum:
+        - SEQUENTIAL
+        - ROTATIONAL
+      default: SEQUENTIAL
+    DelayType:
+      title: DelayType
+      x-stoplight:
+        id: b2gcrfade4f2k
+      enum:
+        - NO_DELAY
+        - FIXED
+        - RANDOM
+      default: NO_DELAY
+    TriggerType:
+      title: TriggerType
+      x-stoplight:
+        id: mv4bimzewwjq6
+      enum:
+        - ON_CALL
+        - ON_SHOT
+        - MANUAL
+      default: ON_CALL
+    MachineOrder:
+      title: MachineOrder
+      x-stoplight:
+        id: 6dcglqdba1vl0
+      enum:
+        - SEQUENTIAL
+        - RANDOMIZED
+        - SIMULTANEOUS
+      default: SEQUENTIAL
