@@ -534,7 +534,6 @@ components:
           x-stoplight:
             id: e1ynjrxovj7po
           minItems: 1
-          uniqueItems: true
           items:
             x-stoplight:
               id: gp1fmnfup0gaw
