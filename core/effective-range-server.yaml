@@ -506,7 +506,6 @@ components:
           x-stoplight:
             id: 99toevkner4rj
           minItems: 1
-          uniqueItems: true
           items:
             x-stoplight:
               id: qs87p05dytoho
