@@ -16,7 +16,7 @@ info:
   contact:
     name: Effective Range
     email: info@effective-range.com
-    url: 'https://www.effective-range.com'
+    url: https://www.effective-range.com
   license:
     name: MIT
     url: 'https://raw.githubusercontent.com/EffectiveRange/effective-range-api/refs/heads/main/LICENSE'
@@ -452,7 +452,6 @@ components:
       properties:
         id:
           type: string
-          x-field-extra-annotation: '@io.micronaut.data.annotation.Id'
           x-stoplight:
             id: gikqrl1sxhvss
         name:
