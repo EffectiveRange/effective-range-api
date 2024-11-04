@@ -338,7 +338,7 @@ paths:
           application/json:
             schema:
               type: object
-              $ref: '#/components/schemas/DisciplineConfig'
+              $ref: '#/components/schemas/Discipline'
     get:
       summary: Get disciplines
       tags:
@@ -351,7 +351,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/DisciplineConfig'
+                  $ref: '#/components/schemas/Discipline'
                   x-stoplight:
                     id: oesbgk7s2r9bw
       operationId: get-disciplines
@@ -377,7 +377,7 @@ paths:
             application/json:
               schema:
                 type: object
-                $ref: '#/components/schemas/DisciplineConfig'
+                $ref: '#/components/schemas/Discipline'
       operationId: get-discipline
       x-stoplight:
         id: t86q0egkjz12p
@@ -388,6 +388,12 @@ components:
     Device:
       title: Device
       type: object
+      required:
+        - id
+        - type
+        - role
+        - active
+        - in_use
       properties:
         id:
           type: string
@@ -406,6 +412,10 @@ components:
     Range:
       title: Range
       type: object
+      required:
+        - id
+        - devices
+        - discipline_ids
       properties:
         id:
           type: string
@@ -415,7 +425,9 @@ components:
             id: xubasdthzxrgr
           items:
             $ref: '#/components/schemas/Device'
-        disciplines:
+            x-stoplight:
+              id: w1lc7rv5c7tpr
+        discipline_ids:
           type: array
           x-stoplight:
             id: n1fdieap3rn6u
@@ -426,6 +438,9 @@ components:
     Shooter:
       title: Shooter
       type: object
+      required:
+        - id
+        - name
       properties:
         id:
           type: string
@@ -436,6 +451,11 @@ components:
     Session:
       title: Session
       type: object
+      required:
+        - id
+        - range
+        - discipline
+        - shooters
       properties:
         id:
           type: string
@@ -443,7 +463,7 @@ components:
         range:
           $ref: '#/components/schemas/Range'
         discipline:
-          type: string
+          $ref: '#/components/schemas/Discipline'
           x-stoplight:
             id: ol4hpgadilpne
         shooters:
@@ -452,9 +472,15 @@ components:
             id: s35m5h0hqxuqx
           items:
             $ref: '#/components/schemas/Shooter'
+            x-stoplight:
+              id: c0n7vjkxvps0d
     CreateSessionRequest:
       title: Create session
       type: object
+      required:
+        - range_id
+        - discipline_id
+        - shooter_ids
       properties:
         range_id:
           type: string
@@ -464,7 +490,7 @@ components:
           type: string
           x-stoplight:
             id: 2rf02b3dse
-        shooter_order:
+        shooter_ids:
           x-stoplight:
             id: lkl3oq9ef4efj
           type: array
@@ -475,14 +501,16 @@ components:
     ManualLaunchRequest:
       title: Manual launch
       type: object
+      required:
+        - device_ids
       properties:
-        devices:
+        device_ids:
           type: array
           items:
             x-stoplight:
               id: mdoep5xdf3yuf
             type: string
-    DisciplineConfig:
+    Discipline:
       title: Discipline
       x-stoplight:
         id: cfx7mrbspij2o
@@ -542,10 +570,10 @@ components:
         id: w9tza4t5cdgul
       type: object
       required:
-        - stations
+        - station_ids
         - launches
       properties:
-        stations:
+        station_ids:
           type: array
           x-stoplight:
             id: 99toevkner4rj
@@ -570,9 +598,9 @@ components:
       type: object
       description: Launch configuration
       required:
-        - machines
+        - machine_ids
       properties:
-        machines:
+        machine_ids:
           type: array
           x-stoplight:
             id: e1ynjrxovj7po
@@ -581,21 +609,21 @@ components:
             x-stoplight:
               id: gp1fmnfup0gaw
             type: string
-        trigger:
+        trigger_type:
           $ref: '#/components/schemas/TriggerType'
           x-stoplight:
             id: 482z99z9eyd4n
-        order:
+        machine_order:
           $ref: '#/components/schemas/MachineOrder'
           x-stoplight:
             id: keepmifbwehi9
-        targets:
+        target_count:
           type: integer
           x-stoplight:
             id: typ5iras3n7oi
           minimum: 1
           default: 1
-        condition:
+        condition_id:
           type: string
           x-stoplight:
             id: 89u80rwo0jwc9
