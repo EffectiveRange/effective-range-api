@@ -354,7 +354,7 @@ paths:
                   $ref: '#/components/schemas/DisciplineConfig'
                   x-stoplight:
                     id: oesbgk7s2r9bw
-      operationId: get-discipline
+      operationId: get-disciplines
       x-stoplight:
         id: r023imxkusoo8
       description: Get all clay shooting disciplines
