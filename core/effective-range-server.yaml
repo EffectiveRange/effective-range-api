@@ -409,24 +409,67 @@ components:
           type: boolean
           x-stoplight:
             id: sv9jrp9ugffkl
+    Station:
+      title: Station
+      x-stoplight:
+        id: cgs8ewmtq0hrb
+      type: object
+      required:
+        - id
+        - device
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: p3422r5csg3ut
+        device:
+          $ref: '#/components/schemas/Device'
+          x-stoplight:
+            id: 3ynxr2zg0m9la
+    Machine:
+      title: Machine
+      x-stoplight:
+        id: ypkcixeyyags6
+      type: object
+      required:
+        - id
+        - device
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: 5lwm8nhnl8xha
+        device:
+          $ref: '#/components/schemas/Device'
+          x-stoplight:
+            id: rvqzypytwjxve
     Range:
       title: Range
       type: object
       required:
         - id
-        - devices
+        - stations
+        - machines
         - discipline_ids
       properties:
         id:
           type: string
-        devices:
+        stations:
           type: array
           x-stoplight:
-            id: xubasdthzxrgr
+            id: k6wawvjn1dmx6
           items:
-            $ref: '#/components/schemas/Device'
+            $ref: '#/components/schemas/Station'
             x-stoplight:
-              id: w1lc7rv5c7tpr
+              id: q1p4g1pdd8jwl
+        machines:
+          type: array
+          x-stoplight:
+            id: jy0ldbbxpmv48
+          items:
+            $ref: '#/components/schemas/Machine'
+            x-stoplight:
+              id: cnpt8hupa8ebh
         discipline_ids:
           type: array
           x-stoplight:
@@ -502,9 +545,9 @@ components:
       title: Manual launch
       type: object
       required:
-        - device_ids
+        - machine_ids
       properties:
-        device_ids:
+        machine_ids:
           type: array
           items:
             x-stoplight:
