@@ -8,6 +8,8 @@ tags:
     description: Shooting range
   - name: session
     description: Shooting session
+  - name: shooter
+    description: Shooting competitor
 info:
   version: 0.1.0
   title: Server API
@@ -383,6 +385,67 @@ paths:
         id: t86q0egkjz12p
       description: Get a discipline by ID
       parameters: []
+  /shooter:
+    get:
+      summary: Get shooters
+      tags:
+        - shooter
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Shooter'
+                  x-stoplight:
+                    id: fmjf14fgqncp3
+      operationId: get-shooters
+      x-stoplight:
+        id: 8019pvexup91b
+      description: Get all shooter
+    post:
+      summary: Add shooter
+      tags:
+        - shooter
+      responses:
+        '201':
+          description: Created
+      operationId: add-shooter
+      x-stoplight:
+        id: tzsibxbelfecv
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              $ref: '#/components/schemas/Shooter'
+      description: Add new shooter
+  '/shooter/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: Shooter ID
+    get:
+      summary: Get shooter
+      tags:
+        - shooter
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/components/schemas/Shooter'
+      operationId: get-shooter
+      x-stoplight:
+        id: 26nf97y2c8xq6
+      description: Get shooter by ID
 components:
   schemas:
     Device:
