@@ -16,7 +16,7 @@ info:
   contact:
     name: Effective Range
     email: info@effective-range.com
-    url: https://www.effective-range.com
+    url: 'https://www.effective-range.com'
   license:
     name: MIT
     url: 'https://raw.githubusercontent.com/EffectiveRange/effective-range-api/refs/heads/main/LICENSE'
@@ -339,6 +339,50 @@ paths:
             schema:
               type: object
               $ref: '#/components/schemas/DisciplineConfig'
+    get:
+      summary: Get disciplines
+      tags:
+        - discipline
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DisciplineConfig'
+                  x-stoplight:
+                    id: oesbgk7s2r9bw
+      operationId: get-discipline
+      x-stoplight:
+        id: r023imxkusoo8
+      description: Get all clay shooting disciplines
+  '/discipline/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: Discipline ID
+    get:
+      summary: Get discipline
+      tags:
+        - discipline
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/components/schemas/DisciplineConfig'
+      operationId: get-discipline
+      x-stoplight:
+        id: t86q0egkjz12p
+      description: Get a discipline by ID
+      parameters: []
 components:
   schemas:
     Device:
