@@ -2,6 +2,8 @@ openapi: 3.1.0
 tags:
   - name: device
     description: Edge device
+  - name: discipline
+    description: Shooting discipline
   - name: range
     description: Shooting range
   - name: session
@@ -14,7 +16,7 @@ info:
   contact:
     name: Effective Range
     email: info@effective-range.com
-    url: www.effective-range.com
+    url: 'https://www.effective-range.com'
   license:
     name: MIT
     url: 'https://raw.githubusercontent.com/EffectiveRange/effective-range-api/refs/heads/main/LICENSE'
@@ -35,7 +37,7 @@ paths:
       description: Get a list of all devices
       tags:
         - device
-    parameters: [ ]
+    parameters: []
     post:
       summary: Add device
       tags:
@@ -66,7 +68,7 @@ paths:
       description: Get a list of currently active devices
       tags:
         - device
-    parameters: [ ]
+    parameters: []
   '/device/{id}':
     get:
       responses:
@@ -226,7 +228,7 @@ paths:
       responses:
         '200':
           description: Started
-          content: { }
+          content: {}
       operationId: start-session
       description: Start a shooting session
   '/session/{id}/end':
@@ -319,6 +321,68 @@ paths:
             schema:
               $ref: '#/components/schemas/ManualLaunchRequest'
       description: Initiate manual launch for a shooting session
+  /discipline:
+    post:
+      summary: Add discipline
+      tags:
+        - discipline
+      responses:
+        '201':
+          description: Created
+      operationId: add-discipline
+      x-stoplight:
+        id: a4qjcud5e3muc
+      description: Add a clay shooting discipline
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              $ref: '#/components/schemas/DisciplineConfig'
+    get:
+      summary: Get disciplines
+      tags:
+        - discipline
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DisciplineConfig'
+                  x-stoplight:
+                    id: oesbgk7s2r9bw
+      operationId: get-disciplines
+      x-stoplight:
+        id: r023imxkusoo8
+      description: Get all clay shooting disciplines
+  '/discipline/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: Discipline ID
+    get:
+      summary: Get discipline
+      tags:
+        - discipline
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/components/schemas/DisciplineConfig'
+      operationId: get-discipline
+      x-stoplight:
+        id: t86q0egkjz12p
+      description: Get a discipline by ID
+      parameters: []
 components:
   schemas:
     Device:
@@ -418,3 +482,155 @@ components:
             x-stoplight:
               id: mdoep5xdf3yuf
             type: string
+    DisciplineConfig:
+      title: Discipline
+      x-stoplight:
+        id: cfx7mrbspij2o
+      type: object
+      required:
+        - id
+        - name
+        - shooter_order
+        - target_limit
+        - turns
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: gikqrl1sxhvss
+        name:
+          type: string
+          x-stoplight:
+            id: eqogwyyqjfl2x
+        shooter_order:
+          $ref: '#/components/schemas/ShooterOrder'
+          x-stoplight:
+            id: yp1c3nul58q91
+        target_limit:
+          type: integer
+          x-stoplight:
+            id: scbb6b9swu8ec
+          minimum: 1
+          default: 25
+        launch_delay:
+          type: integer
+          x-stoplight:
+            id: mlw82lz284by5
+          minimum: 0
+          default: 0
+        delay_type:
+          $ref: '#/components/schemas/DelayType'
+          x-stoplight:
+            id: 617lmg3186txa
+        option_bird:
+          type: boolean
+          x-stoplight:
+            id: m07jgxznqngkd
+          default: false
+        turns:
+          type: array
+          x-stoplight:
+            id: hzd80qhbrn7gt
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/TurnConfig'
+            x-stoplight:
+              id: wrr1cn7k6gyjl
+    TurnConfig:
+      title: TurnConfig
+      x-stoplight:
+        id: w9tza4t5cdgul
+      type: object
+      required:
+        - stations
+        - launches
+      properties:
+        stations:
+          type: array
+          x-stoplight:
+            id: 99toevkner4rj
+          minItems: 1
+          items:
+            x-stoplight:
+              id: qs87p05dytoho
+            type: string
+        launches:
+          type: array
+          x-stoplight:
+            id: plns501xqp2th
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/LaunchConfig'
+            x-stoplight:
+              id: qmqtmacalc2x5
+    LaunchConfig:
+      title: LaunchConfig
+      x-stoplight:
+        id: 7dy7smsffj66j
+      type: object
+      description: Launch configuration
+      required:
+        - machines
+      properties:
+        machines:
+          type: array
+          x-stoplight:
+            id: e1ynjrxovj7po
+          minItems: 1
+          items:
+            x-stoplight:
+              id: gp1fmnfup0gaw
+            type: string
+        trigger:
+          $ref: '#/components/schemas/TriggerType'
+          x-stoplight:
+            id: 482z99z9eyd4n
+        order:
+          $ref: '#/components/schemas/MachineOrder'
+          x-stoplight:
+            id: keepmifbwehi9
+        targets:
+          type: integer
+          x-stoplight:
+            id: typ5iras3n7oi
+          minimum: 1
+          default: 1
+        condition:
+          type: string
+          x-stoplight:
+            id: 89u80rwo0jwc9
+    ShooterOrder:
+      title: ShooterOrder
+      x-stoplight:
+        id: x6ebnxf7td1be
+      enum:
+        - sequential
+        - rotational
+      default: sequential
+    DelayType:
+      title: DelayType
+      x-stoplight:
+        id: b2gcrfade4f2k
+      enum:
+        - no_delay
+        - fixed
+        - random
+      default: no_delay
+    TriggerType:
+      title: TriggerType
+      x-stoplight:
+        id: mv4bimzewwjq6
+      enum:
+        - on_call
+        - on_shot
+        - manual
+      default: on_call
+    MachineOrder:
+      title: MachineOrder
+      x-stoplight:
+        id: 6dcglqdba1vl0
+      enum:
+        - sequential
+        - randomized
+        - simultaneous
+      default: sequential
