@@ -117,6 +117,12 @@ paths:
           description: Added
       operationId: add-range
       description: Add a shooting range
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              $ref: '#/components/schemas/AddRangeRequest'
   '/range/{id}':
     parameters:
       - schema:
@@ -455,6 +461,7 @@ components:
         - id
         - type
         - role
+        - online
         - active
         - in_use
       properties:
@@ -466,6 +473,10 @@ components:
             id: g104uanwf6e9g
         role:
           type: string
+        online:
+          type: boolean
+          x-stoplight:
+            id: jacm9fmpjjiw1
         active:
           type: boolean
         in_use:
@@ -768,3 +779,42 @@ components:
         - randomized
         - simultaneous
       default: sequential
+    AddRangeRequest:
+      title: AddRangeRequest
+      x-stoplight:
+        id: bfxhvbx80fsp3
+      type: object
+      required:
+        - id
+        - station_map
+        - machine_map
+        - discipline_ids
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: 0ov8tifyfek3o
+        station_map:
+          type: object
+          x-stoplight:
+            id: ozhbuwpei1jj6
+          additionalProperties:
+            x-stoplight:
+              id: v5jag1338km5e
+            type: string
+        machine_map:
+          type: object
+          x-stoplight:
+            id: db5coooruyawv
+          additionalProperties:
+            x-stoplight:
+              id: quiuz48zut16g
+            type: string
+        discipline_ids:
+          type: array
+          x-stoplight:
+            id: ab7z2xlg423ks
+          items:
+            x-stoplight:
+              id: dhoq4c46dh5sl
+            type: string
