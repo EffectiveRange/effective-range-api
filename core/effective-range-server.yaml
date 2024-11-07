@@ -462,8 +462,8 @@ components:
         - type
         - role
         - online
-        - active
         - in_use
+        - triggers
       properties:
         id:
           type: string
@@ -477,12 +477,18 @@ components:
           type: boolean
           x-stoplight:
             id: jacm9fmpjjiw1
-        active:
-          type: boolean
         in_use:
           type: boolean
           x-stoplight:
             id: sv9jrp9ugffkl
+        triggers:
+          type: array
+          x-stoplight:
+            id: 3zwoczn21awr2
+          items:
+            $ref: '#/components/schemas/TriggerType'
+            x-stoplight:
+              id: ul95ms3kzx43g
     Range:
       title: Range
       type: object
