@@ -591,6 +591,45 @@ components:
             $ref: '#/components/schemas/Shooter'
             x-stoplight:
               id: c0n7vjkxvps0d
+    AddRangeRequest:
+      title: AddRangeRequest
+      x-stoplight:
+        id: bfxhvbx80fsp3
+      type: object
+      required:
+        - id
+        - station_map
+        - machine_map
+        - discipline_ids
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: 0ov8tifyfek3o
+        station_map:
+          type: object
+          x-stoplight:
+            id: ozhbuwpei1jj6
+          additionalProperties:
+            x-stoplight:
+              id: v5jag1338km5e
+            type: string
+        machine_map:
+          type: object
+          x-stoplight:
+            id: db5coooruyawv
+          additionalProperties:
+            x-stoplight:
+              id: quiuz48zut16g
+            type: string
+        discipline_ids:
+          type: array
+          x-stoplight:
+            id: ab7z2xlg423ks
+          items:
+            x-stoplight:
+              id: dhoq4c46dh5sl
+            type: string
     CreateSessionRequest:
       title: Create session
       type: object
@@ -708,6 +747,10 @@ components:
             $ref: '#/components/schemas/LaunchConfig'
             x-stoplight:
               id: qmqtmacalc2x5
+        station_order:
+          $ref: '#/components/schemas/StationOrder'
+          x-stoplight:
+            id: hx2ctv2ru53ng
     LaunchConfig:
       title: LaunchConfig
       x-stoplight:
@@ -761,15 +804,14 @@ components:
         - fixed
         - random
       default: no_delay
-    TriggerType:
-      title: TriggerType
+    StationOrder:
+      title: StationOrder
       x-stoplight:
-        id: mv4bimzewwjq6
+        id: immjxsqpncmu2
       enum:
-        - on_call
-        - on_shot
-        - manual
-      default: on_call
+        - sequential
+        - simultaneous
+      default: sequential
     MachineOrder:
       title: MachineOrder
       x-stoplight:
@@ -779,42 +821,12 @@ components:
         - randomized
         - simultaneous
       default: sequential
-    AddRangeRequest:
-      title: AddRangeRequest
+    TriggerType:
+      title: TriggerType
       x-stoplight:
-        id: bfxhvbx80fsp3
-      type: object
-      required:
-        - id
-        - station_map
-        - machine_map
-        - discipline_ids
-      properties:
-        id:
-          type: string
-          x-stoplight:
-            id: 0ov8tifyfek3o
-        station_map:
-          type: object
-          x-stoplight:
-            id: ozhbuwpei1jj6
-          additionalProperties:
-            x-stoplight:
-              id: v5jag1338km5e
-            type: string
-        machine_map:
-          type: object
-          x-stoplight:
-            id: db5coooruyawv
-          additionalProperties:
-            x-stoplight:
-              id: quiuz48zut16g
-            type: string
-        discipline_ids:
-          type: array
-          x-stoplight:
-            id: ab7z2xlg423ks
-          items:
-            x-stoplight:
-              id: dhoq4c46dh5sl
-            type: string
+        id: mv4bimzewwjq6
+      enum:
+        - on_call
+        - on_shot
+        - manual
+      default: on_call
