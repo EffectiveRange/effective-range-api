@@ -122,7 +122,7 @@ paths:
           application/json:
             schema:
               type: object
-              $ref: '#/components/schemas/AddRangeRequest'
+              $ref: '#/components/schemas/Range'
   '/range/{id}':
     parameters:
       - schema:
@@ -483,74 +483,42 @@ components:
           type: boolean
           x-stoplight:
             id: sv9jrp9ugffkl
-    Station:
-      title: Station
-      x-stoplight:
-        id: cgs8ewmtq0hrb
-      type: object
-      required:
-        - id
-        - device
-      properties:
-        id:
-          type: string
-          x-stoplight:
-            id: p3422r5csg3ut
-        device:
-          $ref: '#/components/schemas/Device'
-          x-stoplight:
-            id: 3ynxr2zg0m9la
-    Machine:
-      title: Machine
-      x-stoplight:
-        id: ypkcixeyyags6
-      type: object
-      required:
-        - id
-        - device
-      properties:
-        id:
-          type: string
-          x-stoplight:
-            id: 5lwm8nhnl8xha
-        device:
-          $ref: '#/components/schemas/Device'
-          x-stoplight:
-            id: rvqzypytwjxve
     Range:
       title: Range
       type: object
       required:
         - id
-        - stations
-        - machines
+        - station_map
+        - machine_map
         - discipline_ids
       properties:
         id:
           type: string
-        stations:
-          type: array
           x-stoplight:
-            id: k6wawvjn1dmx6
-          items:
-            $ref: '#/components/schemas/Station'
-            x-stoplight:
-              id: q1p4g1pdd8jwl
-        machines:
-          type: array
+            id: 0ov8tifyfek3o
+        station_map:
+          type: object
           x-stoplight:
-            id: jy0ldbbxpmv48
-          items:
-            $ref: '#/components/schemas/Machine'
+            id: ozhbuwpei1jj6
+          additionalProperties:
             x-stoplight:
-              id: cnpt8hupa8ebh
+              id: v5jag1338km5e
+            type: string
+        machine_map:
+          type: object
+          x-stoplight:
+            id: db5coooruyawv
+          additionalProperties:
+            x-stoplight:
+              id: quiuz48zut16g
+            type: string
         discipline_ids:
           type: array
           x-stoplight:
-            id: n1fdieap3rn6u
+            id: ab7z2xlg423ks
           items:
             x-stoplight:
-              id: iwnlxyoq3sf0g
+              id: dhoq4c46dh5sl
             type: string
     Shooter:
       title: Shooter
@@ -591,45 +559,6 @@ components:
             $ref: '#/components/schemas/Shooter'
             x-stoplight:
               id: c0n7vjkxvps0d
-    AddRangeRequest:
-      title: AddRangeRequest
-      x-stoplight:
-        id: bfxhvbx80fsp3
-      type: object
-      required:
-        - id
-        - station_map
-        - machine_map
-        - discipline_ids
-      properties:
-        id:
-          type: string
-          x-stoplight:
-            id: 0ov8tifyfek3o
-        station_map:
-          type: object
-          x-stoplight:
-            id: ozhbuwpei1jj6
-          additionalProperties:
-            x-stoplight:
-              id: v5jag1338km5e
-            type: string
-        machine_map:
-          type: object
-          x-stoplight:
-            id: db5coooruyawv
-          additionalProperties:
-            x-stoplight:
-              id: quiuz48zut16g
-            type: string
-        discipline_ids:
-          type: array
-          x-stoplight:
-            id: ab7z2xlg423ks
-          items:
-            x-stoplight:
-              id: dhoq4c46dh5sl
-            type: string
     CreateSessionRequest:
       title: Create session
       type: object
@@ -738,6 +667,10 @@ components:
             x-stoplight:
               id: qs87p05dytoho
             type: string
+        station_order:
+          $ref: '#/components/schemas/StationOrder'
+          x-stoplight:
+            id: hx2ctv2ru53ng
         launches:
           type: array
           x-stoplight:
@@ -747,10 +680,6 @@ components:
             $ref: '#/components/schemas/LaunchConfig'
             x-stoplight:
               id: qmqtmacalc2x5
-        station_order:
-          $ref: '#/components/schemas/StationOrder'
-          x-stoplight:
-            id: hx2ctv2ru53ng
     LaunchConfig:
       title: LaunchConfig
       x-stoplight:
