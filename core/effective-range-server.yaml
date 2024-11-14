@@ -459,6 +459,7 @@ paths:
         name: id
         in: path
         required: true
+        description: Session ID
     post:
       summary: Your POST endpoint
       tags:
