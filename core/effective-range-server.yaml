@@ -359,9 +359,8 @@ paths:
       tags:
         - session
       responses:
-        '200':
-          description: Started
-          content: {}
+        '202':
+          description: Accepted
       operationId: start-session
       description: Start a shooting session
   '/session/{id}/end':
@@ -378,8 +377,8 @@ paths:
       tags:
         - session
       responses:
-        '200':
-          description: Ended
+        '202':
+          description: Accepted
       operationId: end-session
       description: End a shooting session
   '/session/{id}/pause':
@@ -396,8 +395,8 @@ paths:
       tags:
         - session
       responses:
-        '200':
-          description: Paused
+        '202':
+          description: Accepted
       operationId: pause-session
       description: Pause a shooting session
   '/session/{id}/resume':
@@ -414,8 +413,8 @@ paths:
       tags:
         - session
       responses:
-        '200':
-          description: Resumed
+        '202':
+          description: Accepted
       operationId: resume-session
       description: Resume a shooting session
   '/session/{id}/rewind':
@@ -432,8 +431,8 @@ paths:
       tags:
         - session
       responses:
-        '200':
-          description: Rewinded
+        '202':
+          description: Accepted
       operationId: rewind-session
       description: Rewind a shooting session
   '/session/{id}/launch':
@@ -450,8 +449,8 @@ paths:
       tags:
         - session
       responses:
-        '200':
-          description: Rewinded
+        '202':
+          description: Accepted
       operationId: initiate-manual-launch
       requestBody:
         content:
@@ -469,12 +468,12 @@ paths:
         required: true
         description: Session ID
     post:
-      summary: Your POST endpoint
+      summary: Trigger event
       tags:
         - session
       responses:
-        '200':
-          description: OK
+        '202':
+          description: Accepted
       operationId: trigger-session-event
       x-stoplight:
         id: xdhdyp6s73adg
@@ -744,6 +743,7 @@ components:
         - range
         - discipline
         - shooters
+        - state
       properties:
         id:
           type: string
@@ -762,6 +762,61 @@ components:
             $ref: '#/components/schemas/Shooter'
             x-stoplight:
               id: c0n7vjkxvps0d
+        state:
+          $ref: '#/components/schemas/SessionState'
+          x-stoplight:
+            id: 5b2wter5eaa3r
+    SessionState:
+      title: SessionState
+      x-stoplight:
+        id: o0y6d4wuuprb2
+      type: object
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: crt8ilgl6rd80
+        shooter_id:
+          type: string
+          x-stoplight:
+            id: sm3ga6zioykco
+        round:
+          type: integer
+          x-stoplight:
+            id: jtfr8k2o5psk7
+        turn:
+          type: integer
+          x-stoplight:
+            id: g0d2unx3km9dw
+        launch:
+          type: integer
+          x-stoplight:
+            id: er4hf5g3s4deq
+        trigger_type:
+          type: string
+          x-stoplight:
+            id: om54yqp452807
+        station_ids:
+          type: array
+          x-stoplight:
+            id: 5haew9g905kgm
+          items:
+            x-stoplight:
+              id: hmlerlit7s7i5
+            type: string
+        machine_ids:
+          type: array
+          x-stoplight:
+            id: 17kka950slonm
+          items:
+            x-stoplight:
+              id: 2yoe3mj4k7d3h
+            type: string
+        token:
+          type: string
+          x-stoplight:
+            id: fqr4isqtkurqn
+          format: uuid
     CreateSessionRequest:
       title: Create session
       type: object
