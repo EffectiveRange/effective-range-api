@@ -486,6 +486,24 @@ paths:
               $ref: '#/components/schemas/TriggerEventRequest'
 components:
   schemas:
+    Token:
+      title: Token
+      x-stoplight:
+        id: 2iv7qcr6nc53e
+      type: object
+      required:
+        - id
+        - type
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: 5ivn1nvt1l6z7
+          format: uuid
+        type:
+          $ref: '#/components/schemas/TriggerType'
+          x-stoplight:
+            id: 07is2ncw10iyc
     Device:
       title: Device
       type: object
@@ -495,7 +513,6 @@ components:
         - role
         - online
         - in_use
-        - triggers
       properties:
         id:
           type: string
@@ -513,12 +530,12 @@ components:
           type: boolean
           x-stoplight:
             id: sv9jrp9ugffkl
-        triggers:
+        tokens:
           type: array
           x-stoplight:
             id: 3zwoczn21awr2
           items:
-            $ref: '#/components/schemas/TriggerType'
+            $ref: '#/components/schemas/Token'
             x-stoplight:
               id: ul95ms3kzx43g
     Range:
@@ -783,11 +800,14 @@ components:
             x-stoplight:
               id: 2yoe3mj4k7d3h
             type: string
-        token:
-          type: string
+        tokens:
+          type: array
           x-stoplight:
             id: fqr4isqtkurqn
-          format: uuid
+          items:
+            $ref: '#/components/schemas/Token'
+            x-stoplight:
+              id: f6xdnfvo0wxnt
     Session:
       title: Session
       type: object
