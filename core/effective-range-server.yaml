@@ -740,6 +740,8 @@ components:
       x-stoplight:
         id: o0y6d4wuuprb2
       type: object
+      required:
+        - id
       properties:
         id:
           type: string
@@ -762,7 +764,7 @@ components:
           x-stoplight:
             id: er4hf5g3s4deq
         trigger_type:
-          type: string
+          $ref: '#/components/schemas/TriggerType'
           x-stoplight:
             id: om54yqp452807
         station_ids:
