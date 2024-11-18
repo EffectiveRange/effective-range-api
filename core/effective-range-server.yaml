@@ -735,39 +735,8 @@ components:
         - on_shot
         - manual
       default: on_call
-    Session:
-      title: Session
-      type: object
-      required:
-        - id
-        - range
-        - discipline
-        - shooters
-        - state
-      properties:
-        id:
-          type: string
-          format: uuid
-        range:
-          $ref: '#/components/schemas/Range'
-        discipline:
-          $ref: '#/components/schemas/Discipline'
-          x-stoplight:
-            id: ol4hpgadilpne
-        shooters:
-          type: array
-          x-stoplight:
-            id: s35m5h0hqxuqx
-          items:
-            $ref: '#/components/schemas/Shooter'
-            x-stoplight:
-              id: c0n7vjkxvps0d
-        state:
-          $ref: '#/components/schemas/SessionState'
-          x-stoplight:
-            id: 5b2wter5eaa3r
-    SessionState:
-      title: SessionState
+    State:
+      title: State
       x-stoplight:
         id: o0y6d4wuuprb2
       type: object
@@ -817,6 +786,37 @@ components:
           x-stoplight:
             id: fqr4isqtkurqn
           format: uuid
+    Session:
+      title: Session
+      type: object
+      required:
+        - id
+        - range
+        - discipline
+        - shooters
+        - state
+      properties:
+        id:
+          type: string
+          format: uuid
+        range:
+          $ref: '#/components/schemas/Range'
+        discipline:
+          $ref: '#/components/schemas/Discipline'
+          x-stoplight:
+            id: ol4hpgadilpne
+        shooters:
+          type: array
+          x-stoplight:
+            id: s35m5h0hqxuqx
+          items:
+            $ref: '#/components/schemas/Shooter'
+            x-stoplight:
+              id: c0n7vjkxvps0d
+        state:
+          $ref: '#/components/schemas/State'
+          x-stoplight:
+            id: 5b2wter5eaa3r
     CreateSessionRequest:
       title: Create session
       type: object
