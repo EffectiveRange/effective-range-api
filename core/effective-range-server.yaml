@@ -816,7 +816,6 @@ components:
         - range
         - discipline
         - shooters
-        - state
       properties:
         id:
           type: string
