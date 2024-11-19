@@ -868,18 +868,17 @@ components:
         id: jeinuka22jv99
       type: object
       required:
-        - event_id
         - event_type
+        - token
       properties:
-        event_id:
-          type: string
-          x-stoplight:
-            id: t7cizbjp4cjxs
-          format: uuid
         event_type:
           $ref: '#/components/schemas/EventType'
           x-stoplight:
             id: cjw1o4rn9cw13
+        token:
+          $ref: '#/components/schemas/Token'
+          x-stoplight:
+            id: t7cizbjp4cjxs
     ManualLaunchRequest:
       title: Manual launch
       type: object
