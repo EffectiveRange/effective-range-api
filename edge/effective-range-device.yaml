@@ -1,0 +1,94 @@
+openapi: 3.1.0
+info:
+  version: 0.1.0
+  title: Device API
+  summary: Effective Range device API
+  description: Edge device API for the Effective Range system
+  contact:
+    name: Effective Range
+    email: info@effective-range.com
+    url: 'https://www.effective-range.com'
+  license:
+    name: MIT
+    url: 'https://raw.githubusercontent.com/EffectiveRange/effective-range-api/refs/heads/main/LICENSE'
+tags:
+  - name: launch
+    description: Target launch
+paths:
+  /launch/activate:
+    get:
+      summary: Activate launch
+      tags:
+        - launch
+      responses:
+        '200':
+          description: OK
+      operationId: activate-launch
+      x-stoplight:
+        id: aq16emkx2iucl
+      description: Activate launch for device
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              $ref: '#/components/schemas/Token'
+    parameters: []
+  /launch/deactivate:
+    get:
+      summary: Deactivate launch
+      tags:
+        - launch
+      responses:
+        '200':
+          description: OK
+      operationId: deactivate-launch
+      x-stoplight:
+        id: 5qetcgo65ggdi
+      description: Deactivate launch for device
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              $ref: '#/components/schemas/Token'
+components:
+  schemas:
+    TriggerType:
+      title: TriggerType
+      x-stoplight:
+        id: mv4bimzewwjq6
+      enum:
+        - on_call
+        - on_shot
+        - manual
+      default: on_call
+    Token:
+      title: Token
+      x-stoplight:
+        id: gftvtlg0p4iq9
+      type: object
+      required:
+        - id
+        - type
+        - created
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: kkzh6ml6t612k
+          format: uuid
+        type:
+          $ref: '#/components/schemas/TriggerType'
+          x-stoplight:
+            id: p6bwyzmi74ffo
+        created:
+          type: string
+          x-stoplight:
+            id: ewe9qqdf6iiju
+          format: date-time
+        expires:
+          type: string
+          x-stoplight:
+            id: 6lgq6ci9zojv3
+          format: date-time

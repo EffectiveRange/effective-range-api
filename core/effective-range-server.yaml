@@ -1,15 +1,4 @@
 openapi: 3.1.0
-tags:
-  - name: device
-    description: Edge device
-  - name: discipline
-    description: Shooting discipline
-  - name: range
-    description: Shooting range
-  - name: session
-    description: Shooting session
-  - name: shooter
-    description: Shooting competitor
 info:
   version: 0.1.0
   title: Server API
@@ -22,6 +11,17 @@ info:
   license:
     name: MIT
     url: 'https://raw.githubusercontent.com/EffectiveRange/effective-range-api/refs/heads/main/LICENSE'
+tags:
+  - name: device
+    description: Edge device
+  - name: discipline
+    description: Shooting discipline
+  - name: range
+    description: Shooting range
+  - name: session
+    description: Shooting session
+  - name: shooter
+    description: Shooting competitor
 paths:
   /discipline:
     post:
