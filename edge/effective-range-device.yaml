@@ -15,7 +15,7 @@ tags:
   - name: launch
     description: Target launch
 paths:
-  /launch/activate:
+  /device/activate:
     get:
       summary: Activate launch
       tags:
@@ -34,7 +34,7 @@ paths:
               type: object
               $ref: '#/components/schemas/Token'
     parameters: []
-  /launch/deactivate:
+  /device/deactivate:
     get:
       summary: Deactivate launch
       tags:
@@ -52,6 +52,7 @@ paths:
             schema:
               type: object
               $ref: '#/components/schemas/Token'
+    parameters: []
 components:
   schemas:
     TriggerType:

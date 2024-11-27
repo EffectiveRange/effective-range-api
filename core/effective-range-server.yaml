@@ -516,6 +516,11 @@ components:
       properties:
         id:
           type: string
+        url:
+          type: string
+          x-stoplight:
+            id: bmec6pqoij9ui
+          format: uri
         type:
           type: string
           x-stoplight:
