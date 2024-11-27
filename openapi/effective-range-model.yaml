@@ -89,7 +89,7 @@ components:
             type: object
             $ref: '#/components/schemas/Token'
             x-stoplight:
-              id: ul95ms3kzx43g
+              id: gftvtlg0p4iq9
       x-stoplight:
         id: g4ecd4xr0576j
     Range:
@@ -200,7 +200,7 @@ components:
             type: object
             $ref: '#/components/schemas/TurnConfig'
             x-stoplight:
-              id: wrr1cn7k6gyjl
+              id: w9tza4t5cdgul
     TurnConfig:
       title: TurnConfig
       x-stoplight:
@@ -232,7 +232,7 @@ components:
             type: object
             $ref: '#/components/schemas/LaunchConfig'
             x-stoplight:
-              id: qmqtmacalc2x5
+              id: 7dy7smsffj66j
     LaunchConfig:
       title: LaunchConfig
       x-stoplight:
@@ -375,6 +375,8 @@ components:
         range:
           type: object
           $ref: '#/components/schemas/Range'
+          x-stoplight:
+            id: ff7hbgjrk72az
         discipline:
           type: object
           $ref: '#/components/schemas/Discipline'
@@ -388,12 +390,12 @@ components:
             type: object
             $ref: '#/components/schemas/Shooter'
             x-stoplight:
-              id: c0n7vjkxvps0d
+              id: 0adx94x6y33pf
         state:
           type: object
           $ref: '#/components/schemas/State'
           x-stoplight:
-            id: 5b2wter5eaa3r
+            id: o0y6d4wuuprb2
       x-stoplight:
         id: mtflbe6ai8ijr
     EventType:
