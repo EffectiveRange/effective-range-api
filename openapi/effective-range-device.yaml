@@ -1,4 +1,6 @@
 openapi: 3.1.0
+x-stoplight:
+  id: 2300b1a6d0c75
 info:
   version: 0.1.0
   title: Device API
@@ -32,7 +34,9 @@ paths:
           application/json:
             schema:
               type: object
-              $ref: '#/components/schemas/Token'
+              $ref: './effective-range-model.yaml#/components/schemas/Token'
+              x-stoplight:
+                id: gftvtlg0p4iq9
     parameters: []
   /device/deactivate:
     get:
@@ -51,40 +55,9 @@ paths:
           application/json:
             schema:
               type: object
-              $ref: '#/components/schemas/Token'
+              $ref: './effective-range-model.yaml#/components/schemas/Token'
+              x-stoplight:
+                id: gftvtlg0p4iq9
     parameters: []
 components:
-  schemas:
-    TriggerType:
-      title: TriggerType
-      x-stoplight:
-        id: mv4bimzewwjq6
-      enum:
-        - on_call
-        - on_shot
-        - manual
-      default: on_call
-    Token:
-      title: Token
-      x-stoplight:
-        id: gftvtlg0p4iq9
-      type: object
-      required:
-        - id
-        - type
-        - expiry
-      properties:
-        id:
-          type: string
-          x-stoplight:
-            id: kkzh6ml6t612k
-          format: uuid
-        type:
-          $ref: '#/components/schemas/TriggerType'
-          x-stoplight:
-            id: p6bwyzmi74ffo
-        expiry:
-          type: string
-          x-stoplight:
-            id: 6lgq6ci9zojv3
-          format: date-time
+  schemas: {}
