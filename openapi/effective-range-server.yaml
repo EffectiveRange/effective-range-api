@@ -43,6 +43,8 @@ paths:
             schema:
               type: object
               $ref: './effective-range-model.yaml#/components/schemas/Discipline'
+              x-stoplight:
+                id: oesbgk7s2r9bw
     get:
       summary: Get disciplines
       tags:
@@ -83,6 +85,8 @@ paths:
               schema:
                 type: object
                 $ref: './effective-range-model.yaml#/components/schemas/Discipline'
+                x-stoplight:
+                  id: oesbgk7s2r9bw
       operationId: get-discipline
       x-stoplight:
         id: t86q0egkjz12p
@@ -104,7 +108,7 @@ paths:
                   type: object
                   $ref: './effective-range-model.yaml#/components/schemas/Shooter'
                   x-stoplight:
-                    id: fmjf14fgqncp3
+                    id: 0adx94x6y33pf
       operationId: get-shooters
       x-stoplight:
         id: 8019pvexup91b
@@ -125,6 +129,8 @@ paths:
             schema:
               type: object
               $ref: './effective-range-model.yaml#/components/schemas/Shooter'
+              x-stoplight:
+                id: 0adx94x6y33pf
       description: Add new shooter
   '/shooter/{id}':
     parameters:
@@ -146,6 +152,8 @@ paths:
               schema:
                 type: object
                 $ref: './effective-range-model.yaml#/components/schemas/Shooter'
+                x-stoplight:
+                  id: 0adx94x6y33pf
       operationId: get-shooter
       x-stoplight:
         id: 26nf97y2c8xq6
@@ -162,6 +170,8 @@ paths:
                 items:
                   type: object
                   $ref: './effective-range-model.yaml#/components/schemas/Device'
+                  x-stoplight:
+                    id: g4ecd4xr0576j
       operationId: get-devices
       summary: Get devices
       description: Get a list of all devices
@@ -184,6 +194,8 @@ paths:
             schema:
               type: object
               $ref: './effective-range-model.yaml#/components/schemas/Device'
+              x-stoplight:
+                id: g4ecd4xr0576j
       description: Add a new device
       x-stoplight:
         id: 9ywyj7yupczbl
@@ -199,6 +211,8 @@ paths:
                 items:
                   type: object
                   $ref: './effective-range-model.yaml#/components/schemas/Device'
+                  x-stoplight:
+                    id: g4ecd4xr0576j
       operationId: get-active-devices
       summary: Get active devices
       description: Get a list of currently active devices
@@ -217,6 +231,8 @@ paths:
               schema:
                 type: object
                 $ref: './effective-range-model.yaml#/components/schemas/Device'
+                x-stoplight:
+                  id: g4ecd4xr0576j
       operationId: get-device
       summary: Get device
       description: Get a device by ID
@@ -246,6 +262,8 @@ paths:
                 items:
                   type: object
                   $ref: './effective-range-model.yaml#/components/schemas/Range'
+                  x-stoplight:
+                    id: ff7hbgjrk72az
       operationId: get-ranges
       description: Get all shooting ranges
       x-stoplight:
@@ -265,6 +283,8 @@ paths:
             schema:
               type: object
               $ref: './effective-range-model.yaml#/components/schemas/Range'
+              x-stoplight:
+                id: ff7hbgjrk72az
       x-stoplight:
         id: az16ukej4mtq7
   '/range/{id}':
@@ -287,6 +307,8 @@ paths:
               schema:
                 type: object
                 $ref: './effective-range-model.yaml#/components/schemas/Range'
+                x-stoplight:
+                  id: ff7hbgjrk72az
       operationId: get-range
       description: Get a shooting range by ID
       x-stoplight:
@@ -312,6 +334,8 @@ paths:
               schema:
                 type: object
                 $ref: './effective-range-model.yaml#/components/schemas/Session'
+                x-stoplight:
+                  id: mtflbe6ai8ijr
       operationId: get-active-session
       description: Get the active shooting session on a shooting range
       x-stoplight:
@@ -331,6 +355,8 @@ paths:
                 items:
                   type: object
                   $ref: './effective-range-model.yaml#/components/schemas/Session'
+                  x-stoplight:
+                    id: mtflbe6ai8ijr
       operationId: get-sessions
       description: Get all shooting sessions
       x-stoplight:
@@ -346,6 +372,8 @@ paths:
               schema:
                 type: object
                 $ref: './effective-range-model.yaml#/components/schemas/Session'
+                x-stoplight:
+                  id: mtflbe6ai8ijr
       requestBody:
         content:
           application/json:
@@ -378,6 +406,8 @@ paths:
               schema:
                 type: object
                 $ref: './effective-range-model.yaml#/components/schemas/Session'
+                x-stoplight:
+                  id: mtflbe6ai8ijr
       operationId: get-session
       description: Get a shooting session by ID
       x-stoplight:
@@ -579,7 +609,7 @@ components:
           type: object
           $ref: './effective-range-model.yaml#/components/schemas/Token'
           x-stoplight:
-            id: t7cizbjp4cjxs
+            id: gftvtlg0p4iq9
     ManualLaunchRequest:
       title: Manual launch
       type: object

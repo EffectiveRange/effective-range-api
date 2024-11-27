@@ -35,6 +35,8 @@ paths:
             schema:
               type: object
               $ref: './effective-range-model.yaml#/components/schemas/Token'
+              x-stoplight:
+                id: gftvtlg0p4iq9
     parameters: []
   /device/deactivate:
     get:
@@ -54,6 +56,8 @@ paths:
             schema:
               type: object
               $ref: './effective-range-model.yaml#/components/schemas/Token'
+              x-stoplight:
+                id: gftvtlg0p4iq9
     parameters: []
 components:
   schemas: {}

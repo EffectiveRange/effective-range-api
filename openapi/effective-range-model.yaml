@@ -149,7 +149,7 @@ components:
     Discipline:
       title: Discipline
       x-stoplight:
-        id: cfx7mrbspij2o
+        id: oesbgk7s2r9bw
       type: object
       required:
         - id
@@ -379,7 +379,7 @@ components:
           type: object
           $ref: '#/components/schemas/Discipline'
           x-stoplight:
-            id: ol4hpgadilpne
+            id: oesbgk7s2r9bw
         shooters:
           type: array
           x-stoplight:
