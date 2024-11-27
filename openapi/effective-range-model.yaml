@@ -86,6 +86,7 @@ components:
           x-stoplight:
             id: 3zwoczn21awr2
           items:
+            type: object
             $ref: '#/components/schemas/Token'
             x-stoplight:
               id: ul95ms3kzx43g
@@ -196,6 +197,7 @@ components:
             id: hzd80qhbrn7gt
           minItems: 1
           items:
+            type: object
             $ref: '#/components/schemas/TurnConfig'
             x-stoplight:
               id: wrr1cn7k6gyjl
@@ -227,6 +229,7 @@ components:
             id: plns501xqp2th
           minItems: 1
           items:
+            type: object
             $ref: '#/components/schemas/LaunchConfig'
             x-stoplight:
               id: qmqtmacalc2x5
@@ -353,6 +356,7 @@ components:
           x-stoplight:
             id: fqr4isqtkurqn
           items:
+            type: object
             $ref: '#/components/schemas/Token'
             x-stoplight:
               id: f6xdnfvo0wxnt
@@ -369,8 +373,10 @@ components:
           type: string
           format: uuid
         range:
+          type: object
           $ref: '#/components/schemas/Range'
         discipline:
+          type: object
           $ref: '#/components/schemas/Discipline'
           x-stoplight:
             id: ol4hpgadilpne
@@ -379,10 +385,12 @@ components:
           x-stoplight:
             id: s35m5h0hqxuqx
           items:
+            type: object
             $ref: '#/components/schemas/Shooter'
             x-stoplight:
               id: c0n7vjkxvps0d
         state:
+          type: object
           $ref: '#/components/schemas/State'
           x-stoplight:
             id: 5b2wter5eaa3r

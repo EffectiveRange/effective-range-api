@@ -55,6 +55,7 @@ paths:
               schema:
                 type: array
                 items:
+                  type: object
                   $ref: './effective-range-model.yaml#/components/schemas/Discipline'
                   x-stoplight:
                     id: oesbgk7s2r9bw
@@ -100,6 +101,7 @@ paths:
               schema:
                 type: array
                 items:
+                  type: object
                   $ref: './effective-range-model.yaml#/components/schemas/Shooter'
                   x-stoplight:
                     id: fmjf14fgqncp3
@@ -158,6 +160,7 @@ paths:
               schema:
                 type: array
                 items:
+                  type: object
                   $ref: './effective-range-model.yaml#/components/schemas/Device'
       operationId: get-devices
       summary: Get devices
@@ -179,6 +182,7 @@ paths:
         content:
           application/json:
             schema:
+              type: object
               $ref: './effective-range-model.yaml#/components/schemas/Device'
       description: Add a new device
       x-stoplight:
@@ -193,6 +197,7 @@ paths:
               schema:
                 type: array
                 items:
+                  type: object
                   $ref: './effective-range-model.yaml#/components/schemas/Device'
       operationId: get-active-devices
       summary: Get active devices
@@ -210,6 +215,7 @@ paths:
           content:
             application/json:
               schema:
+                type: object
                 $ref: './effective-range-model.yaml#/components/schemas/Device'
       operationId: get-device
       summary: Get device
@@ -238,6 +244,7 @@ paths:
               schema:
                 type: array
                 items:
+                  type: object
                   $ref: './effective-range-model.yaml#/components/schemas/Range'
       operationId: get-ranges
       description: Get all shooting ranges
@@ -278,6 +285,7 @@ paths:
           content:
             application/json:
               schema:
+                type: object
                 $ref: './effective-range-model.yaml#/components/schemas/Range'
       operationId: get-range
       description: Get a shooting range by ID
@@ -302,6 +310,7 @@ paths:
           content:
             application/json:
               schema:
+                type: object
                 $ref: './effective-range-model.yaml#/components/schemas/Session'
       operationId: get-active-session
       description: Get the active shooting session on a shooting range
@@ -320,6 +329,7 @@ paths:
               schema:
                 type: array
                 items:
+                  type: object
                   $ref: './effective-range-model.yaml#/components/schemas/Session'
       operationId: get-sessions
       description: Get all shooting sessions
@@ -334,11 +344,13 @@ paths:
           content:
             application/json:
               schema:
+                type: object
                 $ref: './effective-range-model.yaml#/components/schemas/Session'
       requestBody:
         content:
           application/json:
             schema:
+              type: object
               $ref: '#/components/schemas/CreateSessionRequest'
       tags:
         - session
@@ -364,6 +376,7 @@ paths:
           content:
             application/json:
               schema:
+                type: object
                 $ref: './effective-range-model.yaml#/components/schemas/Session'
       operationId: get-session
       description: Get a shooting session by ID
@@ -490,6 +503,7 @@ paths:
         content:
           application/json:
             schema:
+              type: object
               $ref: '#/components/schemas/ManualLaunchRequest'
       description: Initiate manual launch for a shooting session
       x-stoplight:
@@ -562,6 +576,7 @@ components:
           x-stoplight:
             id: cjw1o4rn9cw13
         token:
+          type: object
           $ref: './effective-range-model.yaml#/components/schemas/Token'
           x-stoplight:
             id: t7cizbjp4cjxs
