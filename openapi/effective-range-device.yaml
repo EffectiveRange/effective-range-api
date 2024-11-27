@@ -34,7 +34,7 @@ paths:
           application/json:
             schema:
               type: object
-              $ref: './effective-range-model.yaml#/components/schemas/Token'
+              $ref: ./effective-range-model.yaml#/components/schemas/Token
     parameters: []
   /device/deactivate:
     get:
@@ -53,7 +53,7 @@ paths:
           application/json:
             schema:
               type: object
-              $ref: './effective-range-model.yaml#/components/schemas/Token'
+              $ref: ./effective-range-model.yaml#/components/schemas/Token
     parameters: []
 components:
   schemas: {}

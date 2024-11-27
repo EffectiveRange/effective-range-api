@@ -29,10 +29,8 @@ components:
       x-stoplight:
         id: mv4bimzewwjq6
     Token:
-      example:
-        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        expiry: '2000-01-23T04:56:07.000+00:00'
-        type: on_call
+      title: Token
+      type: object
       properties:
         id:
           format: uuid
@@ -50,7 +48,6 @@ components:
         - expiry
         - id
         - type
-      title: Token
       x-stoplight:
         id: gftvtlg0p4iq9
     Device:
