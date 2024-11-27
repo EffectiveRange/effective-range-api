@@ -39,6 +39,8 @@ components:
             id: kkzh6ml6t612k
         type:
           $ref: '#/components/schemas/TriggerType'
+          x-stoplight:
+            id: mv4bimzewwjq6
         expiry:
           format: date-time
           type: string
@@ -254,7 +256,7 @@ components:
         trigger_type:
           $ref: '#/components/schemas/TriggerType'
           x-stoplight:
-            id: 482z99z9eyd4n
+            id: mv4bimzewwjq6
         machine_order:
           $ref: '#/components/schemas/MachineOrder'
           x-stoplight:
@@ -334,7 +336,7 @@ components:
         trigger_type:
           $ref: '#/components/schemas/TriggerType'
           x-stoplight:
-            id: om54yqp452807
+            id: mv4bimzewwjq6
         station_ids:
           type: array
           x-stoplight:
