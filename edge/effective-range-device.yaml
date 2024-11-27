@@ -17,16 +17,16 @@ tags:
 paths:
   /device/activate:
     get:
-      summary: Activate launch
+      summary: Activate device
       tags:
         - device
       responses:
         '202':
           description: Accepted
-      operationId: activate-launch
+      operationId: activate-device
       x-stoplight:
         id: aq16emkx2iucl
-      description: Activate launch for device
+      description: Activate device for launch
       requestBody:
         content:
           application/json:
@@ -36,16 +36,16 @@ paths:
     parameters: []
   /device/deactivate:
     get:
-      summary: Deactivate launch
+      summary: Deactivate device
       tags:
         - device
       responses:
         '202':
           description: Accepted
-      operationId: deactivate-launch
+      operationId: deactivate-device
       x-stoplight:
         id: 5qetcgo65ggdi
-      description: Deactivate launch for device
+      description: Deactivate device for launch
       requestBody:
         content:
           application/json:
