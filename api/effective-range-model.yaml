@@ -1,0 +1,401 @@
+openapi: 3.1.0
+x-stoplight:
+  id: wanywzlu3ptim
+info:
+  version: 0.1.0
+  title: Common models
+  summary: Effective Range common models
+  description: Common models for the Effective Range system
+  contact:
+    name: Effective Range
+    email: info@effective-range.com
+    url: 'https://www.effective-range.com'
+  license:
+    name: MIT
+    url: 'https://raw.githubusercontent.com/EffectiveRange/effective-range-api/refs/heads/main/LICENSE'
+tags:
+  - name: model
+    description: Model
+components:
+  schemas:
+    TriggerType:
+      default: on_call
+      enum:
+        - on_call
+        - on_shot
+        - manual
+      title: TriggerType
+      type: string
+      x-stoplight:
+        id: mv4bimzewwjq6
+    Token:
+      example:
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        expiry: '2000-01-23T04:56:07.000+00:00'
+        type: on_call
+      properties:
+        id:
+          format: uuid
+          type: string
+          x-stoplight:
+            id: kkzh6ml6t612k
+        type:
+          $ref: '#/components/schemas/TriggerType'
+        expiry:
+          format: date-time
+          type: string
+          x-stoplight:
+            id: 6lgq6ci9zojv3
+      required:
+        - expiry
+        - id
+        - type
+      title: Token
+      x-stoplight:
+        id: gftvtlg0p4iq9
+    Device:
+      title: Device
+      type: object
+      required:
+        - id
+        - type
+        - role
+        - online
+        - in_use
+      properties:
+        id:
+          type: string
+        url:
+          type: string
+          x-stoplight:
+            id: bmec6pqoij9ui
+          format: uri
+        type:
+          type: string
+          x-stoplight:
+            id: g104uanwf6e9g
+        role:
+          type: string
+        online:
+          type: boolean
+          x-stoplight:
+            id: jacm9fmpjjiw1
+        in_use:
+          type: boolean
+          x-stoplight:
+            id: sv9jrp9ugffkl
+        tokens:
+          type: array
+          x-stoplight:
+            id: 3zwoczn21awr2
+          items:
+            $ref: '#/components/schemas/Token'
+            x-stoplight:
+              id: ul95ms3kzx43g
+      x-stoplight:
+        id: g4ecd4xr0576j
+    Range:
+      title: Range
+      type: object
+      required:
+        - id
+        - station_map
+        - machine_map
+        - discipline_ids
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: 0ov8tifyfek3o
+        station_map:
+          type: object
+          x-stoplight:
+            id: ozhbuwpei1jj6
+          additionalProperties:
+            x-stoplight:
+              id: v5jag1338km5e
+            type: string
+        machine_map:
+          type: object
+          x-stoplight:
+            id: db5coooruyawv
+          additionalProperties:
+            x-stoplight:
+              id: quiuz48zut16g
+            type: string
+        discipline_ids:
+          type: array
+          x-stoplight:
+            id: ab7z2xlg423ks
+          items:
+            x-stoplight:
+              id: dhoq4c46dh5sl
+            type: string
+      x-stoplight:
+        id: ff7hbgjrk72az
+    Shooter:
+      title: Shooter
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          x-stoplight:
+            id: 57uhi42bwfcva
+      x-stoplight:
+        id: 0adx94x6y33pf
+    Discipline:
+      title: Discipline
+      x-stoplight:
+        id: cfx7mrbspij2o
+      type: object
+      required:
+        - id
+        - name
+        - shooter_order
+        - target_limit
+        - turns
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: gikqrl1sxhvss
+        name:
+          type: string
+          x-stoplight:
+            id: eqogwyyqjfl2x
+        shooter_order:
+          $ref: '#/components/schemas/ShooterOrder'
+          x-stoplight:
+            id: yp1c3nul58q91
+        target_limit:
+          type: integer
+          x-stoplight:
+            id: scbb6b9swu8ec
+          minimum: 1
+          default: 25
+        launch_delay:
+          type: integer
+          x-stoplight:
+            id: mlw82lz284by5
+          minimum: 0
+          default: 0
+        delay_type:
+          $ref: '#/components/schemas/DelayType'
+          x-stoplight:
+            id: 617lmg3186txa
+        option_bird:
+          type: boolean
+          x-stoplight:
+            id: m07jgxznqngkd
+          default: false
+        turns:
+          type: array
+          x-stoplight:
+            id: hzd80qhbrn7gt
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/TurnConfig'
+            x-stoplight:
+              id: wrr1cn7k6gyjl
+    TurnConfig:
+      title: TurnConfig
+      x-stoplight:
+        id: w9tza4t5cdgul
+      type: object
+      required:
+        - station_ids
+        - launches
+      properties:
+        station_ids:
+          type: array
+          x-stoplight:
+            id: 99toevkner4rj
+          minItems: 1
+          items:
+            x-stoplight:
+              id: qs87p05dytoho
+            type: string
+        station_order:
+          $ref: '#/components/schemas/StationOrder'
+          x-stoplight:
+            id: hx2ctv2ru53ng
+        launches:
+          type: array
+          x-stoplight:
+            id: plns501xqp2th
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/LaunchConfig'
+            x-stoplight:
+              id: qmqtmacalc2x5
+    LaunchConfig:
+      title: LaunchConfig
+      x-stoplight:
+        id: 7dy7smsffj66j
+      type: object
+      description: ''
+      required:
+        - machine_ids
+      properties:
+        machine_ids:
+          type: array
+          x-stoplight:
+            id: e1ynjrxovj7po
+          minItems: 1
+          items:
+            x-stoplight:
+              id: gp1fmnfup0gaw
+            type: string
+        trigger_type:
+          $ref: '#/components/schemas/TriggerType'
+          x-stoplight:
+            id: 482z99z9eyd4n
+        machine_order:
+          $ref: '#/components/schemas/MachineOrder'
+          x-stoplight:
+            id: keepmifbwehi9
+        target_count:
+          type: integer
+          x-stoplight:
+            id: typ5iras3n7oi
+          minimum: 1
+          default: 1
+        condition_id:
+          type: string
+          x-stoplight:
+            id: 89u80rwo0jwc9
+    ShooterOrder:
+      title: ShooterOrder
+      x-stoplight:
+        id: x6ebnxf7td1be
+      enum:
+        - sequential
+        - rotational
+      default: sequential
+    DelayType:
+      title: DelayType
+      x-stoplight:
+        id: b2gcrfade4f2k
+      enum:
+        - no_delay
+        - fixed
+        - random
+      default: no_delay
+    StationOrder:
+      title: StationOrder
+      x-stoplight:
+        id: immjxsqpncmu2
+      enum:
+        - sequential
+        - simultaneous
+      default: sequential
+    MachineOrder:
+      title: MachineOrder
+      x-stoplight:
+        id: 6dcglqdba1vl0
+      enum:
+        - sequential
+        - randomized
+        - simultaneous
+      default: sequential
+    State:
+      title: State
+      x-stoplight:
+        id: o0y6d4wuuprb2
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: crt8ilgl6rd80
+        shooter_id:
+          type: string
+          x-stoplight:
+            id: sm3ga6zioykco
+        round:
+          type: integer
+          x-stoplight:
+            id: jtfr8k2o5psk7
+        turn:
+          type: integer
+          x-stoplight:
+            id: g0d2unx3km9dw
+        launch:
+          type: integer
+          x-stoplight:
+            id: er4hf5g3s4deq
+        trigger_type:
+          $ref: '#/components/schemas/TriggerType'
+          x-stoplight:
+            id: om54yqp452807
+        station_ids:
+          type: array
+          x-stoplight:
+            id: 5haew9g905kgm
+          items:
+            x-stoplight:
+              id: hmlerlit7s7i5
+            type: string
+        machine_ids:
+          type: array
+          x-stoplight:
+            id: 17kka950slonm
+          items:
+            x-stoplight:
+              id: 2yoe3mj4k7d3h
+            type: string
+        tokens:
+          type: array
+          x-stoplight:
+            id: fqr4isqtkurqn
+          items:
+            $ref: '#/components/schemas/Token'
+            x-stoplight:
+              id: f6xdnfvo0wxnt
+    Session:
+      title: Session
+      type: object
+      required:
+        - id
+        - range
+        - discipline
+        - shooters
+      properties:
+        id:
+          type: string
+          format: uuid
+        range:
+          $ref: '#/components/schemas/Range'
+        discipline:
+          $ref: '#/components/schemas/Discipline'
+          x-stoplight:
+            id: ol4hpgadilpne
+        shooters:
+          type: array
+          x-stoplight:
+            id: s35m5h0hqxuqx
+          items:
+            $ref: '#/components/schemas/Shooter'
+            x-stoplight:
+              id: c0n7vjkxvps0d
+        state:
+          $ref: '#/components/schemas/State'
+          x-stoplight:
+            id: 5b2wter5eaa3r
+      x-stoplight:
+        id: mtflbe6ai8ijr
+    EventType:
+      title: EventType
+      x-stoplight:
+        id: elw9188rccbi7
+      enum:
+        - CallTarget
+        - TakeShot
+        - LaunchTarget
