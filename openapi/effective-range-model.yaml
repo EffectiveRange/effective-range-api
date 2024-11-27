@@ -55,8 +55,11 @@ components:
     Device:
       title: Device
       type: object
+      x-stoplight:
+        id: g4ecd4xr0576j
       required:
         - id
+        - uri
         - type
         - role
         - online
@@ -64,7 +67,7 @@ components:
       properties:
         id:
           type: string
-        url:
+        uri:
           type: string
           x-stoplight:
             id: bmec6pqoij9ui
@@ -92,8 +95,6 @@ components:
             $ref: '#/components/schemas/Token'
             x-stoplight:
               id: gftvtlg0p4iq9
-      x-stoplight:
-        id: g4ecd4xr0576j
     Range:
       title: Range
       type: object
