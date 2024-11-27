@@ -18,7 +18,7 @@ tags:
     description: Edge device
 paths:
   /device/activate:
-    get:
+    post:
       summary: Activate device
       tags:
         - device
@@ -39,7 +39,7 @@ paths:
                 id: gftvtlg0p4iq9
     parameters: []
   /device/deactivate:
-    get:
+    post:
       summary: Deactivate device
       tags:
         - device
