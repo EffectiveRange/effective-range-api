@@ -12,14 +12,14 @@ info:
     name: MIT
     url: 'https://raw.githubusercontent.com/EffectiveRange/effective-range-api/refs/heads/main/LICENSE'
 tags:
-  - name: launch
-    description: Target launch
+  - name: device
+    description: Edge device
 paths:
   /device/activate:
     get:
       summary: Activate launch
       tags:
-        - launch
+        - device
       responses:
         '202':
           description: Accepted
@@ -38,7 +38,7 @@ paths:
     get:
       summary: Deactivate launch
       tags:
-        - launch
+        - device
       responses:
         '202':
           description: Accepted
