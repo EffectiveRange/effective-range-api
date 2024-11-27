@@ -21,8 +21,8 @@ paths:
       tags:
         - launch
       responses:
-        '200':
-          description: OK
+        '202':
+          description: Accepted
       operationId: activate-launch
       x-stoplight:
         id: aq16emkx2iucl
@@ -40,8 +40,8 @@ paths:
       tags:
         - launch
       responses:
-        '200':
-          description: OK
+        '202':
+          description: Accepted
       operationId: deactivate-launch
       x-stoplight:
         id: 5qetcgo65ggdi
@@ -71,7 +71,7 @@ components:
       required:
         - id
         - type
-        - created
+        - expiry
       properties:
         id:
           type: string
@@ -82,12 +82,7 @@ components:
           $ref: '#/components/schemas/TriggerType'
           x-stoplight:
             id: p6bwyzmi74ffo
-        created:
-          type: string
-          x-stoplight:
-            id: ewe9qqdf6iiju
-          format: date-time
-        expires:
+        expiry:
           type: string
           x-stoplight:
             id: 6lgq6ci9zojv3
