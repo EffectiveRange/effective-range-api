@@ -359,7 +359,7 @@ components:
             type: object
             $ref: '#/components/schemas/Token'
             x-stoplight:
-              id: f6xdnfvo0wxnt
+              id: gftvtlg0p4iq9
     Session:
       title: Session
       type: object
