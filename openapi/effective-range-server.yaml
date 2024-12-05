@@ -550,6 +550,11 @@ paths:
       description: Rewind a shooting session
       x-stoplight:
         id: 2q1l40xn0370v
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RewindSessionRequest'
   '/session/{id}/launch':
     parameters:
       - schema:
@@ -605,7 +610,7 @@ paths:
 components:
   schemas:
     CreateSessionRequest:
-      title: Create session
+      title: CreateSessionRequest
       type: object
       required:
         - range_id
@@ -649,7 +654,7 @@ components:
           x-stoplight:
             id: gftvtlg0p4iq9
     ManualLaunchRequest:
-      title: Manual launch
+      title: ManualLaunchRequest
       type: object
       required:
         - machine_ids
@@ -662,3 +667,34 @@ components:
             type: string
       x-stoplight:
         id: oru90z9hqh0km
+    RewindSessionRequest:
+      title: RewindSessionRequest
+      x-stoplight:
+        id: rrhh2qxv4jwgn
+      type: object
+      required:
+        - type
+        - target
+      properties:
+        type:
+          $ref: '#/components/schemas/RewindType'
+          x-stoplight:
+            id: wg3mx4e49mgom
+        target:
+          $ref: '#/components/schemas/RewindTarget'
+          x-stoplight:
+            id: 7v8cwiufmy0xy
+    RewindType:
+      title: RewindType
+      x-stoplight:
+        id: axhfr6sw79mo6
+      enum:
+        - turn
+        - launch
+    RewindTarget:
+      title: RewindTarget
+      x-stoplight:
+        id: 9q9jesmra0ooi
+      enum:
+        - current
+        - previous
