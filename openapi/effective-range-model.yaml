@@ -31,6 +31,12 @@ components:
     Token:
       title: Token
       type: object
+      x-stoplight:
+        id: gftvtlg0p4iq9
+      required:
+        - id
+        - type
+        - expiry
       properties:
         id:
           format: uuid
@@ -46,12 +52,11 @@ components:
           type: string
           x-stoplight:
             id: 6lgq6ci9zojv3
-      required:
-        - expiry
-        - id
-        - type
-      x-stoplight:
-        id: gftvtlg0p4iq9
+        preceding:
+          type: string
+          x-stoplight:
+            id: aolw5myc3blpf
+          format: uuid
     Device:
       title: Device
       type: object

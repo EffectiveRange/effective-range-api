@@ -16,6 +16,8 @@ info:
 tags:
   - name: device
     description: Edge device
+  - name: server
+    description: Range server
 paths:
   /device/activate:
     post:
@@ -34,7 +36,7 @@ paths:
           application/json:
             schema:
               type: object
-              $ref: './effective-range-model.yaml#/components/schemas/Token'
+              $ref: ./effective-range-model.yaml#/components/schemas/Token
               x-stoplight:
                 id: gftvtlg0p4iq9
     parameters: []
@@ -55,9 +57,33 @@ paths:
           application/json:
             schema:
               type: object
-              $ref: './effective-range-model.yaml#/components/schemas/Token'
+              $ref: ./effective-range-model.yaml#/components/schemas/Token
               x-stoplight:
                 id: gftvtlg0p4iq9
     parameters: []
+  /server/alive:
+    post:
+      summary: Signal server is alive
+      tags:
+        - server
+      responses:
+        '202':
+          description: Accepted
+      operationId: signal-alive
+      x-stoplight:
+        id: cpxurcan29h6s
+      description: Server notifies the device it is alive on the network
+  /server/healthy:
+    post:
+      summary: Signal server is healthy
+      tags:
+        - server
+      responses:
+        '202':
+          description: Accepted
+      operationId: signal-healthy
+      x-stoplight:
+        id: s55vqtvvxkz28
+      description: Server notifies the device it is healthy as a heartbeat signal
 components:
   schemas: {}

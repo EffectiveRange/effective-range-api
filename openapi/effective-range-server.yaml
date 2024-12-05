@@ -42,7 +42,7 @@ paths:
           application/json:
             schema:
               type: object
-              $ref: './effective-range-model.yaml#/components/schemas/Discipline'
+              $ref: ./effective-range-model.yaml#/components/schemas/Discipline
               x-stoplight:
                 id: oesbgk7s2r9bw
     get:
@@ -58,7 +58,7 @@ paths:
                 type: array
                 items:
                   type: object
-                  $ref: './effective-range-model.yaml#/components/schemas/Discipline'
+                  $ref: ./effective-range-model.yaml#/components/schemas/Discipline
                   x-stoplight:
                     id: oesbgk7s2r9bw
       operationId: get-disciplines
@@ -84,7 +84,7 @@ paths:
             application/json:
               schema:
                 type: object
-                $ref: './effective-range-model.yaml#/components/schemas/Discipline'
+                $ref: ./effective-range-model.yaml#/components/schemas/Discipline
                 x-stoplight:
                   id: oesbgk7s2r9bw
       operationId: get-discipline
@@ -106,7 +106,7 @@ paths:
                 type: array
                 items:
                   type: object
-                  $ref: './effective-range-model.yaml#/components/schemas/Shooter'
+                  $ref: ./effective-range-model.yaml#/components/schemas/Shooter
                   x-stoplight:
                     id: 0adx94x6y33pf
       operationId: get-shooters
@@ -128,7 +128,7 @@ paths:
           application/json:
             schema:
               type: object
-              $ref: './effective-range-model.yaml#/components/schemas/Shooter'
+              $ref: ./effective-range-model.yaml#/components/schemas/Shooter
               x-stoplight:
                 id: 0adx94x6y33pf
       description: Add new shooter
@@ -151,7 +151,7 @@ paths:
             application/json:
               schema:
                 type: object
-                $ref: './effective-range-model.yaml#/components/schemas/Shooter'
+                $ref: ./effective-range-model.yaml#/components/schemas/Shooter
                 x-stoplight:
                   id: 0adx94x6y33pf
       operationId: get-shooter
@@ -169,7 +169,7 @@ paths:
                 type: array
                 items:
                   type: object
-                  $ref: './effective-range-model.yaml#/components/schemas/Device'
+                  $ref: ./effective-range-model.yaml#/components/schemas/Device
                   x-stoplight:
                     id: g4ecd4xr0576j
       operationId: get-devices
@@ -193,7 +193,7 @@ paths:
           application/json:
             schema:
               type: object
-              $ref: './effective-range-model.yaml#/components/schemas/Device'
+              $ref: ./effective-range-model.yaml#/components/schemas/Device
               x-stoplight:
                 id: g4ecd4xr0576j
       description: Add a new device
@@ -210,7 +210,7 @@ paths:
                 type: array
                 items:
                   type: object
-                  $ref: './effective-range-model.yaml#/components/schemas/Device'
+                  $ref: ./effective-range-model.yaml#/components/schemas/Device
                   x-stoplight:
                     id: g4ecd4xr0576j
       operationId: get-active-devices
@@ -230,7 +230,7 @@ paths:
             application/json:
               schema:
                 type: object
-                $ref: './effective-range-model.yaml#/components/schemas/Device'
+                $ref: ./effective-range-model.yaml#/components/schemas/Device
                 x-stoplight:
                   id: g4ecd4xr0576j
       operationId: get-device
@@ -247,6 +247,44 @@ paths:
         in: path
         required: true
         description: Device ID
+  '/device/{id}/alive':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: Device ID
+    post:
+      summary: Signal device is alive
+      tags:
+        - device
+      responses:
+        '202':
+          description: Accepted
+      operationId: signal-alive
+      x-stoplight:
+        id: rbbqxxngx6ow3
+      description: Device notifies the server it is alive on the network
+  '/device/{id}/healthy':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: Device ID
+    post:
+      summary: Signal device is healthy
+      tags:
+        - device
+      responses:
+        '202':
+          description: Accepted
+      operationId: signal-healthy
+      x-stoplight:
+        id: q1fsh6mzm5qhl
+      description: Device notifies the server it is healthy as a heartbeat signal
   /range:
     get:
       summary: Get ranges
@@ -261,7 +299,7 @@ paths:
                 type: array
                 items:
                   type: object
-                  $ref: './effective-range-model.yaml#/components/schemas/Range'
+                  $ref: ./effective-range-model.yaml#/components/schemas/Range
                   x-stoplight:
                     id: ff7hbgjrk72az
       operationId: get-ranges
@@ -282,7 +320,7 @@ paths:
           application/json:
             schema:
               type: object
-              $ref: './effective-range-model.yaml#/components/schemas/Range'
+              $ref: ./effective-range-model.yaml#/components/schemas/Range
               x-stoplight:
                 id: ff7hbgjrk72az
       x-stoplight:
@@ -306,7 +344,7 @@ paths:
             application/json:
               schema:
                 type: object
-                $ref: './effective-range-model.yaml#/components/schemas/Range'
+                $ref: ./effective-range-model.yaml#/components/schemas/Range
                 x-stoplight:
                   id: ff7hbgjrk72az
       operationId: get-range
@@ -333,7 +371,7 @@ paths:
             application/json:
               schema:
                 type: object
-                $ref: './effective-range-model.yaml#/components/schemas/Session'
+                $ref: ./effective-range-model.yaml#/components/schemas/Session
                 x-stoplight:
                   id: mtflbe6ai8ijr
       operationId: get-active-session
@@ -354,7 +392,7 @@ paths:
                 type: array
                 items:
                   type: object
-                  $ref: './effective-range-model.yaml#/components/schemas/Session'
+                  $ref: ./effective-range-model.yaml#/components/schemas/Session
                   x-stoplight:
                     id: mtflbe6ai8ijr
       operationId: get-sessions
@@ -371,7 +409,7 @@ paths:
             application/json:
               schema:
                 type: object
-                $ref: './effective-range-model.yaml#/components/schemas/Session'
+                $ref: ./effective-range-model.yaml#/components/schemas/Session
                 x-stoplight:
                   id: mtflbe6ai8ijr
       requestBody:
@@ -405,7 +443,7 @@ paths:
             application/json:
               schema:
                 type: object
-                $ref: './effective-range-model.yaml#/components/schemas/Session'
+                $ref: ./effective-range-model.yaml#/components/schemas/Session
                 x-stoplight:
                   id: mtflbe6ai8ijr
       operationId: get-session
@@ -602,12 +640,12 @@ components:
         - token
       properties:
         event_type:
-          $ref: './effective-range-model.yaml#/components/schemas/EventType'
+          $ref: ./effective-range-model.yaml#/components/schemas/EventType
           x-stoplight:
             id: cjw1o4rn9cw13
         token:
           type: object
-          $ref: './effective-range-model.yaml#/components/schemas/Token'
+          $ref: ./effective-range-model.yaml#/components/schemas/Token
           x-stoplight:
             id: gftvtlg0p4iq9
     ManualLaunchRequest:
