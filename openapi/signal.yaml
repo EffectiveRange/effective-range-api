@@ -1,0 +1,59 @@
+openapi: 3.1.0
+x-stoplight:
+  id: t7cn6d165fvem
+info:
+  version: 0.1.0
+  title: Health API
+  summary: Effective Range health API
+  description: Component health API for the Effective Range system
+  contact:
+    name: Effective Range
+    email: info@effective-range.com
+    url: 'https://www.effective-range.com'
+  license:
+    name: MIT
+    url: 'https://raw.githubusercontent.com/EffectiveRange/effective-range-api/refs/heads/main/LICENSE'
+tags:
+  - name: health
+    description: Component health
+paths:
+  '/signal/{id}/alive':
+    post:
+      summary: Signal component is alive
+      tags:
+        - health
+      responses:
+        '200':
+          description: OK
+      operationId: signal-alive
+      x-stoplight:
+        id: oyvnyv2bljdwb
+      description: Component signals it is alive on the network
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: Component ID
+  '/signal/{id}/healthy':
+    post:
+      summary: Signal component is healthy
+      tags:
+        - health
+      responses:
+        '200':
+          description: OK
+      operationId: signal-healthy
+      x-stoplight:
+        id: fi4uqk45fkvij
+      description: Component signals it is healthy (heartbeat)
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: Component ID
+components:
+  schemas: {}

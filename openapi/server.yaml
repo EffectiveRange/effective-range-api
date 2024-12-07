@@ -18,6 +18,8 @@ tags:
     description: Edge device
   - name: discipline
     description: Shooting discipline
+  - name: health
+    description: Component health
   - name: range
     description: Shooting range
   - name: session
@@ -42,7 +44,7 @@ paths:
           application/json:
             schema:
               type: object
-              $ref: ./effective-range-model.yaml#/components/schemas/Discipline
+              $ref: '#/components/schemas/Discipline'
               x-stoplight:
                 id: oesbgk7s2r9bw
     get:
@@ -58,7 +60,7 @@ paths:
                 type: array
                 items:
                   type: object
-                  $ref: ./effective-range-model.yaml#/components/schemas/Discipline
+                  $ref: '#/components/schemas/Discipline'
                   x-stoplight:
                     id: oesbgk7s2r9bw
       operationId: get-disciplines
@@ -84,7 +86,7 @@ paths:
             application/json:
               schema:
                 type: object
-                $ref: ./effective-range-model.yaml#/components/schemas/Discipline
+                $ref: '#/components/schemas/Discipline'
                 x-stoplight:
                   id: oesbgk7s2r9bw
       operationId: get-discipline
@@ -106,7 +108,7 @@ paths:
                 type: array
                 items:
                   type: object
-                  $ref: ./effective-range-model.yaml#/components/schemas/Shooter
+                  $ref: '#/components/schemas/Shooter'
                   x-stoplight:
                     id: 0adx94x6y33pf
       operationId: get-shooters
@@ -128,7 +130,7 @@ paths:
           application/json:
             schema:
               type: object
-              $ref: ./effective-range-model.yaml#/components/schemas/Shooter
+              $ref: '#/components/schemas/Shooter'
               x-stoplight:
                 id: 0adx94x6y33pf
       description: Add new shooter
@@ -151,7 +153,7 @@ paths:
             application/json:
               schema:
                 type: object
-                $ref: ./effective-range-model.yaml#/components/schemas/Shooter
+                $ref: '#/components/schemas/Shooter'
                 x-stoplight:
                   id: 0adx94x6y33pf
       operationId: get-shooter
@@ -169,7 +171,7 @@ paths:
                 type: array
                 items:
                   type: object
-                  $ref: ./effective-range-model.yaml#/components/schemas/Device
+                  $ref: '#/components/schemas/Device'
                   x-stoplight:
                     id: g4ecd4xr0576j
       operationId: get-devices
@@ -193,7 +195,7 @@ paths:
           application/json:
             schema:
               type: object
-              $ref: ./effective-range-model.yaml#/components/schemas/Device
+              $ref: '#/components/schemas/Device'
               x-stoplight:
                 id: g4ecd4xr0576j
       description: Add a new device
@@ -210,7 +212,7 @@ paths:
                 type: array
                 items:
                   type: object
-                  $ref: ./effective-range-model.yaml#/components/schemas/Device
+                  $ref: '#/components/schemas/Device'
                   x-stoplight:
                     id: g4ecd4xr0576j
       operationId: get-active-devices
@@ -230,7 +232,7 @@ paths:
             application/json:
               schema:
                 type: object
-                $ref: ./effective-range-model.yaml#/components/schemas/Device
+                $ref: '#/components/schemas/Device'
                 x-stoplight:
                   id: g4ecd4xr0576j
       operationId: get-device
@@ -247,44 +249,6 @@ paths:
         in: path
         required: true
         description: Device ID
-  '/device/{id}/alive':
-    parameters:
-      - schema:
-          type: string
-        name: id
-        in: path
-        required: true
-        description: Device ID
-    post:
-      summary: Signal device is alive
-      tags:
-        - device
-      responses:
-        '202':
-          description: Accepted
-      operationId: signal-alive
-      x-stoplight:
-        id: rbbqxxngx6ow3
-      description: Device notifies the server it is alive on the network
-  '/device/{id}/healthy':
-    parameters:
-      - schema:
-          type: string
-        name: id
-        in: path
-        required: true
-        description: Device ID
-    post:
-      summary: Signal device is healthy
-      tags:
-        - device
-      responses:
-        '202':
-          description: Accepted
-      operationId: signal-healthy
-      x-stoplight:
-        id: q1fsh6mzm5qhl
-      description: Device notifies the server it is healthy as a heartbeat signal
   /range:
     get:
       summary: Get ranges
@@ -299,7 +263,7 @@ paths:
                 type: array
                 items:
                   type: object
-                  $ref: ./effective-range-model.yaml#/components/schemas/Range
+                  $ref: '#/components/schemas/Range'
                   x-stoplight:
                     id: ff7hbgjrk72az
       operationId: get-ranges
@@ -320,7 +284,7 @@ paths:
           application/json:
             schema:
               type: object
-              $ref: ./effective-range-model.yaml#/components/schemas/Range
+              $ref: '#/components/schemas/Range'
               x-stoplight:
                 id: ff7hbgjrk72az
       x-stoplight:
@@ -344,7 +308,7 @@ paths:
             application/json:
               schema:
                 type: object
-                $ref: ./effective-range-model.yaml#/components/schemas/Range
+                $ref: '#/components/schemas/Range'
                 x-stoplight:
                   id: ff7hbgjrk72az
       operationId: get-range
@@ -371,7 +335,7 @@ paths:
             application/json:
               schema:
                 type: object
-                $ref: ./effective-range-model.yaml#/components/schemas/Session
+                $ref: '#/components/schemas/Session'
                 x-stoplight:
                   id: mtflbe6ai8ijr
       operationId: get-active-session
@@ -392,7 +356,7 @@ paths:
                 type: array
                 items:
                   type: object
-                  $ref: ./effective-range-model.yaml#/components/schemas/Session
+                  $ref: '#/components/schemas/Session'
                   x-stoplight:
                     id: mtflbe6ai8ijr
       operationId: get-sessions
@@ -409,7 +373,7 @@ paths:
             application/json:
               schema:
                 type: object
-                $ref: ./effective-range-model.yaml#/components/schemas/Session
+                $ref: '#/components/schemas/Session'
                 x-stoplight:
                   id: mtflbe6ai8ijr
       requestBody:
@@ -443,7 +407,7 @@ paths:
             application/json:
               schema:
                 type: object
-                $ref: ./effective-range-model.yaml#/components/schemas/Session
+                $ref: '#/components/schemas/Session'
                 x-stoplight:
                   id: mtflbe6ai8ijr
       operationId: get-session
@@ -607,8 +571,383 @@ paths:
             schema:
               type: object
               $ref: '#/components/schemas/TriggerEventRequest'
+  '/signal/{id}/alive':
+    $ref: './signal.yaml#/paths/~1signal~1{id}~1alive'
+  '/signal/{id}/healthy':
+    $ref: './signal.yaml#/paths/~1signal~1{id}~1healthy'
 components:
   schemas:
+    Device:
+      title: Device
+      type: object
+      x-stoplight:
+        id: g4ecd4xr0576j
+      required:
+        - id
+        - uri
+        - type
+        - role
+        - online
+        - in_use
+      properties:
+        id:
+          type: string
+        uri:
+          type: string
+          x-stoplight:
+            id: bmec6pqoij9ui
+          format: uri
+        type:
+          type: string
+          x-stoplight:
+            id: g104uanwf6e9g
+        role:
+          type: string
+        online:
+          type: boolean
+          x-stoplight:
+            id: jacm9fmpjjiw1
+        in_use:
+          type: boolean
+          x-stoplight:
+            id: sv9jrp9ugffkl
+        tokens:
+          type: array
+          x-stoplight:
+            id: 3zwoczn21awr2
+          items:
+            type: object
+            $ref: './model.yaml#/components/schemas/Token'
+            x-stoplight:
+              id: gftvtlg0p4iq9
+    Range:
+      title: Range
+      type: object
+      required:
+        - id
+        - station_map
+        - machine_map
+        - discipline_ids
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: 0ov8tifyfek3o
+        station_map:
+          type: object
+          x-stoplight:
+            id: ozhbuwpei1jj6
+          additionalProperties:
+            x-stoplight:
+              id: v5jag1338km5e
+            type: string
+        machine_map:
+          type: object
+          x-stoplight:
+            id: db5coooruyawv
+          additionalProperties:
+            x-stoplight:
+              id: quiuz48zut16g
+            type: string
+        discipline_ids:
+          type: array
+          x-stoplight:
+            id: ab7z2xlg423ks
+          items:
+            x-stoplight:
+              id: dhoq4c46dh5sl
+            type: string
+      x-stoplight:
+        id: ff7hbgjrk72az
+    Shooter:
+      title: Shooter
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          x-stoplight:
+            id: 57uhi42bwfcva
+      x-stoplight:
+        id: 0adx94x6y33pf
+    Discipline:
+      title: Discipline
+      x-stoplight:
+        id: oesbgk7s2r9bw
+      type: object
+      required:
+        - id
+        - name
+        - shooter_order
+        - target_limit
+        - turns
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: gikqrl1sxhvss
+        name:
+          type: string
+          x-stoplight:
+            id: eqogwyyqjfl2x
+        shooter_order:
+          $ref: '#/components/schemas/ShooterOrder'
+          x-stoplight:
+            id: yp1c3nul58q91
+        target_limit:
+          type: integer
+          x-stoplight:
+            id: scbb6b9swu8ec
+          minimum: 1
+          default: 25
+        launch_delay:
+          type: integer
+          x-stoplight:
+            id: mlw82lz284by5
+          minimum: 0
+          default: 0
+        delay_type:
+          $ref: '#/components/schemas/DelayType'
+          x-stoplight:
+            id: 617lmg3186txa
+        option_bird:
+          type: boolean
+          x-stoplight:
+            id: m07jgxznqngkd
+          default: false
+        turns:
+          type: array
+          x-stoplight:
+            id: hzd80qhbrn7gt
+          minItems: 1
+          items:
+            type: object
+            $ref: '#/components/schemas/TurnConfig'
+            x-stoplight:
+              id: w9tza4t5cdgul
+    TurnConfig:
+      title: TurnConfig
+      x-stoplight:
+        id: w9tza4t5cdgul
+      type: object
+      required:
+        - station_ids
+        - launches
+      properties:
+        station_ids:
+          type: array
+          x-stoplight:
+            id: 99toevkner4rj
+          minItems: 1
+          items:
+            x-stoplight:
+              id: qs87p05dytoho
+            type: string
+        station_order:
+          $ref: '#/components/schemas/StationOrder'
+          x-stoplight:
+            id: hx2ctv2ru53ng
+        launches:
+          type: array
+          x-stoplight:
+            id: plns501xqp2th
+          minItems: 1
+          items:
+            type: object
+            $ref: '#/components/schemas/LaunchConfig'
+            x-stoplight:
+              id: 7dy7smsffj66j
+    LaunchConfig:
+      title: LaunchConfig
+      x-stoplight:
+        id: 7dy7smsffj66j
+      type: object
+      description: ''
+      required:
+        - machine_ids
+      properties:
+        machine_ids:
+          type: array
+          x-stoplight:
+            id: e1ynjrxovj7po
+          minItems: 1
+          items:
+            x-stoplight:
+              id: gp1fmnfup0gaw
+            type: string
+        trigger_type:
+          $ref: './model.yaml#/components/schemas/TriggerType'
+          x-stoplight:
+            id: mv4bimzewwjq6
+        machine_order:
+          $ref: '#/components/schemas/MachineOrder'
+          x-stoplight:
+            id: keepmifbwehi9
+        target_count:
+          type: integer
+          x-stoplight:
+            id: typ5iras3n7oi
+          minimum: 1
+          default: 1
+        condition_id:
+          type: string
+          x-stoplight:
+            id: 89u80rwo0jwc9
+    ShooterOrder:
+      title: ShooterOrder
+      x-stoplight:
+        id: x6ebnxf7td1be
+      enum:
+        - sequential
+        - rotational
+      default: sequential
+    DelayType:
+      title: DelayType
+      x-stoplight:
+        id: b2gcrfade4f2k
+      enum:
+        - no_delay
+        - fixed
+        - random
+      default: no_delay
+    StationOrder:
+      title: StationOrder
+      x-stoplight:
+        id: immjxsqpncmu2
+      enum:
+        - sequential
+        - simultaneous
+      default: sequential
+    MachineOrder:
+      title: MachineOrder
+      x-stoplight:
+        id: 6dcglqdba1vl0
+      enum:
+        - sequential
+        - randomized
+        - simultaneous
+      default: sequential
+    State:
+      title: State
+      x-stoplight:
+        id: o0y6d4wuuprb2
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: crt8ilgl6rd80
+        shooter_id:
+          type: string
+          x-stoplight:
+            id: sm3ga6zioykco
+        round:
+          type: integer
+          x-stoplight:
+            id: jtfr8k2o5psk7
+        turn:
+          type: integer
+          x-stoplight:
+            id: g0d2unx3km9dw
+        launch:
+          type: integer
+          x-stoplight:
+            id: er4hf5g3s4deq
+        trigger_type:
+          $ref: './model.yaml#/components/schemas/TriggerType'
+          x-stoplight:
+            id: mv4bimzewwjq6
+        station_ids:
+          type: array
+          x-stoplight:
+            id: 5haew9g905kgm
+          items:
+            x-stoplight:
+              id: hmlerlit7s7i5
+            type: string
+        machine_ids:
+          type: array
+          x-stoplight:
+            id: 17kka950slonm
+          items:
+            x-stoplight:
+              id: 2yoe3mj4k7d3h
+            type: string
+        tokens:
+          type: array
+          x-stoplight:
+            id: fqr4isqtkurqn
+          items:
+            type: object
+            $ref: './model.yaml#/components/schemas/Token'
+            x-stoplight:
+              id: gftvtlg0p4iq9
+    Session:
+      title: Session
+      type: object
+      required:
+        - id
+        - range
+        - discipline
+        - shooters
+      properties:
+        id:
+          type: string
+          format: uuid
+        range:
+          type: object
+          $ref: '#/components/schemas/Range'
+          x-stoplight:
+            id: ff7hbgjrk72az
+        discipline:
+          type: object
+          $ref: '#/components/schemas/Discipline'
+          x-stoplight:
+            id: oesbgk7s2r9bw
+        shooters:
+          type: array
+          x-stoplight:
+            id: s35m5h0hqxuqx
+          items:
+            type: object
+            $ref: '#/components/schemas/Shooter'
+            x-stoplight:
+              id: 0adx94x6y33pf
+        state:
+          type: object
+          $ref: '#/components/schemas/State'
+          x-stoplight:
+            id: o0y6d4wuuprb2
+      x-stoplight:
+        id: mtflbe6ai8ijr
+    EventType:
+      title: EventType
+      x-stoplight:
+        id: elw9188rccbi7
+      enum:
+        - CallTarget
+        - TakeShot
+        - LaunchTarget
+    RewindType:
+      title: RewindType
+      x-stoplight:
+        id: axhfr6sw79mo6
+      enum:
+        - turn
+        - launch
+    RewindTarget:
+      title: RewindTarget
+      x-stoplight:
+        id: 9q9jesmra0ooi
+      enum:
+        - current
+        - previous
     CreateSessionRequest:
       title: CreateSessionRequest
       type: object
@@ -645,12 +984,12 @@ components:
         - token
       properties:
         event_type:
-          $ref: ./effective-range-model.yaml#/components/schemas/EventType
+          $ref: '#/components/schemas/EventType'
           x-stoplight:
             id: cjw1o4rn9cw13
         token:
           type: object
-          $ref: ./effective-range-model.yaml#/components/schemas/Token
+          $ref: './model.yaml#/components/schemas/Token'
           x-stoplight:
             id: gftvtlg0p4iq9
     ManualLaunchRequest:
@@ -684,17 +1023,3 @@ components:
           $ref: '#/components/schemas/RewindTarget'
           x-stoplight:
             id: 7v8cwiufmy0xy
-    RewindType:
-      title: RewindType
-      x-stoplight:
-        id: axhfr6sw79mo6
-      enum:
-        - turn
-        - launch
-    RewindTarget:
-      title: RewindTarget
-      x-stoplight:
-        id: 9q9jesmra0ooi
-      enum:
-        - current
-        - previous
