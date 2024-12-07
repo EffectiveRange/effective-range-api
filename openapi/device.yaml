@@ -62,8 +62,8 @@ paths:
                 id: gftvtlg0p4iq9
     parameters: []
   '/signal/{id}/alive':
-    $ref: "./signal.yaml#/paths/~1signal~1{id}~1alive"
+    $ref: "./signal.yaml#/paths/~1signal~1%7Bid%7D~1alive"
   '/signal/{id}/healthy':
-    $ref: "./signal.yaml#/paths/~1signal~1{id}~1healthy"
+    $ref: "./signal.yaml#/paths/~1signal~1%7Bid%7D~1healthy"
 components:
   schemas: {}
