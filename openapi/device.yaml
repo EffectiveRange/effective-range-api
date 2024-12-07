@@ -16,8 +16,8 @@ info:
 tags:
   - name: device
     description: Edge device
-  - name: health
-    description: Component health
+  - name: signal
+    description: Component signal
 paths:
   /device/activate:
     post:
@@ -36,7 +36,7 @@ paths:
           application/json:
             schema:
               type: object
-              $ref: ./model.yaml#/components/schemas/Token
+              $ref: "./model.yaml#/components/schemas/Token"
               x-stoplight:
                 id: gftvtlg0p4iq9
     parameters: []
@@ -57,13 +57,13 @@ paths:
           application/json:
             schema:
               type: object
-              $ref: ./model.yaml#/components/schemas/Token
+              $ref: "./model.yaml#/components/schemas/Token"
               x-stoplight:
                 id: gftvtlg0p4iq9
     parameters: []
   '/signal/{id}/alive':
-    $ref: './signal.yaml#/paths/~1signal~1{id}~1alive'
+    $ref: "./signal.yaml#/paths/~1signal~1{id}~1alive"
   '/signal/{id}/healthy':
-    $ref: './signal.yaml#/paths/~1signal~1{id}~1healthy'
+    $ref: "./signal.yaml#/paths/~1signal~1{id}~1healthy"
 components:
   schemas: {}

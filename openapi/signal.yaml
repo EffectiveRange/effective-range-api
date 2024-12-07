@@ -3,9 +3,9 @@ x-stoplight:
   id: t7cn6d165fvem
 info:
   version: 0.1.0
-  title: Health API
-  summary: Effective Range health API
-  description: Component health API for the Effective Range system
+  title: Signal API
+  summary: Effective Range signal API
+  description: Component signal API for the Effective Range system
   contact:
     name: Effective Range
     email: info@effective-range.com
@@ -14,14 +14,14 @@ info:
     name: MIT
     url: 'https://raw.githubusercontent.com/EffectiveRange/effective-range-api/refs/heads/main/LICENSE'
 tags:
-  - name: health
-    description: Component health
+  - name: signal
+    description: Component signal
 paths:
   '/signal/{id}/alive':
     post:
       summary: Signal component is alive
       tags:
-        - health
+        - signal
       responses:
         '200':
           description: OK
@@ -40,7 +40,7 @@ paths:
     post:
       summary: Signal component is healthy
       tags:
-        - health
+        - signal
       responses:
         '200':
           description: OK
