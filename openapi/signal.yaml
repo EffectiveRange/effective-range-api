@@ -17,7 +17,7 @@ tags:
   - name: signal
     description: Component signal
 paths:
-  '/signal/{id}/alive':
+  /signal/alive:
     post:
       summary: Signal component is alive
       tags:
@@ -29,14 +29,13 @@ paths:
       x-stoplight:
         id: oyvnyv2bljdwb
       description: Component signals it is alive on the network
-    parameters:
-      - schema:
-          type: string
-        name: id
-        in: path
-        required: true
-        description: Component ID
-  '/signal/{id}/healthy':
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Component'
+    parameters: []
+  /signal/healthy:
     post:
       summary: Signal component is healthy
       tags:
@@ -48,12 +47,34 @@ paths:
       x-stoplight:
         id: fi4uqk45fkvij
       description: Component signals it is healthy (heartbeat)
-    parameters:
-      - schema:
-          type: string
-        name: id
-        in: path
-        required: true
-        description: Component ID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Component'
+    parameters: []
 components:
-  schemas: {}
+  schemas:
+    Component:
+      title: Component
+      x-stoplight:
+        id: mnpauv0e7v27m
+      type: object
+      required:
+        - host
+        - port
+        - type
+      properties:
+        host:
+          type: string
+          x-stoplight:
+            id: l48ddk21l4ufp
+        port:
+          type: integer
+          x-stoplight:
+            id: vwnx7s4497woy
+          minimum: 0
+        type:
+          type: string
+          x-stoplight:
+            id: pb7ux0wo2cydf
