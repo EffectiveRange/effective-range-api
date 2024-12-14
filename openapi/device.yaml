@@ -61,9 +61,9 @@ paths:
               x-stoplight:
                 id: gftvtlg0p4iq9
     parameters: []
-  '/signal/{id}/alive':
-    $ref: "./signal.yaml#/paths/~1signal~1%7Bid%7D~1alive"
-  '/signal/{id}/healthy':
-    $ref: "./signal.yaml#/paths/~1signal~1%7Bid%7D~1healthy"
+  /signal/alive:
+    $ref: "./signal.yaml#/paths/~1signal~1alive"
+  /signal/healthy:
+    $ref: "./signal.yaml#/paths/~1signal~1healthy"
 components:
   schemas: {}

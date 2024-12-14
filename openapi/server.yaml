@@ -571,10 +571,10 @@ paths:
             schema:
               type: object
               $ref: '#/components/schemas/TriggerEventRequest'
-  '/signal/{id}/alive':
-    $ref: "./signal.yaml#/paths/~1signal~1%7Bid%7D~1alive"
-  '/signal/{id}/healthy':
-    $ref: "./signal.yaml#/paths/~1signal~1%7Bid%7D~1healthy"
+  /signal/alive:
+    $ref: "./signal.yaml#/paths/~1signal~1alive"
+  /signal/healthy:
+    $ref: "./signal.yaml#/paths/~1signal~1healthy"
 components:
   schemas:
     Device:
