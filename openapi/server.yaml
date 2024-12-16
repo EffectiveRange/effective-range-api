@@ -901,7 +901,6 @@ components:
         - discipline
         - shooters
         - status
-        - state
       properties:
         id:
           type: string
