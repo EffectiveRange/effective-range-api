@@ -570,11 +570,11 @@ paths:
           application/json:
             schema:
               type: object
-              $ref: '#/components/schemas/TriggerEventRequest'
+              $ref: ./model.yaml#/components/schemas/Token
   /signal/alive:
-    $ref: "./signal.yaml#/paths/~1signal~1alive"
+    $ref: ./signal.yaml#/paths/~1signal~1alive
   /signal/healthy:
-    $ref: "./signal.yaml#/paths/~1signal~1healthy"
+    $ref: ./signal.yaml#/paths/~1signal~1healthy
 components:
   schemas:
     Device:
@@ -617,7 +617,7 @@ components:
             id: 3zwoczn21awr2
           items:
             type: object
-            $ref: "./model.yaml#/components/schemas/Token"
+            $ref: ./model.yaml#/components/schemas/Token
             x-stoplight:
               id: gftvtlg0p4iq9
     Range:
@@ -780,7 +780,7 @@ components:
               id: gp1fmnfup0gaw
             type: string
         trigger_type:
-          $ref: "./model.yaml#/components/schemas/TriggerType"
+          $ref: ./model.yaml#/components/schemas/TriggerType
           x-stoplight:
             id: mv4bimzewwjq6
         machine_order:
@@ -860,7 +860,7 @@ components:
           x-stoplight:
             id: er4hf5g3s4deq
         trigger_type:
-          $ref: "./model.yaml#/components/schemas/TriggerType"
+          $ref: ./model.yaml#/components/schemas/TriggerType
           x-stoplight:
             id: mv4bimzewwjq6
         station_ids:
@@ -885,17 +885,21 @@ components:
             id: fqr4isqtkurqn
           items:
             type: object
-            $ref: "./model.yaml#/components/schemas/Token"
+            $ref: ./model.yaml#/components/schemas/Token
             x-stoplight:
               id: gftvtlg0p4iq9
     Session:
       title: Session
       type: object
+      x-stoplight:
+        id: mtflbe6ai8ijr
       required:
         - id
         - range
         - discipline
         - shooters
+        - status
+        - state
       properties:
         id:
           type: string
@@ -919,21 +923,25 @@ components:
             $ref: '#/components/schemas/Shooter'
             x-stoplight:
               id: 0adx94x6y33pf
+        status:
+          $ref: '#/components/schemas/SessionStatus'
+          x-stoplight:
+            id: v5nayvq13yg4x
         state:
           type: object
           $ref: '#/components/schemas/State'
           x-stoplight:
             id: o0y6d4wuuprb2
+    SessionStatus:
+      title: SessionStatus
       x-stoplight:
-        id: mtflbe6ai8ijr
-    EventType:
-      title: EventType
-      x-stoplight:
-        id: elw9188rccbi7
+        id: fcooe9uver7lu
       enum:
-        - CallTarget
-        - TakeShot
-        - LaunchTarget
+        - created
+        - active
+        - paused
+        - completed
+        - ended
     RewindType:
       title: RewindType
       x-stoplight:
@@ -974,24 +982,6 @@ components:
             type: string
       x-stoplight:
         id: bep232hh076km
-    TriggerEventRequest:
-      title: TriggerEventRequest
-      x-stoplight:
-        id: jeinuka22jv99
-      type: object
-      required:
-        - event_type
-        - token
-      properties:
-        event_type:
-          $ref: '#/components/schemas/EventType'
-          x-stoplight:
-            id: cjw1o4rn9cw13
-        token:
-          type: object
-          $ref: "./model.yaml#/components/schemas/Token"
-          x-stoplight:
-            id: gftvtlg0p4iq9
     ManualLaunchRequest:
       title: ManualLaunchRequest
       type: object
