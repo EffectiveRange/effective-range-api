@@ -571,6 +571,8 @@ paths:
             schema:
               type: object
               $ref: ./model.yaml#/components/schemas/Token
+              x-stoplight:
+                id: gftvtlg0p4iq9
   /signal/alive:
     $ref: ./signal.yaml#/paths/~1signal~1alive
   /signal/healthy:
