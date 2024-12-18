@@ -315,33 +315,6 @@ paths:
       description: Get a shooting range by ID
       x-stoplight:
         id: 3y4qn3jj2ejld
-  '/range/{id}/session':
-    parameters:
-      - schema:
-          type: string
-        name: id
-        in: path
-        required: true
-        description: Range ID
-    get:
-      summary: Get active session
-      tags:
-        - range
-        - session
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                $ref: '#/components/schemas/Session'
-                x-stoplight:
-                  id: mtflbe6ai8ijr
-      operationId: get-active-session
-      description: Get the active shooting session on a shooting range
-      x-stoplight:
-        id: mem7mam2niwym
   /session:
     get:
       summary: Get sessions
