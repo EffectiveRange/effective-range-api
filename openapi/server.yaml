@@ -582,7 +582,7 @@ components:
           type: boolean
           x-stoplight:
             id: jacm9fmpjjiw1
-        reservationId:
+        session_id:
           type: string
           x-stoplight:
             id: sv9jrp9ugffkl
@@ -599,6 +599,8 @@ components:
     Range:
       title: Range
       type: object
+      x-stoplight:
+        id: ff7hbgjrk72az
       required:
         - id
         - station_map
@@ -633,8 +635,11 @@ components:
             x-stoplight:
               id: dhoq4c46dh5sl
             type: string
-      x-stoplight:
-        id: ff7hbgjrk72az
+        session_id:
+          type: string
+          x-stoplight:
+            id: xajjwaa4egduc
+          format: uuid
     Shooter:
       title: Shooter
       type: object
