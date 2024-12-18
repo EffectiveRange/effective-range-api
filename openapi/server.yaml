@@ -519,32 +519,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/RewindSessionRequest'
-  '/session/{id}/launch':
-    parameters:
-      - schema:
-          type: string
-          format: uuid
-        name: id
-        in: path
-        required: true
-        description: Session ID
-    post:
-      summary: Manual launch
-      tags:
-        - session
-      responses:
-        '202':
-          description: Accepted
-      operationId: initiate-manual-launch
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              $ref: '#/components/schemas/ManualLaunchRequest'
-      description: Initiate manual launch for a shooting session
-      x-stoplight:
-        id: ze72e0fgk0e0d
   '/session/{id}/event':
     parameters:
       - schema:
@@ -969,20 +943,6 @@ components:
             type: string
       x-stoplight:
         id: bep232hh076km
-    ManualLaunchRequest:
-      title: ManualLaunchRequest
-      type: object
-      required:
-        - machine_ids
-      properties:
-        machine_ids:
-          type: array
-          items:
-            x-stoplight:
-              id: mdoep5xdf3yuf
-            type: string
-      x-stoplight:
-        id: oru90z9hqh0km
     RewindSessionRequest:
       title: RewindSessionRequest
       x-stoplight:
