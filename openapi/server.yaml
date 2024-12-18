@@ -901,7 +901,6 @@ components:
         - range
         - discipline
         - shooters
-        - status
       properties:
         id:
           type: string
@@ -925,25 +924,11 @@ components:
             $ref: '#/components/schemas/Shooter'
             x-stoplight:
               id: 0adx94x6y33pf
-        status:
-          $ref: '#/components/schemas/SessionStatus'
-          x-stoplight:
-            id: v5nayvq13yg4x
         state:
           type: object
           $ref: '#/components/schemas/State'
           x-stoplight:
             id: o0y6d4wuuprb2
-    SessionStatus:
-      title: SessionStatus
-      x-stoplight:
-        id: fcooe9uver7lu
-      enum:
-        - created
-        - active
-        - paused
-        - completed
-        - ended
     RewindType:
       title: RewindType
       x-stoplight:
