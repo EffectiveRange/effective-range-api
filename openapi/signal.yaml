@@ -61,10 +61,15 @@ components:
         id: mnpauv0e7v27m
       type: object
       required:
+        - id
         - host
         - port
         - type
       properties:
+        id:
+          type: string
+          x-stoplight:
+            id: pdhfpm7q2wzxy
         host:
           type: string
           x-stoplight:
