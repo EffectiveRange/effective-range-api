@@ -564,7 +564,7 @@ components:
         - type
         - role
         - online
-        - in_use
+        - reserved
       properties:
         id:
           type: string
@@ -583,7 +583,7 @@ components:
           type: boolean
           x-stoplight:
             id: jacm9fmpjjiw1
-        in_use:
+        reserved:
           type: boolean
           x-stoplight:
             id: sv9jrp9ugffkl
