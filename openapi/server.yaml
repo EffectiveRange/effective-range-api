@@ -564,7 +564,6 @@ components:
         - type
         - role
         - online
-        - reserved
       properties:
         id:
           type: string
@@ -583,10 +582,11 @@ components:
           type: boolean
           x-stoplight:
             id: jacm9fmpjjiw1
-        reserved:
-          type: boolean
+        reservationId:
+          type: string
           x-stoplight:
             id: sv9jrp9ugffkl
+          format: uuid
         tokens:
           type: array
           x-stoplight:
