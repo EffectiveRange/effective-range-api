@@ -1,0 +1,69 @@
+openapi: 3.1.0
+x-stoplight:
+  id: 2300b1a6d0c75
+info:
+  version: 0.1.0
+  title: Device API
+  summary: Effective Range device API
+  description: Edge device API for the Effective Range system
+  contact:
+    name: Effective Range
+    email: info@effective-range.com
+    url: 'https://www.effective-range.com'
+  license:
+    name: MIT
+    url: 'https://raw.githubusercontent.com/EffectiveRange/effective-range-api/refs/heads/main/LICENSE'
+tags:
+  - name: device
+    description: Edge device
+  - name: signal
+    description: Component signal
+paths:
+  /device/activate:
+    post:
+      summary: Activate device
+      tags:
+        - device
+      responses:
+        '202':
+          description: Accepted
+      operationId: activate-device
+      x-stoplight:
+        id: aq16emkx2iucl
+      description: Activate device for launch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              $ref: "./model.yaml#/components/schemas/Token"
+              x-stoplight:
+                id: gftvtlg0p4iq9
+    parameters: []
+  /device/deactivate:
+    post:
+      summary: Deactivate device
+      tags:
+        - device
+      responses:
+        '202':
+          description: Accepted
+      operationId: deactivate-device
+      x-stoplight:
+        id: 5qetcgo65ggdi
+      description: Deactivate device for launch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              $ref: "./model.yaml#/components/schemas/Token"
+              x-stoplight:
+                id: gftvtlg0p4iq9
+    parameters: []
+  /signal/alive:
+    $ref: "./signal.yaml#/paths/~1signal~1alive"
+  /signal/healthy:
+    $ref: "./signal.yaml#/paths/~1signal~1healthy"
+components:
+  schemas: {}

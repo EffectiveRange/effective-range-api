@@ -1,0 +1,85 @@
+openapi: 3.1.0
+x-stoplight:
+  id: t7cn6d165fvem
+info:
+  version: 0.1.0
+  title: Signal API
+  summary: Effective Range signal API
+  description: Component signal API for the Effective Range system
+  contact:
+    name: Effective Range
+    email: info@effective-range.com
+    url: 'https://www.effective-range.com'
+  license:
+    name: MIT
+    url: 'https://raw.githubusercontent.com/EffectiveRange/effective-range-api/refs/heads/main/LICENSE'
+tags:
+  - name: signal
+    description: Component signal
+paths:
+  /signal/alive:
+    post:
+      summary: Signal component is alive
+      tags:
+        - signal
+      responses:
+        '200':
+          description: OK
+      operationId: signal-alive
+      x-stoplight:
+        id: oyvnyv2bljdwb
+      description: Component signals it is alive on the network
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Component'
+    parameters: []
+  /signal/healthy:
+    post:
+      summary: Signal component is healthy
+      tags:
+        - signal
+      responses:
+        '200':
+          description: OK
+      operationId: signal-healthy
+      x-stoplight:
+        id: fi4uqk45fkvij
+      description: Component signals it is healthy (heartbeat)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Component'
+    parameters: []
+components:
+  schemas:
+    Component:
+      title: Component
+      x-stoplight:
+        id: mnpauv0e7v27m
+      type: object
+      required:
+        - id
+        - host
+        - port
+        - type
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: pdhfpm7q2wzxy
+        host:
+          type: string
+          x-stoplight:
+            id: l48ddk21l4ufp
+        port:
+          type: integer
+          x-stoplight:
+            id: vwnx7s4497woy
+          minimum: 0
+        type:
+          type: string
+          x-stoplight:
+            id: pb7ux0wo2cydf
