@@ -1,0 +1,81 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+package er_serverdevice;
+
+enum TriggerType {
+  ON_CALL = 0;
+  ON_SHOT = 1;
+  MANUAL = 2;
+}
+
+enum EventType {
+  USED = 0;
+  DISCARDED = 1;
+  EXPIRED = 2;
+}
+
+message Token {
+  bytes id = 1;
+  optional bytes pre_id = 2;
+  bytes session_id = 3;
+  google.protobuf.Timestamp expiry = 4;
+  TriggerType trigger = 5;
+}
+
+message Error {
+  int code = 1;
+  string msg = 2;
+}
+
+message TokenRequest { repeated Token tokens = 1; }
+message TokenResponse { optional Error error = 1; }
+
+message EventRequest {
+  bytes token_id = 1;
+  EventType type = 2;
+}
+message EventResponse { optional Error error = 1; }
+
+message AliveRequest {
+  string component_id = 1;
+  string hostname = 2;
+  uint16 port = 3;
+  uint64 status_period_s = 4;
+}
+
+message AliveResponse { optional Error error = 1; }
+
+message StatusRequest {
+  string component_id = 1;
+  optional Error error = 2;
+}
+message StatusResponse { optional Error error = 1; }
+
+///////////////////////////
+
+service Health {
+  // used for signalling when a component starts
+  // communicates peer info and status message
+  // time. Once per component startup,
+  // if an endpoint receives a subsequent alive
+  // request then it treats the peer as if was
+  // restarted, and all existing tokens invalidate locally
+  rpc Alive(AliveRequest) returns (AliveResponse) {}
+  // periodic status message called in intervals
+  // specified in the initial alive request
+  rpc Status(StatusRequest) returns (StatusResponse) {}
+}
+
+service Device {
+  // List of tokens on which the device operates on
+  // Sending an empty list means to deactivate the
+  // device
+  rpc SetTokens(TokenRequest) returns (TokenResponse) {}
+}
+
+service Event {
+  // for reporting token usage from device to server
+  rpc ReportEvent(EventRequest) returns (EventResponse) {}
+}
