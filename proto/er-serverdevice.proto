@@ -25,7 +25,7 @@ message Token {
 }
 
 message Error {
-  int code = 1;
+  int32 code = 1;
   string msg = 2;
 }
 
@@ -41,7 +41,7 @@ message EventResponse { optional Error error = 1; }
 message AliveRequest {
   string component_id = 1;
   string hostname = 2;
-  uint16 port = 3;
+  uint32 port = 3;
   uint64 status_period_s = 4;
 }
 
