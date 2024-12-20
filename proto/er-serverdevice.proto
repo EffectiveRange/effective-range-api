@@ -69,7 +69,7 @@ message StatusRequest {
 message StatusResponse { optional Error error = 1; }
 
 message SessionRequest { bytes session_id = 1; }
-message SessionRequest { optional Error error = 1; }
+message SessionResponse { optional Error error = 1; }
 
 ///////////////////////////
 
