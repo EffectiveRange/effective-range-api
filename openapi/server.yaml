@@ -18,14 +18,14 @@ tags:
     description: Edge device
   - name: discipline
     description: Shooting discipline
+  - name: health
+    description: Component health
   - name: range
     description: Shooting range
   - name: session
     description: Shooting session
   - name: shooter
     description: Shooting competitor
-  - name: signal
-    description: Component signal
 paths:
   /discipline:
     post:
@@ -520,10 +520,10 @@ paths:
               $ref: ./model.yaml#/components/schemas/Token
               x-stoplight:
                 id: gftvtlg0p4iq9
-  /signal/alive:
-    $ref: ./signal.yaml#/paths/~1signal~1alive
-  /signal/healthy:
-    $ref: ./signal.yaml#/paths/~1signal~1healthy
+  /health/alive:
+    $ref: "./health.yaml#/paths/~1health~1alive"
+  /health/status:
+    $ref: "./health.yaml#/paths/~1health~1status"
 components:
   schemas:
     Device:
