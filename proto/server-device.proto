@@ -1,8 +1,11 @@
 syntax = "proto3";
 
+option java_multiple_files = true;
+option java_package = "com.effectiverange.effectiverange.proto.serverdevice";
+
 import "google/protobuf/timestamp.proto";
 
-package com.effectiverange.effectiverange.proto.serverdevice;
+package serverdevice;
 
 enum TriggerType {
   ON_CALL = 0;
