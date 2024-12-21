@@ -1,8 +1,11 @@
 syntax = "proto3";
 
+option java_multiple_files = true;
+option java_package = "com.effectiverange.effectiverange.proto.serverdevice";
+
 import "google/protobuf/timestamp.proto";
 
-package er_serverdevice;
+package serverdevice;
 
 enum TriggerType {
   ON_CALL = 0;
@@ -19,9 +22,13 @@ enum EventType {
   DISCARDED = 2;
 }
 
+message UUID {
+  string value = 1;
+}
+
 message Token {
-  bytes id = 1;
-  optional bytes pre_id = 2;
+  UUID id = 1;
+  optional UUID pre_id = 2;
   google.protobuf.Timestamp expiry = 4;
   TriggerType trigger = 5;
 }
@@ -39,14 +46,13 @@ message Error {
 }
 
 message TokenRequest {
-  bytes session_id = 1;
+  UUID session_id = 1;
   repeated Token tokens = 2;
 }
-
 message TokenResponse { optional Error error = 1; }
 
 message EventRequest {
-  bytes token_id = 1;
+  UUID token_id = 1;
   EventType type = 2;
 }
 message EventsRequest { repeated EventRequest events = 1; }
@@ -58,17 +64,16 @@ message AliveRequest {
   uint32 port = 3;
   uint64 status_period_s = 4;
 }
-
 message AliveResponse { optional Error error = 1; }
 
 message StatusRequest {
   string component_id = 1;
-  optional bytes session_id = 2;
+  optional UUID session_id = 2;
   optional Error error = 3;
 }
 message StatusResponse { optional Error error = 1; }
 
-message SessionRequest { bytes session_id = 1; }
+message SessionRequest { UUID session_id = 1; }
 message SessionResponse { optional Error error = 1; }
 
 ///////////////////////////
