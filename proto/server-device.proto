@@ -2,7 +2,7 @@ syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
 
-package er_serverdevice;
+package com.effectiverange.effectiverange.proto.serverdevice;
 
 enum TriggerType {
   ON_CALL = 0;
@@ -46,7 +46,6 @@ message TokenRequest {
   UUID session_id = 1;
   repeated Token tokens = 2;
 }
-
 message TokenResponse { optional Error error = 1; }
 
 message EventRequest {
@@ -62,7 +61,6 @@ message AliveRequest {
   uint32 port = 3;
   uint64 status_period_s = 4;
 }
-
 message AliveResponse { optional Error error = 1; }
 
 message StatusRequest {

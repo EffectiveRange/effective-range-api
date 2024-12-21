@@ -1,0 +1,5 @@
+syntax = "proto3";
+
+package com.effectiverange.effectiverange.proto.interdevice;
+
+message Launch { string token = 1; }
