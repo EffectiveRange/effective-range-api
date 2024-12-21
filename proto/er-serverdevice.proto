@@ -1,0 +1,104 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+package er_serverdevice;
+
+enum TriggerType {
+  ON_CALL = 0;
+  ON_SHOT = 1;
+  MANUAL = 2;
+}
+
+enum EventType {
+  // Token successfully used up for operation
+  USED = 0;
+  // Token TTL expired
+  EXPIRED = 1;
+  // Token discarded by any reason by the device
+  DISCARDED = 2;
+}
+
+message Token {
+  bytes id = 1;
+  optional bytes pre_id = 2;
+  google.protobuf.Timestamp expiry = 4;
+  TriggerType trigger = 5;
+}
+
+enum ErrorCode {
+  UNKNOWN = 0;
+  NO_SESSION = 1;
+  SESSION_MISMATCH = 2;
+  INVALID_TOKEN = 3;
+}
+
+message Error {
+  ErrorCode code = 1;
+  optional string reason = 2;
+}
+
+message TokenRequest {
+  bytes session_id = 1;
+  repeated Token tokens = 2;
+}
+
+message TokenResponse { optional Error error = 1; }
+
+message EventRequest {
+  bytes token_id = 1;
+  EventType type = 2;
+}
+message EventsRequest { repeated EventRequest events = 1; }
+message EventResponse { optional Error error = 1; }
+
+message AliveRequest {
+  string component_id = 1;
+  string host = 2;
+  uint32 port = 3;
+  uint64 status_period_s = 4;
+}
+
+message AliveResponse { optional Error error = 1; }
+
+message StatusRequest {
+  string component_id = 1;
+  optional bytes session_id = 2;
+  optional Error error = 3;
+}
+message StatusResponse { optional Error error = 1; }
+
+message SessionRequest { bytes session_id = 1; }
+message SessionResponse { optional Error error = 1; }
+
+///////////////////////////
+
+service Health {
+  // used for signalling when a component starts
+  // communicates peer info and status message
+  // time. Once per component startup,
+  // if an endpoint receives a subsequent alive
+  // request then it treats the peer as if was
+  // restarted, and all existing tokens invalidate locally
+  rpc Alive(AliveRequest) returns (AliveResponse) {}
+  // periodic status message called in intervals
+  // specified in the initial alive request
+  rpc Status(StatusRequest) returns (StatusResponse) {}
+}
+
+service Device {
+  // List of tokens on which the device operates on
+  // Sending an empty list means to deactivate the
+  // device. Only valid while the device in an active session
+  // If a token request arrives with a non matching
+  // session id, it is not accepted
+  rpc SetTokens(TokenRequest) returns (TokenResponse) {}
+  rpc StartSession(SessionRequest) returns (SessionResponse) {}
+  rpc EndSession(SessionRequest) returns (SessionResponse) {}
+}
+
+service Event {
+  // for reporting token usage from device to server
+  rpc ReportEvent(EventRequest) returns (EventResponse) {}
+  rpc ReportEvents(EventsRequest) returns (EventResponse) {}
+}

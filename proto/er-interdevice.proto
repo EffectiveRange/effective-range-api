@@ -1,0 +1,5 @@
+syntax = "proto3";
+
+package er_interdevice;
+
+message Launch { bytes token = 1; }
