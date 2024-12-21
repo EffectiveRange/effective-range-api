@@ -39,7 +39,6 @@ components:
         - common
       required:
         - id
-        - session_id
         - trigger_type
         - expiry_time
       properties:
@@ -48,11 +47,6 @@ components:
           type: string
           x-stoplight:
             id: kkzh6ml6t612k
-        session_id:
-          type: string
-          x-stoplight:
-            id: 06c7yf6thue67
-          format: uuid
         trigger_type:
           $ref: '#/components/schemas/TriggerType'
           x-stoplight:

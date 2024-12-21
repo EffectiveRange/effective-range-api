@@ -3,9 +3,9 @@ x-stoplight:
   id: t7cn6d165fvem
 info:
   version: 0.1.0
-  title: Signal API
-  summary: Effective Range signal API
-  description: Component signal API for the Effective Range system
+  title: Health API
+  summary: Effective Range health API
+  description: Component health API for the Effective Range system
   contact:
     name: Effective Range
     email: info@effective-range.com
@@ -14,18 +14,18 @@ info:
     name: MIT
     url: 'https://raw.githubusercontent.com/EffectiveRange/effective-range-api/refs/heads/main/LICENSE'
 tags:
-  - name: signal
-    description: Component signal
+  - name: health
+    description: Component health
 paths:
-  /signal/alive:
+  /health/alive:
     post:
       summary: Signal component is alive
       tags:
-        - signal
+        - health
       responses:
         '200':
           description: OK
-      operationId: signal-alive
+      operationId: health-alive
       x-stoplight:
         id: oyvnyv2bljdwb
       description: Component signals it is alive on the network
@@ -35,18 +35,18 @@ paths:
             schema:
               $ref: '#/components/schemas/Component'
     parameters: []
-  /signal/healthy:
+  /health/status:
     post:
-      summary: Signal component is healthy
+      summary: Signal component health status
       tags:
-        - signal
+        - health
       responses:
         '200':
           description: OK
-      operationId: signal-healthy
+      operationId: health-status
       x-stoplight:
         id: fi4uqk45fkvij
-      description: Component signals it is healthy (heartbeat)
+      description: Component signals its health status
       requestBody:
         content:
           application/json:
@@ -64,7 +64,7 @@ components:
         - id
         - host
         - port
-        - type
+        - status_period
       properties:
         id:
           type: string
@@ -79,7 +79,7 @@ components:
           x-stoplight:
             id: vwnx7s4497woy
           minimum: 0
-        type:
-          type: string
+        status_period:
+          type: integer
           x-stoplight:
             id: pb7ux0wo2cydf
