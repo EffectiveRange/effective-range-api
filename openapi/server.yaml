@@ -503,6 +503,7 @@ paths:
         description: Session ID
       - schema:
           type: string
+          format: uuid
         name: token_id
         in: path
         required: true
