@@ -492,7 +492,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/RewindSessionRequest'
-  '/session/{id}/event/{token_id}':
+  '/session/{id}/event/{tokenId}':
     parameters:
       - schema:
           type: string
@@ -504,7 +504,7 @@ paths:
       - schema:
           type: string
           format: uuid
-        name: token_id
+        name: tokenId
         in: path
         required: true
         description: Token ID
