@@ -33,6 +33,11 @@ message Token {
   TriggerType trigger = 5;
 }
 
+message Event {
+  UUID token_id = 1;
+  EventType type = 2;
+}
+
 enum ErrorCode {
   UNKNOWN = 0;
   NO_SESSION = 1;
@@ -52,10 +57,9 @@ message TokenRequest {
 message TokenResponse { optional Error error = 1; }
 
 message EventRequest {
-  UUID token_id = 1;
-  EventType type = 2;
+  UUID session_id = 1;
+  repeated Event events = 2;
 }
-message EventsRequest { repeated EventRequest events = 1; }
 message EventResponse { optional Error error = 1; }
 
 message AliveRequest {
@@ -102,8 +106,7 @@ service Device {
   rpc EndSession(SessionRequest) returns (SessionResponse) {}
 }
 
-service Event {
+service Session {
   // for reporting token usage from device to server
   rpc ReportEvent(EventRequest) returns (EventResponse) {}
-  rpc ReportEvents(EventsRequest) returns (EventResponse) {}
 }
