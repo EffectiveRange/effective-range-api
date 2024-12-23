@@ -492,7 +492,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/RewindSessionRequest'
-  '/session/{id}/event':
+  '/session/{id}/event/{token_id}':
     parameters:
       - schema:
           type: string
@@ -501,6 +501,12 @@ paths:
         in: path
         required: true
         description: Session ID
+      - schema:
+          type: string
+        name: token_id
+        in: path
+        required: true
+        description: Token ID
     post:
       summary: Trigger event
       tags:
@@ -513,17 +519,11 @@ paths:
         id: xdhdyp6s73adg
       description: Trigger a session event
       requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              $ref: ./model.yaml#/components/schemas/Token
-              x-stoplight:
-                id: gftvtlg0p4iq9
+        content: {}
   /health/alive:
-    $ref: "./health.yaml#/paths/~1health~1alive"
+    $ref: ./health.yaml#/paths/~1health~1alive
   /health/status:
-    $ref: "./health.yaml#/paths/~1health~1status"
+    $ref: ./health.yaml#/paths/~1health~1status
 components:
   schemas:
     Device:
