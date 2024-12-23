@@ -518,8 +518,6 @@ paths:
       x-stoplight:
         id: xdhdyp6s73adg
       description: Trigger a session event
-      requestBody:
-        content: {}
   /health/alive:
     $ref: ./health.yaml#/paths/~1health~1alive
   /health/status:
