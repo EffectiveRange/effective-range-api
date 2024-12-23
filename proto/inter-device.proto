@@ -1,0 +1,5 @@
+syntax = "proto3";
+
+package interdevice;
+
+message Launch { string token = 1; }
