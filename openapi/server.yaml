@@ -525,6 +525,15 @@ paths:
     $ref: ./health.yaml#/paths/~1health~1status
 components:
   schemas:
+    DeviceStatus:
+      title: DeviceStatus
+      x-stoplight:
+        id: xubznd8zoiifs
+      enum:
+        - unknown
+        - online
+        - offline
+      default: unknown
     Device:
       title: Device
       type: object
@@ -535,7 +544,7 @@ components:
         - uri
         - type
         - role
-        - online
+        - status
       properties:
         id:
           type: string
@@ -550,8 +559,8 @@ components:
             id: g104uanwf6e9g
         role:
           type: string
-        online:
-          type: boolean
+        status:
+          $ref: '#/components/schemas/DeviceStatus'
           x-stoplight:
             id: jacm9fmpjjiw1
         session_id:
@@ -785,6 +794,16 @@ components:
         - simultaneous
         - complement
       default: sequential
+    SessionStatus:
+      title: SessionStatus
+      x-stoplight:
+        id: o6nlgfn0w4n50
+      enum:
+        - created
+        - started
+        - ended
+      default: created
+      description: ''
     State:
       title: State
       x-stoplight:
@@ -852,6 +871,7 @@ components:
         - range
         - discipline
         - shooters
+        - status
       properties:
         id:
           type: string
@@ -875,6 +895,10 @@ components:
             $ref: '#/components/schemas/Shooter'
             x-stoplight:
               id: 0adx94x6y33pf
+        status:
+          $ref: '#/components/schemas/SessionStatus'
+          x-stoplight:
+            id: sw57lihee61b7
         state:
           type: object
           $ref: '#/components/schemas/State'
