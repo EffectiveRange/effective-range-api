@@ -975,6 +975,8 @@ components:
     CreateSessionRequest:
       title: CreateSessionRequest
       type: object
+      x-stoplight:
+        id: bep232hh076km
       required:
         - range_id
         - discipline_id
@@ -984,10 +986,12 @@ components:
           type: string
           x-stoplight:
             id: aart5dimk9z5l
+          format: uuid
         discipline_id:
           type: string
           x-stoplight:
             id: 2rf02b3dse
+          format: uuid
         shooter_ids:
           x-stoplight:
             id: lkl3oq9ef4efj
@@ -996,8 +1000,7 @@ components:
             x-stoplight:
               id: g2nle7t6sq5a7
             type: string
-      x-stoplight:
-        id: bep232hh076km
+            format: uuid
     RewindSessionRequest:
       title: RewindSessionRequest
       x-stoplight:
