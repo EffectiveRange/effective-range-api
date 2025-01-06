@@ -645,6 +645,7 @@ components:
             x-stoplight:
               id: v5jag1338km5e
             type: string
+            format: uuid
         machine_map:
           type: object
           x-stoplight:
@@ -653,6 +654,7 @@ components:
             x-stoplight:
               id: quiuz48zut16g
             type: string
+            format: uuid
         discipline_ids:
           type: array
           x-stoplight:
