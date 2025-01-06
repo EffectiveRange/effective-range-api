@@ -35,6 +35,10 @@ paths:
       responses:
         '201':
           description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Discipline'
       operationId: add-discipline
       x-stoplight:
         id: a4qjcud5e3muc
@@ -123,6 +127,10 @@ paths:
       responses:
         '201':
           description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Shooter'
       operationId: add-shooter
       x-stoplight:
         id: tzsibxbelfecv
@@ -191,6 +199,10 @@ paths:
       responses:
         '201':
           description: Added
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
       operationId: add-device
       requestBody:
         content:
@@ -280,6 +292,10 @@ paths:
       responses:
         '201':
           description: Added
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Range'
       operationId: add-range
       description: Add a shooting range
       requestBody:
