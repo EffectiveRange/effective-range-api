@@ -23,7 +23,7 @@ enum EventType {
 }
 
 message UUID {
-  //
+  // String instead of bytes to avoid endianness issues
   string value = 1;
 }
 
@@ -65,15 +65,14 @@ message EventRequest {
 message EventResponse { optional Error error = 1; }
 
 message AliveRequest {
-  string component_id = 1;
-  string host = 2;
-  uint32 port = 3;
-  uint64 status_period_s = 4;
+  UUID component_id = 1;
+  string component_uri = 2;
+  uint64 status_period_s = 3;
 }
 message AliveResponse { optional Error error = 1; }
 
 message StatusRequest {
-  string component_id = 1;
+  UUID component_id = 1;
   optional UUID session_id = 2;
   optional Error error = 3;
 }
