@@ -44,7 +44,7 @@ paths:
           application/json:
             schema:
               type: object
-              $ref: '#/components/schemas/Discipline'
+              $ref: '#/components/schemas/NewDiscipline'
               x-stoplight:
                 id: oesbgk7s2r9bw
     get:
@@ -131,7 +131,7 @@ paths:
           application/json:
             schema:
               type: object
-              $ref: '#/components/schemas/Shooter'
+              $ref: '#/components/schemas/NewShooter'
               x-stoplight:
                 id: 0adx94x6y33pf
       description: Add new shooter
@@ -197,7 +197,7 @@ paths:
           application/json:
             schema:
               type: object
-              $ref: '#/components/schemas/Device'
+              $ref: '#/components/schemas/NewDevice'
               x-stoplight:
                 id: g4ecd4xr0576j
       description: Add a new device
@@ -287,7 +287,7 @@ paths:
           application/json:
             schema:
               type: object
-              $ref: '#/components/schemas/Range'
+              $ref: '#/components/schemas/NewRange'
               x-stoplight:
                 id: ff7hbgjrk72az
       x-stoplight:
@@ -358,7 +358,7 @@ paths:
           application/json:
             schema:
               type: object
-              $ref: '#/components/schemas/CreateSessionRequest'
+              $ref: '#/components/schemas/NewSession'
       tags:
         - session
       description: Create a new shooting session on a shooting range
@@ -495,7 +495,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RewindSessionRequest'
+              $ref: '#/components/schemas/Rewind'
   '/session/{id}/event/{tokenId}':
     parameters:
       - schema:
@@ -696,6 +696,9 @@ components:
         - description
         - shooter_order
         - target_limit
+        - launch_delay
+        - delay_type
+        - option_bird
         - turns
       properties:
         id:
@@ -973,8 +976,8 @@ components:
       enum:
         - current
         - previous
-    CreateSessionRequest:
-      title: CreateSessionRequest
+    NewSession:
+      title: NewSession
       type: object
       x-stoplight:
         id: bep232hh076km
@@ -1002,8 +1005,8 @@ components:
               id: g2nle7t6sq5a7
             type: string
             format: uuid
-    RewindSessionRequest:
-      title: RewindSessionRequest
+    Rewind:
+      title: Rewind
       x-stoplight:
         id: rrhh2qxv4jwgn
       type: object
@@ -1019,3 +1022,135 @@ components:
           $ref: '#/components/schemas/RewindTarget'
           x-stoplight:
             id: 7v8cwiufmy0xy
+    NewDiscipline:
+      title: NewDiscipline
+      type: object
+      required:
+        - name
+        - description
+        - shooter_order
+        - target_limit
+        - turns
+      properties:
+        name:
+          type: string
+          x-stoplight:
+            id: eqogwyyqjfl2x
+        description:
+          type: string
+          x-stoplight:
+            id: nrv6whohxnku7
+        shooter_order:
+          $ref: '#/components/schemas/ShooterOrder'
+          x-stoplight:
+            id: yp1c3nul58q91
+        target_limit:
+          type: integer
+          x-stoplight:
+            id: scbb6b9swu8ec
+          minimum: 1
+          default: 25
+        launch_delay:
+          type: integer
+          x-stoplight:
+            id: mlw82lz284by5
+          minimum: 0
+          default: 0
+        delay_type:
+          $ref: '#/components/schemas/DelayType'
+          x-stoplight:
+            id: 617lmg3186txa
+        option_bird:
+          type: boolean
+          x-stoplight:
+            id: m07jgxznqngkd
+          default: false
+        turns:
+          type: array
+          x-stoplight:
+            id: hzd80qhbrn7gt
+          minItems: 1
+          items:
+            type: object
+            $ref: '#/components/schemas/TurnConfig'
+            x-stoplight:
+              id: w9tza4t5cdgul
+    NewShooter:
+      title: NewShooter
+      x-stoplight:
+        id: 0mdxmppx00ab2
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          x-stoplight:
+            id: inqrp5i1mi4uu
+    NewDevice:
+      title: NewDevice
+      x-stoplight:
+        id: af4rffinypchj
+      type: object
+      required:
+        - name
+        - uri
+        - type
+        - role
+      properties:
+        name:
+          type: string
+          x-stoplight:
+            id: fhewmlcpebsgp
+        uri:
+          type: string
+          x-stoplight:
+            id: bmec6pqoij9ui
+        type:
+          type: string
+          x-stoplight:
+            id: g104uanwf6e9g
+        role:
+          type: string
+    NewRange:
+      title: NewRange
+      x-stoplight:
+        id: o2rv8qbm9nwba
+      type: object
+      required:
+        - name
+        - station_map
+        - machine_map
+        - discipline_ids
+      properties:
+        name:
+          type: string
+          x-stoplight:
+            id: 1f90m55bk43ky
+        station_map:
+          type: object
+          x-stoplight:
+            id: ozhbuwpei1jj6
+          additionalProperties:
+            x-stoplight:
+              id: v5jag1338km5e
+            type: string
+            format: uuid
+        machine_map:
+          type: object
+          x-stoplight:
+            id: db5coooruyawv
+          additionalProperties:
+            x-stoplight:
+              id: quiuz48zut16g
+            type: string
+            format: uuid
+        discipline_ids:
+          type: array
+          x-stoplight:
+            id: ab7z2xlg423ks
+          items:
+            x-stoplight:
+              id: dhoq4c46dh5sl
+            type: string
+            format: uuid
