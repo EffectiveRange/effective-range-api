@@ -1005,8 +1005,8 @@ components:
               id: g2nle7t6sq5a7
             type: string
             format: uuid
-    Rewind:
-      title: Rewind
+    RewindRequest:
+      title: RewindRequest
       x-stoplight:
         id: rrhh2qxv4jwgn
       type: object
