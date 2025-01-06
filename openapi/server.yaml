@@ -358,7 +358,7 @@ paths:
           application/json:
             schema:
               type: object
-              $ref: '#/components/schemas/NewSession'
+              $ref: '#/components/schemas/SessionRequest'
       tags:
         - session
       description: Create a new shooting session on a shooting range
@@ -976,8 +976,8 @@ components:
       enum:
         - current
         - previous
-    NewSession:
-      title: NewSession
+    SessionRequest:
+      title: SessionRequest
       type: object
       x-stoplight:
         id: bep232hh076km
