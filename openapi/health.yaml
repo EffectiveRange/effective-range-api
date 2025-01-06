@@ -62,23 +62,19 @@ components:
       type: object
       required:
         - id
-        - host
-        - port
+        - uri
         - status_period
       properties:
         id:
           type: string
           x-stoplight:
             id: pdhfpm7q2wzxy
-        host:
+          format: uuid
+        uri:
           type: string
           x-stoplight:
             id: l48ddk21l4ufp
-        port:
-          type: integer
-          x-stoplight:
-            id: vwnx7s4497woy
-          minimum: 0
+          format: uri
         status_period:
           type: integer
           x-stoplight:

@@ -519,6 +519,34 @@ paths:
       x-stoplight:
         id: xdhdyp6s73adg
       description: Trigger a session event
+  '/session/{id}/device/active':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: Session ID
+    get:
+      summary: Get active devices of session
+      tags:
+        - session
+        - device
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Device'
+                  x-stoplight:
+                    id: kp5vog8k42m0d
+      operationId: get-session-active-devices
+      x-stoplight:
+        id: 3nin88r96hctb
+      description: Get a list of currently active devices of the session
   /health/alive:
     $ref: ./health.yaml#/paths/~1health~1alive
   /health/status:
@@ -541,6 +569,7 @@ components:
         id: g4ecd4xr0576j
       required:
         - id
+        - name
         - uri
         - type
         - role
@@ -548,6 +577,11 @@ components:
       properties:
         id:
           type: string
+          format: uuid
+        name:
+          type: string
+          x-stoplight:
+            id: fhewmlcpebsgp
         uri:
           type: string
           x-stoplight:
@@ -584,6 +618,7 @@ components:
         id: ff7hbgjrk72az
       required:
         - id
+        - name
         - station_map
         - machine_map
         - discipline_ids
@@ -592,6 +627,11 @@ components:
           type: string
           x-stoplight:
             id: 0ov8tifyfek3o
+          format: uuid
+        name:
+          type: string
+          x-stoplight:
+            id: 1f90m55bk43ky
         station_map:
           type: object
           x-stoplight:
@@ -624,18 +664,19 @@ components:
     Shooter:
       title: Shooter
       type: object
+      x-stoplight:
+        id: 0adx94x6y33pf
       required:
         - id
         - name
       properties:
         id:
           type: string
+          format: uuid
         name:
           type: string
           x-stoplight:
             id: 57uhi42bwfcva
-      x-stoplight:
-        id: 0adx94x6y33pf
     Discipline:
       title: Discipline
       x-stoplight:
@@ -644,6 +685,7 @@ components:
       required:
         - id
         - name
+        - description
         - shooter_order
         - target_limit
         - turns
@@ -652,10 +694,15 @@ components:
           type: string
           x-stoplight:
             id: gikqrl1sxhvss
+          format: uuid
         name:
           type: string
           x-stoplight:
             id: eqogwyyqjfl2x
+        description:
+          type: string
+          x-stoplight:
+            id: nrv6whohxnku7
         shooter_order:
           $ref: '#/components/schemas/ShooterOrder'
           x-stoplight:
@@ -816,7 +863,7 @@ components:
           type: string
           x-stoplight:
             id: crt8ilgl6rd80
-        shooter_id:
+        shooter:
           type: string
           x-stoplight:
             id: sm3ga6zioykco
