@@ -495,7 +495,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Rewind'
+              $ref: '#/components/schemas/RewindRequest'
   '/session/{id}/event/{tokenId}':
     parameters:
       - schema:
