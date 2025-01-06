@@ -1093,11 +1093,15 @@ components:
         id: af4rffinypchj
       type: object
       required:
+        - id
         - name
         - uri
         - type
         - role
       properties:
+        id:
+          type: string
+          format: uuid
         name:
           type: string
           x-stoplight:
