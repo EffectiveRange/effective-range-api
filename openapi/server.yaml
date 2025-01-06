@@ -663,6 +663,7 @@ components:
             x-stoplight:
               id: dhoq4c46dh5sl
             type: string
+            format: uuid
         session_id:
           type: string
           x-stoplight:
