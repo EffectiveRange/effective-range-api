@@ -81,7 +81,6 @@ components:
       required:
         - id
         - uri
-        - status
         - status_period
       properties:
         id:
@@ -94,10 +93,6 @@ components:
           x-stoplight:
             id: l48ddk21l4ufp
           format: uri
-        status:
-          $ref: '#/components/schemas/Status'
-          x-stoplight:
-            id: sfhemjn1w6e4r
         status_period:
           type: integer
           x-stoplight:
@@ -107,30 +102,8 @@ components:
           x-stoplight:
             id: 1ki5bqm69p8vx
           format: uuid
-    Status:
-      title: Status
-      x-stoplight:
-        id: wkjkinif3whs2
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          $ref: '#/components/schemas/StatusType'
+        error:
+          type: object
+          $ref: ./model.yaml#/components/schemas/Error
           x-stoplight:
-            id: pw7a3i2ssv5ag
-        error_code:
-          type: integer
-          x-stoplight:
-            id: fkxj60762y80a
-        error_reason:
-          type: string
-          x-stoplight:
-            id: 12g1pmrque650
-    StatusType:
-      title: StatusType
-      x-stoplight:
-        id: ted55zs62lwca
-      enum:
-        - healthy
-        - failing
+            id: w4ychh28buda2
