@@ -19,7 +19,65 @@ tags:
   - name: health
     description: Component health
 paths:
-  /device/activate:
+  '/device/reserve/{sessionId}':
+    parameters:
+      - schema:
+          type: string
+          format: uuid
+        name: sessionId
+        in: path
+        required: true
+        description: Session ID
+    post:
+      summary: Reserve device
+      tags:
+        - device
+      responses:
+        '202':
+          description: Accepted
+        '406':
+          description: Not Acceptable
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: ./model.yaml#/components/schemas/Error
+                x-stoplight:
+                  id: w4ychh28buda2
+      operationId: reserve-device
+      x-stoplight:
+        id: 271yacc6702a5
+      description: Reserve device for session
+  '/device/release/{sessionId}':
+    parameters:
+      - schema:
+          type: string
+          format: uuid
+        name: sessionId
+        in: path
+        required: true
+        description: Session ID
+    post:
+      summary: Release device
+      tags:
+        - device
+      responses:
+        '202':
+          description: Accepted
+        '406':
+          description: Not Acceptable
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: ./model.yaml#/components/schemas/Error
+                x-stoplight:
+                  id: w4ychh28buda2
+      operationId: release-device
+      x-stoplight:
+        id: gbagx4n5bk3ah
+      description: Release device from session
+  '/device/activate/{sessionId}':
     post:
       summary: Activate device
       tags:
@@ -27,6 +85,15 @@ paths:
       responses:
         '202':
           description: Accepted
+        '406':
+          description: Not Acceptable
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: ./model.yaml#/components/schemas/Error
+                x-stoplight:
+                  id: w4ychh28buda2
       operationId: activate-device
       x-stoplight:
         id: aq16emkx2iucl
@@ -35,12 +102,23 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              $ref: '#/components/schemas/Activation'
+              type: array
               x-stoplight:
-                id: gftvtlg0p4iq9
-    parameters: []
-  /device/deactivate:
+                id: t5s8hdt03rj88
+              items:
+                type: object
+                $ref: ./model.yaml#/components/schemas/Token
+                x-stoplight:
+                  id: gftvtlg0p4iq9
+    parameters:
+      - schema:
+          type: string
+          format: uuid
+        name: sessionId
+        in: path
+        required: true
+        description: Session ID
+  '/device/deactivate/{sessionId}':
     post:
       summary: Deactivate device
       tags:
@@ -48,58 +126,30 @@ paths:
       responses:
         '202':
           description: Accepted
+        '406':
+          description: Not Acceptable
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: ./model.yaml#/components/schemas/Error
+                x-stoplight:
+                  id: w4ychh28buda2
       operationId: deactivate-device
       x-stoplight:
         id: 5qetcgo65ggdi
       description: Deactivate device for launch
       requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              $ref: '#/components/schemas/Deactivation'
-              x-stoplight:
-                id: gftvtlg0p4iq9
-    parameters: []
+        content: {}
+    parameters:
+      - schema:
+          type: string
+          format: uuid
+        name: sessionId
+        in: path
+        required: true
+        description: Session ID
   /health/alive:
     $ref: ./health.yaml#/paths/~1health~1alive
   /health/status:
     $ref: ./health.yaml#/paths/~1health~1status
-components:
-  schemas:
-    Activation:
-      title: Activation
-      x-stoplight:
-        id: w679jccls5uq4
-      type: object
-      required:
-        - session_id
-        - tokens
-      properties:
-        session_id:
-          type: string
-          x-stoplight:
-            id: lpx2qmuymnol8
-          format: uuid
-        tokens:
-          type: array
-          x-stoplight:
-            id: t5s8hdt03rj88
-          items:
-            type: object
-            $ref: ./model.yaml#/components/schemas/Token
-            x-stoplight:
-              id: gftvtlg0p4iq9
-    Deactivation:
-      title: Deactivation
-      x-stoplight:
-        id: ayw0nnal3187d
-      type: object
-      required:
-        - session_id
-      properties:
-        session_id:
-          type: string
-          x-stoplight:
-            id: h70q49r4xag5y
-          format: uuid
