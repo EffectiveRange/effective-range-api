@@ -36,7 +36,7 @@ paths:
           application/json:
             schema:
               type: object
-              $ref: "./model.yaml#/components/schemas/Token"
+              $ref: '#/components/schemas/Activation'
               x-stoplight:
                 id: gftvtlg0p4iq9
     parameters: []
@@ -57,13 +57,49 @@ paths:
           application/json:
             schema:
               type: object
-              $ref: "./model.yaml#/components/schemas/Token"
+              $ref: '#/components/schemas/Deactivation'
               x-stoplight:
                 id: gftvtlg0p4iq9
     parameters: []
   /health/alive:
-    $ref: "./health.yaml#/paths/~1health~1alive"
+    $ref: ./health.yaml#/paths/~1health~1alive
   /health/status:
-    $ref: "./health.yaml#/paths/~1health~1status"
+    $ref: ./health.yaml#/paths/~1health~1status
 components:
-  schemas: {}
+  schemas:
+    Activation:
+      title: Activation
+      x-stoplight:
+        id: w679jccls5uq4
+      type: object
+      required:
+        - session_id
+        - tokens
+      properties:
+        session_id:
+          type: string
+          x-stoplight:
+            id: lpx2qmuymnol8
+          format: uuid
+        tokens:
+          type: array
+          x-stoplight:
+            id: t5s8hdt03rj88
+          items:
+            type: object
+            $ref: ./model.yaml#/components/schemas/Token
+            x-stoplight:
+              id: gftvtlg0p4iq9
+    Deactivation:
+      title: Deactivation
+      x-stoplight:
+        id: ayw0nnal3187d
+      type: object
+      required:
+        - session_id
+      properties:
+        session_id:
+          type: string
+          x-stoplight:
+            id: h70q49r4xag5y
+          format: uuid
