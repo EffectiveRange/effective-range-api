@@ -61,3 +61,32 @@ components:
           x-stoplight:
             id: aolw5myc3blpf
           format: uuid
+    ErrorCode:
+      title: ErrorCode
+      x-stoplight:
+        id: j2ov7zolqqaiv
+      enum:
+        - unknown
+        - unreachable
+        - status_expired
+        - no_session
+        - session_mismatch
+        - invalid_token
+        - invalid_argument
+      default: unknown
+    Error:
+      title: Error
+      x-stoplight:
+        id: is5kvrx25ljdf
+      type: object
+      required:
+        - code
+      properties:
+        code:
+          $ref: '#/components/schemas/ErrorCode'
+          x-stoplight:
+            id: f72gwqw2t5nhe
+        reason:
+          type: string
+          x-stoplight:
+            id: a5zwe4rzhhpim

@@ -535,6 +535,15 @@ paths:
       responses:
         '202':
           description: Accepted
+        '406':
+          description: Not Acceptable
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: ./model.yaml#/components/schemas/Error
+                x-stoplight:
+                  id: w4ychh28buda2
       operationId: trigger-session-event
       x-stoplight:
         id: xdhdyp6s73adg
@@ -623,6 +632,11 @@ components:
           x-stoplight:
             id: sv9jrp9ugffkl
           format: uuid
+        error:
+          type: object
+          $ref: ./model.yaml#/components/schemas/Error
+          x-stoplight:
+            id: w4ychh28buda2
         tokens:
           type: array
           x-stoplight:

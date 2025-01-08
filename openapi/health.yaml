@@ -23,8 +23,17 @@ paths:
       tags:
         - health
       responses:
-        '200':
-          description: OK
+        '202':
+          description: Accepted
+        '406':
+          description: Not Acceptable
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: ./model.yaml#/components/schemas/Error
+                x-stoplight:
+                  id: w4ychh28buda2
       operationId: health-alive
       x-stoplight:
         id: oyvnyv2bljdwb
@@ -41,8 +50,17 @@ paths:
       tags:
         - health
       responses:
-        '200':
-          description: OK
+        '202':
+          description: Accepted
+        '406':
+          description: Not Acceptable
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: ./model.yaml#/components/schemas/Error
+                x-stoplight:
+                  id: w4ychh28buda2
       operationId: health-status
       x-stoplight:
         id: fi4uqk45fkvij
@@ -79,3 +97,13 @@ components:
           type: integer
           x-stoplight:
             id: pb7ux0wo2cydf
+        session_id:
+          type: string
+          x-stoplight:
+            id: 1ki5bqm69p8vx
+          format: uuid
+        error:
+          type: object
+          $ref: ./model.yaml#/components/schemas/Error
+          x-stoplight:
+            id: w4ychh28buda2
