@@ -67,6 +67,8 @@ components:
         id: j2ov7zolqqaiv
       enum:
         - unknown
+        - unreachable
+        - status_expired
         - no_session
         - session_mismatch
         - invalid_token
