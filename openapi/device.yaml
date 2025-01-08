@@ -139,8 +139,6 @@ paths:
       x-stoplight:
         id: 5qetcgo65ggdi
       description: Deactivate device for launch
-      requestBody:
-        content: {}
     parameters:
       - schema:
           type: string
