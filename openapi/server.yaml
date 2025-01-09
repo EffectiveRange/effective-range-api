@@ -60,6 +60,14 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Discipline'
+                  x-stoplight:
+                    id: hgvb7d8ia92vw
       operationId: get-disciplines
       x-stoplight:
         id: r023imxkusoo8
@@ -95,26 +103,6 @@ paths:
       description: Get a discipline by ID
       parameters: []
   /shooter:
-    get:
-      summary: Get shooters
-      tags:
-        - shooter
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: object
-                  $ref: '#/components/schemas/Shooter'
-                  x-stoplight:
-                    id: 0adx94x6y33pf
-      operationId: get-shooters
-      x-stoplight:
-        id: 8019pvexup91b
-      description: Get all shooter
     post:
       summary: Add shooter
       tags:
@@ -140,6 +128,26 @@ paths:
               x-stoplight:
                 id: 0adx94x6y33pf
       description: Add new shooter
+    get:
+      summary: Get shooters
+      tags:
+        - shooter
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  $ref: '#/components/schemas/Shooter'
+                  x-stoplight:
+                    id: 0adx94x6y33pf
+      operationId: get-shooters
+      x-stoplight:
+        id: 8019pvexup91b
+      description: Get all shooter
   '/shooter/{id}':
     parameters:
       - schema:
@@ -170,27 +178,6 @@ paths:
         id: 26nf97y2c8xq6
       description: Get shooter by ID
   /device:
-    get:
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: object
-                  $ref: '#/components/schemas/Device'
-                  x-stoplight:
-                    id: g4ecd4xr0576j
-      operationId: get-devices
-      summary: Get devices
-      description: Get a list of all devices
-      tags:
-        - device
-      x-stoplight:
-        id: wnwpyt955cft9
-    parameters: []
     post:
       summary: Add device
       tags:
@@ -216,6 +203,27 @@ paths:
       description: Add a new device
       x-stoplight:
         id: 9ywyj7yupczbl
+    get:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  $ref: '#/components/schemas/Device'
+                  x-stoplight:
+                    id: g4ecd4xr0576j
+      operationId: get-devices
+      summary: Get devices
+      description: Get a list of all devices
+      tags:
+        - device
+      x-stoplight:
+        id: wnwpyt955cft9
+    parameters: []
   /device/active:
     get:
       responses:
@@ -268,26 +276,6 @@ paths:
         required: true
         description: Device ID
   /range:
-    get:
-      summary: Get ranges
-      tags:
-        - range
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: object
-                  $ref: '#/components/schemas/Range'
-                  x-stoplight:
-                    id: ff7hbgjrk72az
-      operationId: get-ranges
-      description: Get all shooting ranges
-      x-stoplight:
-        id: qp0mo370uisly
     post:
       summary: Add range
       tags:
@@ -313,6 +301,26 @@ paths:
                 id: ff7hbgjrk72az
       x-stoplight:
         id: az16ukej4mtq7
+    get:
+      summary: Get ranges
+      tags:
+        - range
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  $ref: '#/components/schemas/Range'
+                  x-stoplight:
+                    id: ff7hbgjrk72az
+      operationId: get-ranges
+      description: Get all shooting ranges
+      x-stoplight:
+        id: qp0mo370uisly
   '/range/{id}':
     parameters:
       - schema:
@@ -343,26 +351,6 @@ paths:
       x-stoplight:
         id: 3y4qn3jj2ejld
   /session:
-    get:
-      summary: Get sessions
-      tags:
-        - session
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: object
-                  $ref: '#/components/schemas/Session'
-                  x-stoplight:
-                    id: mtflbe6ai8ijr
-      operationId: get-sessions
-      description: Get all shooting sessions
-      x-stoplight:
-        id: 80mdoy32p2ncz
     post:
       operationId: create-session
       summary: Create session
@@ -391,6 +379,26 @@ paths:
       description: Create a new shooting session on a shooting range
       x-stoplight:
         id: lj3bw804vmomt
+    get:
+      summary: Get sessions
+      tags:
+        - session
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  $ref: '#/components/schemas/Session'
+                  x-stoplight:
+                    id: mtflbe6ai8ijr
+      operationId: get-sessions
+      description: Get all shooting sessions
+      x-stoplight:
+        id: 80mdoy32p2ncz
   '/session/{id}':
     parameters:
       - schema:
