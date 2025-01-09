@@ -39,6 +39,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Discipline'
+        '400':
+          description: Bad Request
       operationId: add-discipline
       x-stoplight:
         id: a4qjcud5e3muc
@@ -56,17 +58,8 @@ paths:
       tags:
         - discipline
       responses:
-        '202':
-          description: Accepted
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: object
-                  $ref: '#/components/schemas/Discipline'
-                  x-stoplight:
-                    id: oesbgk7s2r9bw
+        '200':
+          description: OK
       operationId: get-disciplines
       x-stoplight:
         id: r023imxkusoo8
@@ -94,6 +87,8 @@ paths:
                 $ref: '#/components/schemas/Discipline'
                 x-stoplight:
                   id: oesbgk7s2r9bw
+        '404':
+          description: Not Found
       operationId: get-discipline
       x-stoplight:
         id: t86q0egkjz12p
@@ -131,6 +126,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Shooter'
+        '400':
+          description: Bad Request
       operationId: add-shooter
       x-stoplight:
         id: tzsibxbelfecv
@@ -166,6 +163,8 @@ paths:
                 $ref: '#/components/schemas/Shooter'
                 x-stoplight:
                   id: 0adx94x6y33pf
+        '404':
+          description: Not Found
       operationId: get-shooter
       x-stoplight:
         id: 26nf97y2c8xq6
@@ -174,7 +173,7 @@ paths:
     get:
       responses:
         '200':
-          description: Returned devices
+          description: OK
           content:
             application/json:
               schema:
@@ -198,11 +197,13 @@ paths:
         - device
       responses:
         '201':
-          description: Added
+          description: Created
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Device'
+        '400':
+          description: Bad Request
       operationId: add-device
       requestBody:
         content:
@@ -219,7 +220,7 @@ paths:
     get:
       responses:
         '200':
-          description: Returned active devices
+          description: OK
           content:
             application/json:
               schema:
@@ -241,7 +242,7 @@ paths:
     get:
       responses:
         '200':
-          description: Returned device
+          description: OK
           content:
             application/json:
               schema:
@@ -249,6 +250,8 @@ paths:
                 $ref: '#/components/schemas/Device'
                 x-stoplight:
                   id: g4ecd4xr0576j
+        '404':
+          description: Not Found
       operationId: get-device
       summary: Get device
       description: Get a device by ID
@@ -296,6 +299,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Range'
+        '400':
+          description: Bad Request
       operationId: add-range
       description: Add a shooting range
       requestBody:
@@ -331,6 +336,8 @@ paths:
                 $ref: '#/components/schemas/Range'
                 x-stoplight:
                   id: ff7hbgjrk72az
+        '404':
+          description: Not Found
       operationId: get-range
       description: Get a shooting range by ID
       x-stoplight:
@@ -342,7 +349,7 @@ paths:
         - session
       responses:
         '200':
-          description: Returned sessions
+          description: OK
           content:
             application/json:
               schema:
@@ -369,6 +376,10 @@ paths:
                 $ref: '#/components/schemas/Session'
                 x-stoplight:
                   id: mtflbe6ai8ijr
+        '400':
+          description: Bad Request
+        '406':
+          description: Not Acceptable
       requestBody:
         content:
           application/json:
@@ -395,7 +406,7 @@ paths:
         - session
       responses:
         '200':
-          description: Returned session
+          description: OK
           content:
             application/json:
               schema:
@@ -403,6 +414,8 @@ paths:
                 $ref: '#/components/schemas/Session'
                 x-stoplight:
                   id: mtflbe6ai8ijr
+        '404':
+          description: Not Found
       operationId: get-session
       description: Get a shooting session by ID
       x-stoplight:
@@ -423,6 +436,10 @@ paths:
       responses:
         '202':
           description: Accepted
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
       operationId: start-session
       description: Start a shooting session
       x-stoplight:
@@ -443,6 +460,10 @@ paths:
       responses:
         '202':
           description: Accepted
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
       operationId: end-session
       description: End a shooting session
       x-stoplight:
@@ -463,6 +484,10 @@ paths:
       responses:
         '202':
           description: Accepted
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
       operationId: pause-session
       description: Pause a shooting session
       x-stoplight:
@@ -483,6 +508,10 @@ paths:
       responses:
         '202':
           description: Accepted
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
       operationId: resume-session
       description: Resume a shooting session
       x-stoplight:
@@ -503,6 +532,12 @@ paths:
       responses:
         '202':
           description: Accepted
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
       operationId: rewind-session
       description: Rewind a shooting session
       x-stoplight:
@@ -535,6 +570,8 @@ paths:
       responses:
         '202':
           description: Accepted
+        '404':
+          description: Not Found
         '406':
           description: Not Acceptable
           content:
@@ -548,6 +585,37 @@ paths:
       x-stoplight:
         id: xdhdyp6s73adg
       description: Trigger a session event
+  '/session/{id}/device':
+    parameters:
+      - schema:
+          type: string
+          format: uuid
+        name: id
+        in: path
+        required: true
+        description: Session ID
+    get:
+      summary: Get devices of session
+      tags:
+        - session
+        - device
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Device'
+                  x-stoplight:
+                    id: kp5vog8k42m0d
+        '404':
+          description: Not Found
+      operationId: get-session-devices
+      x-stoplight:
+        id: 3nin88r96hctb
+      description: Get a list of all devices of the session
   '/session/{id}/device/active':
     parameters:
       - schema:
@@ -573,6 +641,8 @@ paths:
                   $ref: '#/components/schemas/Device'
                   x-stoplight:
                     id: kp5vog8k42m0d
+        '404':
+          description: Not Found
       operationId: get-session-active-devices
       x-stoplight:
         id: 3nin88r96hctb
