@@ -47,6 +47,7 @@ enum ErrorCode {
   SESSION_MISMATCH = 4;
   INVALID_TOKEN = 5;
   INVALID_ARGUMENT = 6;
+  INTERNAL_ERROR = 7;
 }
 
 message Error {
