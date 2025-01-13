@@ -48,6 +48,7 @@ enum ErrorCode {
   INVALID_TOKEN = 5;
   INVALID_ARGUMENT = 6;
   INTERNAL_ERROR = 7;
+  LOCAL_ERROR = 8;
 }
 
 message Error {
@@ -74,13 +75,11 @@ message EventRequest {
   UUID device_id = 3;
 }
 
-message HealthRequest {
-  Component component = 1;
-}
+message HealthRequest { Component component = 1; }
 
-message SessionRequest {UUID session_id = 1;}
+message SessionRequest { UUID session_id = 1; }
 
-message Response {optional Error error = 1;}
+message Response { optional Error error = 1; }
 
 ///////////////////////////
 
