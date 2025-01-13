@@ -71,6 +71,7 @@ message TokenRequest {
 message EventRequest {
   UUID session_id = 1;
   repeated Event events = 2;
+  UUID device_id = 3;
 }
 
 message HealthRequest {
