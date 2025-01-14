@@ -1123,25 +1123,55 @@ components:
           $ref: '#/components/schemas/RewindTarget'
           x-stoplight:
             id: 7v8cwiufmy0xy
-    EventRequest:
-      title: EventRequest
+    EventType:
+      title: EventType
+      x-stoplight:
+        id: a9l39hw1h6q6w
+      enum:
+        - used
+        - expired
+        - discarded
+      default: used
+    Event:
+      title: Event
       x-stoplight:
         id: st4sst3an9zbt
       type: object
       required:
-        - device_id
         - token_id
+        - type
       properties:
-        device_id:
-          type: string
-          x-stoplight:
-            id: nilo11d956kcn
-          format: uuid
         token_id:
           type: string
           x-stoplight:
             id: 3jdejoa2hzgri
           format: uuid
+        type:
+          $ref: '#/components/schemas/EventType'
+          x-stoplight:
+            id: riznx6hrxrwph
+    EventRequest:
+      title: EventRequest
+      x-stoplight:
+        id: rn8y2h07bc4dw
+      type: object
+      required:
+        - device_id
+        - events
+      properties:
+        device_id:
+          type: string
+          x-stoplight:
+            id: 9vfijdk2htcrb
+          format: uuid
+        events:
+          type: array
+          x-stoplight:
+            id: ar9xb2fua0alh
+          items:
+            $ref: '#/components/schemas/Event'
+            x-stoplight:
+              id: uzdqn2p5k8ryd
     NewDiscipline:
       title: NewDiscipline
       type: object
