@@ -732,9 +732,9 @@ components:
       required:
         - id
         - name
+        - description
         - station_map
         - machine_map
-        - discipline_ids
       properties:
         id:
           type: string
@@ -745,6 +745,10 @@ components:
           type: string
           x-stoplight:
             id: 1f90m55bk43ky
+        description:
+          type: string
+          x-stoplight:
+            id: ehtc337czqid9
         station_map:
           type: object
           x-stoplight:
@@ -761,15 +765,6 @@ components:
           additionalProperties:
             x-stoplight:
               id: quiuz48zut16g
-            type: string
-            format: uuid
-        discipline_ids:
-          type: array
-          x-stoplight:
-            id: ab7z2xlg423ks
-          items:
-            x-stoplight:
-              id: dhoq4c46dh5sl
             type: string
             format: uuid
         session_id:
@@ -1232,14 +1227,18 @@ components:
       type: object
       required:
         - name
+        - description
         - station_map
         - machine_map
-        - discipline_ids
       properties:
         name:
           type: string
           x-stoplight:
             id: 1f90m55bk43ky
+        description:
+          type: string
+          x-stoplight:
+            id: lyanl1dn8e4c5
         station_map:
           type: object
           x-stoplight:
@@ -1256,14 +1255,5 @@ components:
           additionalProperties:
             x-stoplight:
               id: quiuz48zut16g
-            type: string
-            format: uuid
-        discipline_ids:
-          type: array
-          x-stoplight:
-            id: ab7z2xlg423ks
-          items:
-            x-stoplight:
-              id: dhoq4c46dh5sl
             type: string
             format: uuid
