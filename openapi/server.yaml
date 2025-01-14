@@ -555,7 +555,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/RewindRequest'
-  '/session/{id}/event/{tokenId}':
+  '/session/{id}/event':
     parameters:
       - schema:
           type: string
@@ -564,13 +564,6 @@ paths:
         in: path
         required: true
         description: Session ID
-      - schema:
-          type: string
-          format: uuid
-        name: tokenId
-        in: path
-        required: true
-        description: Token ID
     post:
       summary: Trigger event
       tags:
@@ -593,6 +586,11 @@ paths:
       x-stoplight:
         id: xdhdyp6s73adg
       description: Trigger a session event
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventRequest'
   '/session/{id}/device':
     parameters:
       - schema:
@@ -732,9 +730,9 @@ components:
       required:
         - id
         - name
+        - description
         - station_map
         - machine_map
-        - discipline_ids
       properties:
         id:
           type: string
@@ -745,6 +743,10 @@ components:
           type: string
           x-stoplight:
             id: 1f90m55bk43ky
+        description:
+          type: string
+          x-stoplight:
+            id: ehtc337czqid9
         station_map:
           type: object
           x-stoplight:
@@ -761,15 +763,6 @@ components:
           additionalProperties:
             x-stoplight:
               id: quiuz48zut16g
-            type: string
-            format: uuid
-        discipline_ids:
-          type: array
-          x-stoplight:
-            id: ab7z2xlg423ks
-          items:
-            x-stoplight:
-              id: dhoq4c46dh5sl
             type: string
             format: uuid
         session_id:
@@ -1130,6 +1123,25 @@ components:
           $ref: '#/components/schemas/RewindTarget'
           x-stoplight:
             id: 7v8cwiufmy0xy
+    EventRequest:
+      title: EventRequest
+      x-stoplight:
+        id: st4sst3an9zbt
+      type: object
+      required:
+        - device_id
+        - token_id
+      properties:
+        device_id:
+          type: string
+          x-stoplight:
+            id: nilo11d956kcn
+          format: uuid
+        token_id:
+          type: string
+          x-stoplight:
+            id: 3jdejoa2hzgri
+          format: uuid
     NewDiscipline:
       title: NewDiscipline
       type: object
@@ -1232,14 +1244,18 @@ components:
       type: object
       required:
         - name
+        - description
         - station_map
         - machine_map
-        - discipline_ids
       properties:
         name:
           type: string
           x-stoplight:
             id: 1f90m55bk43ky
+        description:
+          type: string
+          x-stoplight:
+            id: lyanl1dn8e4c5
         station_map:
           type: object
           x-stoplight:
@@ -1256,14 +1272,5 @@ components:
           additionalProperties:
             x-stoplight:
               id: quiuz48zut16g
-            type: string
-            format: uuid
-        discipline_ids:
-          type: array
-          x-stoplight:
-            id: ab7z2xlg423ks
-          items:
-            x-stoplight:
-              id: dhoq4c46dh5sl
             type: string
             format: uuid
