@@ -1123,6 +1123,15 @@ components:
           $ref: '#/components/schemas/RewindTarget'
           x-stoplight:
             id: 7v8cwiufmy0xy
+    EventType:
+      title: EventType
+      x-stoplight:
+        id: a9l39hw1h6q6w
+      enum:
+        - used
+        - expired
+        - discarded
+      default: used
     EventRequest:
       title: EventRequest
       x-stoplight:
@@ -1131,6 +1140,7 @@ components:
       required:
         - device_id
         - token_id
+        - type
       properties:
         device_id:
           type: string
@@ -1142,6 +1152,10 @@ components:
           x-stoplight:
             id: 3jdejoa2hzgri
           format: uuid
+        type:
+          $ref: '#/components/schemas/EventType'
+          x-stoplight:
+            id: riznx6hrxrwph
     NewDiscipline:
       title: NewDiscipline
       type: object
