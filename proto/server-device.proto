@@ -47,6 +47,8 @@ enum ErrorCode {
   SESSION_MISMATCH = 4;
   INVALID_TOKEN = 5;
   INVALID_ARGUMENT = 6;
+  INTERNAL_ERROR = 7;
+  LOCAL_ERROR = 8;
 }
 
 message Error {
@@ -54,34 +56,30 @@ message Error {
   optional string reason = 2;
 }
 
+message Component {
+  UUID id = 1;
+  string uri = 2;
+  // Status period in seconds
+  uint64 status_period = 3;
+  optional Error error = 4;
+}
+
 message TokenRequest {
   UUID session_id = 1;
   repeated Token tokens = 2;
 }
-message TokenResponse { optional Error error = 1; }
 
 message EventRequest {
-  UUID session_id = 1;
-  repeated Event events = 2;
+  UUID device_id = 1;
+  UUID session_id = 2;
+  repeated Event events = 3;
 }
-message EventResponse { optional Error error = 1; }
 
-message AliveRequest {
-  UUID component_id = 1;
-  string component_uri = 2;
-  uint64 status_period_s = 3;
-}
-message AliveResponse { optional Error error = 1; }
+message HealthRequest {Component component = 1;}
 
-message StatusRequest {
-  UUID component_id = 1;
-  optional UUID session_id = 2;
-  optional Error error = 3;
-}
-message StatusResponse { optional Error error = 1; }
+message SessionRequest {UUID session_id = 1;}
 
-message SessionRequest { UUID session_id = 1; }
-message SessionResponse { optional Error error = 1; }
+message Response {optional Error error = 1;}
 
 ///////////////////////////
 
@@ -92,24 +90,24 @@ service Health {
   // if an endpoint receives a subsequent alive
   // request then it treats the peer as if was
   // restarted, and all existing tokens invalidate locally
-  rpc Alive(AliveRequest) returns (AliveResponse) {}
+  rpc Alive(HealthRequest) returns (Response) {}
   // periodic status message called in intervals
   // specified in the initial alive request
-  rpc Status(StatusRequest) returns (StatusResponse) {}
+  rpc Status(HealthRequest) returns (Response) {}
 }
 
 service Device {
-  // List of tokens on which the device operates on
-  // Sending an empty list means to deactivate the
-  // device. Only valid while the device in an active session
+  // List of tokens which the device operates on
+  // Only valid while the device in an active session
   // If a token request arrives with a non matching
   // session id, it is not accepted
-  rpc SetTokens(TokenRequest) returns (TokenResponse) {}
-  rpc StartSession(SessionRequest) returns (SessionResponse) {}
-  rpc EndSession(SessionRequest) returns (SessionResponse) {}
+  rpc Activate(TokenRequest) returns (Response) {}
+  rpc Deactivate(SessionRequest) returns (Response) {}
+  rpc StartSession(SessionRequest) returns (Response) {}
+  rpc EndSession(SessionRequest) returns (Response) {}
 }
 
 service Session {
   // for reporting token usage from device to server
-  rpc ReportEvent(EventRequest) returns (EventResponse) {}
+  rpc ReportEvent(EventRequest) returns (Response) {}
 }
