@@ -70,16 +70,16 @@ message TokenRequest {
 }
 
 message EventRequest {
-  UUID session_id = 1;
-  repeated Event events = 2;
-  UUID device_id = 3;
+  UUID device_id = 1;
+  UUID session_id = 2;
+  repeated Event events = 3;
 }
 
-message HealthRequest { Component component = 1; }
+message HealthRequest {Component component = 1;}
 
-message SessionRequest { UUID session_id = 1; }
+message SessionRequest {UUID session_id = 1;}
 
-message Response { optional Error error = 1; }
+message Response {optional Error error = 1;}
 
 ///////////////////////////
 
