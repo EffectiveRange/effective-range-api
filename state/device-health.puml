@@ -1,0 +1,19 @@
+@startuml
+hide empty description
+
+header Effective Range device
+title Health state machine
+
+[*] --> NotConnected
+
+NotConnected --> Connected : ServerAlive / onConnected
+
+Connected --> NotConnected : StatusExpire / onDisconnected
+Connected --> Connected : ServerStatus[matching uri and component] / resetStatusTimer
+Connected --> NotConnected: ServerStatus[mismatch uri or component]
+Connected --> NotConnectedTrans : ServerAlive / onDisconnected
+
+NotConnectedTrans --> Connected : <<transient>> / onConnected
+
+footer Effective Range device
+@enduml
