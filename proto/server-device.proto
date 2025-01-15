@@ -13,15 +13,6 @@ enum TriggerType {
   MANUAL = 2;
 }
 
-enum EventType {
-  // Token successfully used up for operation
-  USED = 0;
-  // Token TTL expired
-  EXPIRED = 1;
-  // Token discarded by any reason by the device
-  DISCARDED = 2;
-}
-
 message UUID {
   // String instead of bytes to avoid endianness issues
   string value = 1;
@@ -30,13 +21,7 @@ message UUID {
 message Token {
   UUID id = 1;
   optional UUID pre_id = 2;
-  google.protobuf.Timestamp expiry = 4;
-  TriggerType trigger = 5;
-}
-
-message Event {
-  UUID token_id = 1;
-  EventType type = 2;
+  TriggerType trigger = 3;
 }
 
 enum ErrorCode {
@@ -70,9 +55,9 @@ message TokenRequest {
 }
 
 message EventRequest {
-  UUID device_id = 1;
-  UUID session_id = 2;
-  repeated Event events = 3;
+  UUID session_id = 1;
+  UUID device_id = 2;
+  UUID token_id = 3;
 }
 
 message HealthRequest {Component component = 1;}
@@ -80,6 +65,18 @@ message HealthRequest {Component component = 1;}
 message SessionRequest {UUID session_id = 1;}
 
 message Response {optional Error error = 1;}
+
+enum SessionState {
+  NOT_IN_SESSION = 0;
+  IN_SESSION = 1;
+  ACTIVE_WITH_TOKENS = 2;
+  ACTIVE_WITHOUT_TOKENS = 3;
+}
+
+message SessionResponse {
+  SessionState next_state = 1;
+  optional Error error = 2;
+}
 
 ///////////////////////////
 
@@ -101,10 +98,10 @@ service Device {
   // Only valid while the device in an active session
   // If a token request arrives with a non matching
   // session id, it is not accepted
-  rpc Activate(TokenRequest) returns (Response) {}
-  rpc Deactivate(SessionRequest) returns (Response) {}
-  rpc StartSession(SessionRequest) returns (Response) {}
-  rpc EndSession(SessionRequest) returns (Response) {}
+  rpc Activate(TokenRequest) returns (SessionResponse) {}
+  rpc Deactivate(SessionRequest) returns (SessionResponse) {}
+  rpc StartSession(SessionRequest) returns (SessionResponse) {}
+  rpc EndSession(SessionRequest) returns (SessionResponse) {}
 }
 
 service Session {
