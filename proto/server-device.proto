@@ -66,7 +66,7 @@ message SessionRequest {UUID session_id = 1;}
 
 message Response {optional Error error = 1;}
 
-message DeviceResponse {
+message SessionResponse {
   // Resulting state of the device after handling the operation
   string result = 1;
   optional Error error = 2;
@@ -92,10 +92,10 @@ service Device {
   // Only valid while the device in an active session
   // If a token request arrives with a non matching
   // session id, it is not accepted
-  rpc Activate(TokenRequest) returns (DeviceResponse) {}
-  rpc Deactivate(SessionRequest) returns (DeviceResponse) {}
-  rpc StartSession(SessionRequest) returns (DeviceResponse) {}
-  rpc EndSession(SessionRequest) returns (DeviceResponse) {}
+  rpc Activate(TokenRequest) returns (SessionResponse) {}
+  rpc Deactivate(SessionRequest) returns (SessionResponse) {}
+  rpc StartSession(SessionRequest) returns (SessionResponse) {}
+  rpc EndSession(SessionRequest) returns (SessionResponse) {}
 }
 
 service Session {
