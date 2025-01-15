@@ -1,0 +1,29 @@
+@startuml
+hide empty description
+
+header Effective Range device
+title Session state machine
+
+[*] --> NotInSession : onConnected
+
+NotInSession --> InSession : StartSession / onSessionStart
+NotInSession --> [*] : Health.onDisconnected
+NotInSession --> NotInSession : <<any>>
+
+InSession --> NotInSession : EndSession / onEndSession
+InSession --> ActiveWithTokens : Activate[len(tokens)>0] / onActivate
+InSession --> [*] : Health.onDisconnected / onEndSession
+InSession --> NotInSession  : <<any>> / onEndSession
+
+ActiveWithTokens --> ActiveWithTokens : ReportEvent[len(tokens)>0]
+ActiveWithTokens --> ActiveWithoutTokens : ReportEvent[len(tokens)==0]
+ActiveWithTokens --> InSession : Deactivate / onDeactivate
+ActiveWithTokens --> [*] : Health.onDisconnected / onEndSession
+ActiveWithTokens --> NotInSession : <<any>> / onEndSession
+
+ActiveWithoutTokens --> InSession : Deactivate / onDeactivate
+ActiveWithoutTokens --> [*] : Health.onDisconnected / onEndSession
+ActiveWithoutTokens --> [*] : <<any>> / onEndSession
+
+footer Effective Range device
+@enduml
