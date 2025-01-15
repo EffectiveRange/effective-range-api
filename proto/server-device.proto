@@ -66,9 +66,15 @@ message SessionRequest {UUID session_id = 1;}
 
 message Response {optional Error error = 1;}
 
+enum SessionState {
+  NOT_IN_SESSION = 0;
+  IN_SESSION = 1;
+  ACTIVE_WITH_TOKENS = 2;
+  ACTIVE_WITHOUT_TOKENS = 3;
+}
+
 message SessionResponse {
-  // Resulting state of the device after handling the operation
-  string result = 1;
+  SessionState next_state = 1;
   optional Error error = 2;
 }
 
