@@ -34,6 +34,7 @@ enum ErrorCode {
   INVALID_ARGUMENT = 6;
   INTERNAL_ERROR = 7;
   LOCAL_ERROR = 8;
+  INVALID_STATE = 9;
 }
 
 message Error {
