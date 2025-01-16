@@ -1,0 +1,63 @@
+@startuml
+hide empty description
+
+header Effective Range server
+title Session state machine
+
+[*] --> SessionCreated
+SessionCreated --> SessionStarted : StartSession/ReserveRange
+SessionStarted --> TurnStarted
+TurnStarted : entry/LogTurnInfo
+TurnStarted --> LaunchStarted
+
+LaunchStarted : entry/LogLaunchInfo
+LaunchStarted : entry/ActivateDevices
+LaunchStarted --> LaunchActive
+
+state LaunchActiveChoice <<choice>>
+
+' Successful launch
+LaunchActive --> LaunchActiveChoice : ReportEvent\n/ProcessEvent
+LaunchActiveChoice --> LaunchActive : [IsLaunchIncomplete]
+LaunchActiveChoice --> LaunchCompleted : [IsLaunchComplete]
+LaunchCompleted : entry/DeactivateDevices
+
+state LaunchCompleteChoice <<choice>>
+
+LaunchCompleted --> LaunchCompleteChoice
+LaunchCompleteChoice --> LaunchStarted : [IsTurnIncomplete]\n/NextLaunch
+LaunchCompleteChoice --> TurnEnded : [IsTurnComplete]
+
+' Failed launch
+LaunchStarted --> LaunchFailed : SignalFailure
+LaunchActive --> LaunchFailed : SignalFailure
+LaunchFailed : entry/InterruptActivation
+LaunchFailed : entry/DeactivateDevices
+LaunchFailed --> LaunchStarted
+
+' Paused session
+LaunchActive --> SessionPaused : PauseSession
+SessionPaused : entry/InterruptActivation
+SessionPaused : entry/DeactivateDevices
+SessionPaused --> LaunchStarted : ResumeSession
+
+' Rewound session
+state SessionRewoundChoice <<choice>>
+
+SessionPaused --> SessionRewound : RewindSession
+SessionRewound --> SessionRewoundChoice
+SessionRewoundChoice --> LaunchStarted : [IsRewindLaunch]\n/RewindLaunch
+SessionRewoundChoice --> TurnStarted : [IsRewindTurn]\n/RewindTurn
+
+state TurnEndedChoice <<choice>>
+
+TurnEnded --> TurnEndedChoice
+TurnEndedChoice --> TurnStarted : [IsSessionIncomplete]\n/NextTurn
+TurnEndedChoice --> SessionCompleted : [IsSessionComplete]
+SessionCompleted --> SessionRewound : RewindSession
+SessionCompleted --> SessionEnded : EndSession/ReleaseRange
+SessionEnded --> [*]
+
+footer Effective Range server
+
+@enduml
