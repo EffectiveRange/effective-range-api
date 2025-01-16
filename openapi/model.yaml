@@ -40,21 +40,27 @@ components:
       required:
         - id
         - trigger_type
+        - expiry_time
       properties:
         id:
           format: uuid
           type: string
           x-stoplight:
             id: kkzh6ml6t612k
-        pre_id:
-          type: string
-          x-stoplight:
-            id: aolw5myc3blpf
-          format: uuid
         trigger_type:
           $ref: '#/components/schemas/TriggerType'
           x-stoplight:
             id: mv4bimzewwjq6
+        expiry_time:
+          format: date-time
+          type: string
+          x-stoplight:
+            id: 6lgq6ci9zojv3
+        preceding_id:
+          type: string
+          x-stoplight:
+            id: aolw5myc3blpf
+          format: uuid
     ErrorCode:
       title: ErrorCode
       x-stoplight:
@@ -67,6 +73,9 @@ components:
         - session_mismatch
         - invalid_token
         - invalid_argument
+        - internal_error
+        - local_error
+        - invalid_state
       default: unknown
     Error:
       title: Error
