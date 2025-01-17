@@ -101,7 +101,7 @@ paths:
       x-stoplight:
         id: t86q0egkjz12p
       description: Get a discipline by ID
-      parameters: [ ]
+      parameters: []
   /shooter:
     post:
       summary: Add shooter
@@ -223,7 +223,7 @@ paths:
         - device
       x-stoplight:
         id: wnwpyt955cft9
-    parameters: [ ]
+    parameters: []
   /device/active:
     get:
       responses:
@@ -245,7 +245,7 @@ paths:
         - device
       x-stoplight:
         id: y7v3mgosrqpgi
-    parameters: [ ]
+    parameters: []
   '/device/{id}':
     get:
       responses:
@@ -275,6 +275,18 @@ paths:
         in: path
         required: true
         description: Device ID
+  /device/discover:
+    post:
+      summary: Discover devices
+      tags:
+        - device
+      responses:
+        '200':
+          description: OK
+      operationId: discover-devices
+      x-stoplight:
+        id: lbrwnmwxdrcg6
+      description: Initiate device discovery
   /range:
     post:
       summary: Add range
