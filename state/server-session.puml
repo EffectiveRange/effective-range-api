@@ -40,6 +40,7 @@ LaunchActive --> SessionPaused : PauseSession
 SessionPaused : entry/InterruptActivation
 SessionPaused : entry/DeactivateDevices
 SessionPaused --> LaunchStarted : ResumeSession
+SessionPaused --> SessionEnded : EndSession/ReleaseRange
 
 ' Rewound session
 state SessionRewoundChoice <<choice>>
