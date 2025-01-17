@@ -67,6 +67,9 @@ components:
         - session_mismatch
         - invalid_token
         - invalid_argument
+        - internal_error
+        - local_error
+        - invalid_state
       default: unknown
     Error:
       title: Error
