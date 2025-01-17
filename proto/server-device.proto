@@ -61,11 +61,14 @@ message EventRequest {
   UUID token_id = 3;
 }
 
-message HealthRequest {Component component = 1;}
+message HealthRequest { Component component = 1; }
 
-message SessionRequest {UUID session_id = 1;}
+message SessionRequest {
+  UUID device_id = 1;
+  UUID session_id = 2;
+}
 
-message Response {optional Error error = 1;}
+message Response { optional Error error = 1; }
 
 enum SessionState {
   NOT_IN_SESSION = 0;
