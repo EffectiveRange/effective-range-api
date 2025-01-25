@@ -33,7 +33,7 @@ LaunchStarted --> LaunchFailed : SignalFailure
 LaunchActive --> LaunchFailed : SignalFailure
 LaunchFailed : entry/InterruptActivation
 LaunchFailed : entry/DeactivateDevices
-LaunchFailed --> LaunchStarted
+LaunchFailed --> LaunchStarted : StartSession/ReserveRange
 
 ' Paused session
 LaunchActive --> SessionPaused : PauseSession
@@ -41,6 +41,9 @@ SessionPaused : entry/InterruptActivation
 SessionPaused : entry/DeactivateDevices
 SessionPaused --> LaunchStarted : ResumeSession
 SessionPaused --> SessionEnded : EndSession/ReleaseRange
+
+' Continue session after server restart
+LaunchActive --> LaunchStarted : StartSession/ReserveRange
 
 ' Rewound session
 state SessionRewoundChoice <<choice>>
