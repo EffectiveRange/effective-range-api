@@ -362,6 +362,32 @@ paths:
       description: Get a shooting range by ID
       x-stoplight:
         id: 3y4qn3jj2ejld
+  '/range/{id}/release':
+    parameters:
+      - schema:
+          type: string
+          format: uuid
+        name: id
+        in: path
+        required: true
+        description: Range ID
+    post:
+      summary: Release range
+      tags:
+        - range
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Range'
+        '404':
+          description: Not Found
+      operationId: release-range
+      description: Release a shooting range from session
+      x-stoplight:
+        id: 3y4qn3jj2ejld
   /session:
     post:
       operationId: create-session
@@ -486,6 +512,30 @@ paths:
           description: Not Acceptable
       operationId: end-session
       description: End a shooting session
+      x-stoplight:
+        id: i0uio63eazv87
+  '/session/{id}/reset':
+    parameters:
+      - schema:
+          type: string
+          format: uuid
+        name: id
+        in: path
+        required: true
+        description: Session ID
+    post:
+      summary: Reset session
+      tags:
+        - session
+      responses:
+        '202':
+          description: Accepted
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+      operationId: reset-session
+      description: Reset a shooting session
       x-stoplight:
         id: i0uio63eazv87
   '/session/{id}/pause':
