@@ -378,6 +378,10 @@ paths:
       responses:
         '202':
           description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Range'
         '404':
           description: Not Found
       operationId: release-range
