@@ -32,7 +32,7 @@ LaunchCompleteChoice --> TurnEnded : [IsTurnComplete]
 LaunchStarted --> LaunchFailed : SignalFailure
 LaunchActive --> LaunchFailed : SignalFailure
 LaunchFailed : entry/InterruptActivation
-LaunchFailed : entry/DeactivateDevices
+LaunchFailed : entry/ReleaseRange
 LaunchFailed --> LaunchStarted : StartSession/ReserveRange
 
 ' Paused session
