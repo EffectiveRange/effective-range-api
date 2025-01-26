@@ -36,6 +36,7 @@ LaunchCompleted --> LaunchFailed : SignalFailure
 LaunchFailed : entry/InterruptActivation
 LaunchFailed : entry/ReleaseRange
 LaunchFailed --> LaunchStarted : StartSession/ReserveRange
+LaunchFailed --> LaunchFailed : ResetSession/ReleaseRange
 LaunchFailed --> SessionEnded : EndSession/ReleaseRange
 
 ' Paused session
