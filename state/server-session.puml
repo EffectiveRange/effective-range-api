@@ -48,6 +48,7 @@ SessionPaused --> SessionEnded : EndSession/ReleaseRange
 
 ' Continue session after server restart
 LaunchActive --> LaunchStarted : StartSession/ReserveRange
+LaunchActive --> LaunchActive : ResetSession/ReleaseRange
 
 ' Rewound session
 state SessionRewoundChoice <<choice>>
