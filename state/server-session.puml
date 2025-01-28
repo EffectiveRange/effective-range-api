@@ -34,9 +34,7 @@ LaunchActive --> LaunchFailed : SignalFailure
 SessionPaused --> LaunchFailed : SignalFailure
 LaunchCompleted --> LaunchFailed : SignalFailure
 LaunchFailed : entry/InterruptActivation
-LaunchFailed : entry/ReleaseRange
-LaunchFailed --> LaunchStarted : StartSession/ReserveRange
-LaunchFailed --> LaunchFailed : ResetSession/ReleaseRange
+LaunchFailed --> LaunchStarted : ResetSession/ResetRange
 LaunchFailed --> SessionEnded : EndSession/ReleaseRange
 
 ' Paused session
@@ -47,8 +45,7 @@ SessionPaused --> LaunchStarted : ResumeSession
 SessionPaused --> SessionEnded : EndSession/ReleaseRange
 
 ' Continue session after server restart
-LaunchActive --> LaunchStarted : StartSession/ReserveRange
-LaunchActive --> LaunchActive : ResetSession/ReleaseRange
+LaunchActive --> LaunchStarted : ResetSession/ResetRange
 
 ' Rewound session
 state SessionRewoundChoice <<choice>>
