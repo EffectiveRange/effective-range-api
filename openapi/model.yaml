@@ -16,6 +16,7 @@ info:
 tags:
   - name: common
     description: Common model
+paths: { }
 components:
   schemas:
     TriggerType:

@@ -101,7 +101,7 @@ paths:
       x-stoplight:
         id: t86q0egkjz12p
       description: Get a discipline by ID
-      parameters: []
+      parameters: [ ]
   /shooter:
     post:
       summary: Add shooter
@@ -223,7 +223,7 @@ paths:
         - device
       x-stoplight:
         id: wnwpyt955cft9
-    parameters: []
+    parameters: [ ]
   /device/active:
     get:
       responses:
@@ -245,7 +245,7 @@ paths:
         - device
       x-stoplight:
         id: y7v3mgosrqpgi
-    parameters: []
+    parameters: [ ]
   '/device/{id}':
     get:
       responses:
@@ -738,6 +738,7 @@ components:
       required:
         - id
         - name
+        - description
         - uri
         - type
         - role
@@ -750,6 +751,10 @@ components:
           type: string
           x-stoplight:
             id: fhewmlcpebsgp
+        description:
+          type: string
+          x-stoplight:
+            id: lyanl1dn8e4c5
         uri:
           type: string
           x-stoplight:
@@ -770,11 +775,6 @@ components:
           x-stoplight:
             id: sv9jrp9ugffkl
           format: uuid
-        error:
-          type: object
-          $ref: ./model.yaml#/components/schemas/Error
-          x-stoplight:
-            id: w4ychh28buda2
         tokens:
           type: array
           x-stoplight:
@@ -1277,6 +1277,7 @@ components:
       required:
         - id
         - name
+        - description
         - uri
         - type
         - role
@@ -1288,6 +1289,10 @@ components:
           type: string
           x-stoplight:
             id: fhewmlcpebsgp
+        description:
+          type: string
+          x-stoplight:
+            id: lyanl1dn8e4c5
         uri:
           type: string
           x-stoplight:
