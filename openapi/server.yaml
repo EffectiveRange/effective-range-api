@@ -280,6 +280,10 @@ paths:
       responses:
         '202':
           description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
         '404':
           description: Not Found
       operationId: update-device
