@@ -101,7 +101,7 @@ paths:
       x-stoplight:
         id: t86q0egkjz12p
       description: Get a discipline by ID
-      parameters: [ ]
+      parameters: []
   /shooter:
     post:
       summary: Add shooter
@@ -223,7 +223,7 @@ paths:
         - device
       x-stoplight:
         id: wnwpyt955cft9
-    parameters: [ ]
+    parameters: []
   /device/active:
     get:
       responses:
@@ -245,7 +245,7 @@ paths:
         - device
       x-stoplight:
         id: y7v3mgosrqpgi
-    parameters: [ ]
+    parameters: []
   '/device/{id}':
     get:
       responses:
@@ -267,6 +267,37 @@ paths:
         - device
       x-stoplight:
         id: opzgga0xi0rij
+    parameters:
+      - schema:
+          type: string
+          format: uuid
+        name: id
+        in: path
+        required: true
+        description: Device ID
+  '/device/{id}/update':
+    post:
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+        '404':
+          description: Not Found
+      operationId: update-device
+      summary: Update device
+      description: Update device parameters
+      tags:
+        - device
+      x-stoplight:
+        id: opzgga0xi0rij
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDevice'
     parameters:
       - schema:
           type: string
@@ -1304,6 +1335,28 @@ components:
             id: g104uanwf6e9g
         role:
           type: string
+    UpdateDevice:
+      title: UpdateDevice
+      x-stoplight:
+        id: at80zgwsp54nn
+      type: object
+      properties:
+        name:
+          type: string
+          x-stoplight:
+            id: h0huuhwicx4zn
+        description:
+          type: string
+          x-stoplight:
+            id: gxeg630ilwtmw
+        type:
+          type: string
+          x-stoplight:
+            id: n1hpwow5oq5oc
+        role:
+          type: string
+          x-stoplight:
+            id: yv044mpykfy7g
     NewRange:
       title: NewRange
       x-stoplight:
