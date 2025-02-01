@@ -28,12 +28,14 @@ LaunchCompleted --> LaunchCompleteChoice
 LaunchCompleteChoice --> LaunchStarted : [IsTurnIncomplete]\n/NextLaunch
 LaunchCompleteChoice --> TurnEnded : [IsTurnComplete]
 
+' Event report timout
+LaunchActive --> LaunchStarted : ReportTimeout/\nInterruptActivation;DeactivateDevices
+
 ' Failed launch
 LaunchStarted --> LaunchFailed : SignalFailure
 LaunchActive --> LaunchFailed : SignalFailure
 SessionPaused --> LaunchFailed : SignalFailure
 LaunchCompleted --> LaunchFailed : SignalFailure
-LaunchFailed : entry/InterruptActivation
 LaunchFailed --> LaunchStarted : ResetSession/ResetRange
 LaunchFailed --> SessionEnded : EndSession/ReleaseRange
 
