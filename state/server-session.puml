@@ -12,14 +12,14 @@ TurnStarted --> LaunchStarted
 
 LaunchStarted : entry/LogLaunchInfo
 LaunchStarted : entry/ActivateDevices
-LaunchStarted --> LaunchActive
+LaunchStarted --> LaunchActivated : ActivateLaunch
 
-state LaunchActiveChoice <<choice>>
+state LaunchActivatedChoice <<choice>>
 
 ' Successful launch
-LaunchActive --> LaunchActiveChoice : ReportEvent\n/ProcessEvent
-LaunchActiveChoice --> LaunchActive : [IsLaunchIncomplete]
-LaunchActiveChoice --> LaunchCompleted : [IsLaunchComplete]
+LaunchActivated --> LaunchActivatedChoice : ReportEvent\n/ProcessEvent
+LaunchActivatedChoice --> LaunchActivated : [IsLaunchIncomplete]
+LaunchActivatedChoice --> LaunchCompleted : [IsLaunchComplete]
 LaunchCompleted : entry/DeactivateDevices
 
 state LaunchCompleteChoice <<choice>>
@@ -28,31 +28,27 @@ LaunchCompleted --> LaunchCompleteChoice
 LaunchCompleteChoice --> LaunchStarted : [IsTurnIncomplete]\n/NextLaunch
 LaunchCompleteChoice --> TurnEnded : [IsTurnComplete]
 
+LaunchActivated --> LaunchDeactivated : CancelLaunch/InterruptActivation
+LaunchDeactivated : entry/DeactivateDevices
+LaunchDeactivated --> LaunchFailed : SignalFailure
+LaunchDeactivated --> SessionEnded : EndSession/ReleaseRange
+
 ' Event report timout
-LaunchActive --> LaunchStarted : ReportTimeout/\nInterruptActivation;DeactivateDevices
+LaunchDeactivated --> LaunchStarted : RestartLaunch
 
 ' Failed launch
 LaunchStarted --> LaunchFailed : SignalFailure
-LaunchActive --> LaunchFailed : SignalFailure
-SessionPaused --> LaunchFailed : SignalFailure
 LaunchCompleted --> LaunchFailed : SignalFailure
 LaunchFailed --> LaunchStarted : ResetSession/ResetRange
 LaunchFailed --> SessionEnded : EndSession/ReleaseRange
 
-' Paused session
-LaunchActive --> SessionPaused : PauseSession
-SessionPaused : entry/InterruptActivation
-SessionPaused : entry/DeactivateDevices
-SessionPaused --> LaunchStarted : ResumeSession
-SessionPaused --> SessionEnded : EndSession/ReleaseRange
-
 ' Continue session after server restart
-LaunchActive --> LaunchStarted : ResetSession/ResetRange
+LaunchActivated --> LaunchStarted : ResetSession/ResetRange
 
 ' Rewound session
 state SessionRewoundChoice <<choice>>
 
-SessionPaused --> SessionRewound : RewindSession
+LaunchDeactivated --> SessionRewound : RewindSession
 SessionRewound --> SessionRewoundChoice
 SessionRewoundChoice --> LaunchStarted : [IsRewindLaunch]\n/RewindLaunch
 SessionRewoundChoice --> TurnStarted : [IsRewindTurn]\n/RewindTurn
