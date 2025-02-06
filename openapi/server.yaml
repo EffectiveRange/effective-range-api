@@ -101,7 +101,7 @@ paths:
       x-stoplight:
         id: t86q0egkjz12p
       description: Get a discipline by ID
-      parameters: []
+      parameters: [ ]
   /shooter:
     post:
       summary: Add shooter
@@ -223,7 +223,7 @@ paths:
         - device
       x-stoplight:
         id: wnwpyt955cft9
-    parameters: []
+    parameters: [ ]
   /device/active:
     get:
       responses:
@@ -245,7 +245,7 @@ paths:
         - device
       x-stoplight:
         id: y7v3mgosrqpgi
-    parameters: []
+    parameters: [ ]
   '/device/{id}':
     get:
       responses:
@@ -658,7 +658,7 @@ paths:
         required: true
         description: Session ID
     post:
-      summary: Trigger event
+      summary: Report event
       tags:
         - session
       responses:
@@ -675,10 +675,10 @@ paths:
                 $ref: ./model.yaml#/components/schemas/Error
                 x-stoplight:
                   id: w4ychh28buda2
-      operationId: trigger-session-event
+      operationId: report-session-event
       x-stoplight:
         id: xdhdyp6s73adg
-      description: Trigger a session event
+      description: Report a session event
       requestBody:
         content:
           application/json:
@@ -1216,6 +1216,14 @@ components:
           $ref: '#/components/schemas/RewindTarget'
           x-stoplight:
             id: 7v8cwiufmy0xy
+    EventSource:
+      title: EventSource
+      x-stoplight:
+        id: tgimlu0sb0r72
+      enum:
+        - device
+        - server
+      default: device
     EventRequest:
       title: EventRequest
       x-stoplight:
@@ -1224,6 +1232,7 @@ components:
       required:
         - device_id
         - token_id
+        - source
       properties:
         device_id:
           type: string
@@ -1235,6 +1244,10 @@ components:
           x-stoplight:
             id: tayxzzmbux9av
           format: uuid
+        source:
+          $ref: '#/components/schemas/EventSource'
+          x-stoplight:
+            id: 38she3jywfxp3
     NewDiscipline:
       title: NewDiscipline
       type: object
