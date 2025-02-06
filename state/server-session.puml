@@ -30,7 +30,6 @@ LaunchCompleteChoice --> TurnEnded : [IsTurnComplete]
 
 LaunchActivated --> LaunchDeactivated : CancelLaunch/InterruptActivation
 LaunchDeactivated : entry/DeactivateDevices
-LaunchDeactivated --> LaunchFailed : SignalFailure
 LaunchDeactivated --> SessionEnded : EndSession/ReleaseRange
 
 ' Event report timout
@@ -38,7 +37,9 @@ LaunchDeactivated --> LaunchStarted : RestartLaunch
 
 ' Failed launch
 LaunchStarted --> LaunchFailed : SignalFailure
+LaunchActivated --> LaunchFailed : SignalFailure
 LaunchCompleted --> LaunchFailed : SignalFailure
+LaunchDeactivated --> LaunchFailed : SignalFailure
 LaunchFailed --> LaunchStarted : ResetSession/ResetRange
 LaunchFailed --> SessionEnded : EndSession/ReleaseRange
 

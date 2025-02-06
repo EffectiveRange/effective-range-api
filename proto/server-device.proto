@@ -56,20 +56,26 @@ message TokenRequest {
   repeated Token tokens = 3;
 }
 
+enum EventSource {
+  DEVICE = 0;
+  SERVER = 1;
+}
+
 message EventRequest {
   UUID session_id = 1;
   UUID device_id = 2;
   UUID token_id = 3;
+  EventSource source = 4;
 }
 
-message HealthRequest { Component component = 1; }
+message HealthRequest {Component component = 1;}
 
 message SessionRequest {
   UUID device_id = 1;
   UUID session_id = 2;
 }
 
-message Response { optional Error error = 1; }
+message Response {optional Error error = 1;}
 
 enum SessionState {
   NOT_IN_SESSION = 0;
@@ -81,6 +87,18 @@ enum SessionState {
 message SessionResponse {
   SessionState next_state = 1;
   optional Error error = 2;
+}
+
+message LatencyStat {
+  uint64 latency = 1;
+}
+
+message StatRequest {
+  UUID device_id = 1;
+  UUID token_id = 2;
+  oneof stat {
+    LatencyStat latency = 3;
+  }
 }
 
 ///////////////////////////
@@ -107,9 +125,11 @@ service Device {
   rpc Deactivate(SessionRequest) returns (SessionResponse) {}
   rpc StartSession(SessionRequest) returns (SessionResponse) {}
   rpc EndSession(SessionRequest) returns (SessionResponse) {}
+  rpc TriggerEvent(EventRequest) returns (SessionResponse) {}
 }
 
 service Session {
   // for reporting token usage from device to server
   rpc ReportEvent(EventRequest) returns (Response) {}
+  rpc ReportStat(StatRequest) returns (Response) {}
 }
