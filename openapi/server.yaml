@@ -748,10 +748,6 @@ paths:
       x-stoplight:
         id: 3nin88r96hctb
       description: Get a list of currently active devices of the session
-  /health/alive:
-    $ref: ./health.yaml#/paths/~1health~1alive
-  /health/status:
-    $ref: ./health.yaml#/paths/~1health~1status
   /diagnostics:
     get:
       summary: Get diagnostics
@@ -835,6 +831,10 @@ paths:
         in: path
         required: true
         description: Object ID
+  /health/alive:
+    $ref: ./health.yaml#/paths/~1health~1alive
+  /health/status:
+    $ref: ./health.yaml#/paths/~1health~1status
 components:
   schemas:
     DeviceStatus:
@@ -1507,12 +1507,18 @@ components:
       type: object
       required:
         - type
+        - timestamp
         - message
       properties:
         type:
           $ref: '#/components/schemas/DiagnosticType'
           x-stoplight:
             id: wcyusfaw9u45y
+        timestamp:
+          type: string
+          x-stoplight:
+            id: 1oamwav127ded
+          format: date-time
         message:
           type: string
           x-stoplight:
