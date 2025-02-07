@@ -1506,10 +1506,16 @@ components:
         id: pxn85svbjvls6
       type: object
       required:
+        - id
         - type
         - timestamp
         - message
       properties:
+        id:
+          type: string
+          x-stoplight:
+            id: i8bf3ek1viv7b
+          format: uuid
         type:
           $ref: '#/components/schemas/DiagnosticType'
           x-stoplight:
@@ -1533,3 +1539,11 @@ components:
           x-stoplight:
             id: v7yugdnwp9eky
           format: uuid
+        attributes:
+          type: object
+          x-stoplight:
+            id: 249d8qpm447f1
+          additionalProperties:
+            x-stoplight:
+              id: lsvlv5ndchgkg
+            type: string
