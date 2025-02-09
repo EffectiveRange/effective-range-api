@@ -2,4 +2,11 @@ syntax = "proto3";
 
 package interdevice;
 
-message Launch { string token = 1; }
+message Launch {
+  string token = 1;
+  string sender_id = 2;
+  uint64 tx_timestamp = 4;
+  optional string originator_id = 3;
+  optional uint64 rx_timestamp = 5;
+  optional uint64 originator_timestamp = 6;
+}

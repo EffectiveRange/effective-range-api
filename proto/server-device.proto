@@ -3,8 +3,6 @@ syntax = "proto3";
 option java_multiple_files = true;
 option java_package = "com.effectiverange.effectiverange.proto.serverdevice";
 
-import "google/protobuf/timestamp.proto";
-
 package serverdevice;
 
 enum TriggerType {
@@ -68,14 +66,14 @@ message EventRequest {
   EventSource source = 4;
 }
 
-message HealthRequest {Component component = 1;}
+message HealthRequest { Component component = 1; }
 
 message SessionRequest {
   UUID device_id = 1;
   UUID session_id = 2;
 }
 
-message Response {optional Error error = 1;}
+message Response { optional Error error = 1; }
 
 enum SessionState {
   NOT_IN_SESSION = 0;
@@ -90,15 +88,15 @@ message SessionResponse {
 }
 
 message LatencyStat {
-  uint64 latency = 1;
+  UUID peer_id = 1;
+  UUID token_id = 2;
+  int64 latency_us = 3;
 }
 
 message StatRequest {
   UUID device_id = 1;
-  UUID token_id = 2;
-  oneof stat {
-    LatencyStat latency = 3;
-  }
+  UUID session_id = 2;
+  oneof stat { LatencyStat latency = 3; }
 }
 
 ///////////////////////////
