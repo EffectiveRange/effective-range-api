@@ -32,12 +32,12 @@ LaunchActivated --> LaunchDeactivated : CancelLaunch/InterruptActivation
 LaunchDeactivated : entry/DeactivateDevices
 LaunchDeactivated --> SessionEnded : EndSession/ReleaseRange
 
-' Event report timout
+' Restart launch
 LaunchDeactivated --> LaunchStarted : RestartLaunch
 
 ' Failed launch
 LaunchStarted --> LaunchFailed : SignalFailure
-LaunchActivated --> LaunchFailed : SignalFailure
+LaunchActivated --> LaunchStarted : SignalFailure/ResetRange
 LaunchCompleted --> LaunchFailed : SignalFailure
 LaunchDeactivated --> LaunchFailed : SignalFailure
 LaunchFailed --> LaunchStarted : ResetSession/ResetRange
