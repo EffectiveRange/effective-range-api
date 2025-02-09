@@ -16,6 +16,8 @@ info:
 tags:
   - name: device
     description: Edge device
+  - name: diagnostics
+    description: Diagnostics
   - name: discipline
     description: Shooting discipline
   - name: health
@@ -746,6 +748,89 @@ paths:
       x-stoplight:
         id: 3nin88r96hctb
       description: Get a list of currently active devices of the session
+  /diagnostics:
+    get:
+      summary: Get diagnostics
+      tags:
+        - diagnostics
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DiagnosticEntry'
+                  x-stoplight:
+                    id: 8atc9f2ejdgs2
+      operationId: get-diagnostics
+      x-stoplight:
+        id: dddfbtx124gi4
+      description: Get diagnostic entries
+  '/diagnostics/{type}':
+    get:
+      summary: Get diagnostics for type
+      tags:
+        - diagnostics
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DiagnosticEntry'
+                  x-stoplight:
+                    id: 8atc9f2ejdgs2
+      operationId: get-diagnostics-for-type
+      x-stoplight:
+        id: dddfbtx124gi4
+      description: Get diagnostic entries for diagnostic type
+    parameters:
+      - schema:
+          type: object
+          $ref: '#/components/schemas/DiagnosticType'
+        name: type
+        in: path
+        required: true
+        description: Diagnostics type
+  '/diagnostics/{type}/{id}':
+    get:
+      summary: Get diagnostics for object
+      tags:
+        - diagnostics
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DiagnosticEntry'
+                  x-stoplight:
+                    id: 8atc9f2ejdgs2
+      operationId: get-diagnostics-for-object
+      x-stoplight:
+        id: dddfbtx124gi4
+      description: Get diagnostic entries for diagnostic object
+    parameters:
+      - schema:
+          type: object
+          $ref: '#/components/schemas/DiagnosticType'
+        name: type
+        in: path
+        required: true
+        description: Diagnostics type
+      - schema:
+          type: string
+          format: uuid
+        name: id
+        in: path
+        required: true
+        description: Object ID
   /health/alive:
     $ref: ./health.yaml#/paths/~1health~1alive
   /health/status:
@@ -1407,3 +1492,58 @@ components:
               id: quiuz48zut16g
             type: string
             format: uuid
+    DiagnosticType:
+      title: DiagnosticType
+      x-stoplight:
+        id: xp6j6cv3u22pq
+      enum:
+        - server
+        - device
+        - session
+    DiagnosticEntry:
+      title: DiagnosticEntry
+      x-stoplight:
+        id: pxn85svbjvls6
+      type: object
+      required:
+        - id
+        - type
+        - timestamp
+        - message
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: i8bf3ek1viv7b
+          format: uuid
+        type:
+          $ref: '#/components/schemas/DiagnosticType'
+          x-stoplight:
+            id: wcyusfaw9u45y
+        timestamp:
+          type: string
+          x-stoplight:
+            id: 1oamwav127ded
+          format: date-time
+        message:
+          type: string
+          x-stoplight:
+            id: p229wlf0gxss5
+        device_id:
+          type: string
+          x-stoplight:
+            id: 8nu5h4s018mv7
+          format: uuid
+        session_id:
+          type: string
+          x-stoplight:
+            id: v7yugdnwp9eky
+          format: uuid
+        attributes:
+          type: object
+          x-stoplight:
+            id: 249d8qpm447f1
+          additionalProperties:
+            x-stoplight:
+              id: lsvlv5ndchgkg
+            type: string
