@@ -37,7 +37,7 @@ LaunchDeactivated --> LaunchStarted : RestartLaunch
 
 ' Failed launch
 LaunchStarted --> LaunchFailed : SignalFailure
-LaunchActivated --> LaunchFailed : SignalFailure
+LaunchActivated --> LaunchStarted : SignalFailure/ResetRange
 LaunchCompleted --> LaunchFailed : SignalFailure
 LaunchDeactivated --> LaunchFailed : SignalFailure
 LaunchFailed --> LaunchStarted : ResetSession/ResetRange
