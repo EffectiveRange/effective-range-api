@@ -1500,6 +1500,7 @@ components:
         - server
         - device
         - session
+        - token
     DiagnosticEntry:
       title: DiagnosticEntry
       x-stoplight:
@@ -1510,6 +1511,7 @@ components:
         - type
         - timestamp
         - message
+        - server_id
       properties:
         id:
           type: string
@@ -1529,6 +1531,11 @@ components:
           type: string
           x-stoplight:
             id: p229wlf0gxss5
+        server_id:
+          type: string
+          x-stoplight:
+            id: 6ntq74yg6ksya
+          format: uuid
         device_id:
           type: string
           x-stoplight:
@@ -1538,6 +1545,11 @@ components:
           type: string
           x-stoplight:
             id: v7yugdnwp9eky
+          format: uuid
+        token_id:
+          type: string
+          x-stoplight:
+            id: nlgpm4oa4c9ds
           format: uuid
         attributes:
           type: object
