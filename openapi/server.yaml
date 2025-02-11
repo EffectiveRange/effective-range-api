@@ -103,7 +103,7 @@ paths:
       x-stoplight:
         id: t86q0egkjz12p
       description: Get a discipline by ID
-      parameters: []
+      parameters: [ ]
     delete:
       summary: Delete discipline
       tags:
@@ -251,7 +251,7 @@ paths:
         - device
       x-stoplight:
         id: wnwpyt955cft9
-    parameters: []
+    parameters: [ ]
   /device/active:
     get:
       responses:
@@ -273,7 +273,7 @@ paths:
         - device
       x-stoplight:
         id: y7v3mgosrqpgi
-    parameters: []
+    parameters: [ ]
   '/device/{id}':
     get:
       responses:
@@ -717,7 +717,7 @@ paths:
             application/json:
               schema:
                 type: object
-                $ref: ./model.yaml#/components/schemas/Error
+                $ref: './model.yaml#/components/schemas/Error'
                 x-stoplight:
                   id: w4ychh28buda2
       operationId: report-session-event
@@ -908,9 +908,9 @@ paths:
         required: true
         description: Object ID
   /health/alive:
-    $ref: ./health.yaml#/paths/~1health~1alive
+    $ref: './health.yaml#/paths/~1health~1alive'
   /health/status:
-    $ref: ./health.yaml#/paths/~1health~1status
+    $ref: './health.yaml#/paths/~1health~1status'
 components:
   schemas:
     DeviceStatus:
@@ -973,7 +973,7 @@ components:
             id: 3zwoczn21awr2
           items:
             type: object
-            $ref: ./model.yaml#/components/schemas/Token
+            $ref: './model.yaml#/components/schemas/Token'
             x-stoplight:
               id: gftvtlg0p4iq9
     Range:
@@ -1155,7 +1155,7 @@ components:
               id: gp1fmnfup0gaw
             type: string
         trigger_type:
-          $ref: ./model.yaml#/components/schemas/TriggerType
+          $ref: './model.yaml#/components/schemas/TriggerType'
           x-stoplight:
             id: mv4bimzewwjq6
         machine_order:
@@ -1246,7 +1246,7 @@ components:
           x-stoplight:
             id: er4hf5g3s4deq
         trigger_type:
-          $ref: ./model.yaml#/components/schemas/TriggerType
+          $ref: './model.yaml#/components/schemas/TriggerType'
           x-stoplight:
             id: mv4bimzewwjq6
         station_ids:
@@ -1271,7 +1271,7 @@ components:
             id: fqr4isqtkurqn
           items:
             type: object
-            $ref: ./model.yaml#/components/schemas/Token
+            $ref: './model.yaml#/components/schemas/Token'
             x-stoplight:
               id: gftvtlg0p4iq9
     Session:
