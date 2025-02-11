@@ -103,7 +103,20 @@ paths:
       x-stoplight:
         id: t86q0egkjz12p
       description: Get a discipline by ID
-      parameters: [ ]
+      parameters: []
+    delete:
+      summary: Delete discipline
+      tags:
+        - discipline
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+      operationId: delete-discipline
+      x-stoplight:
+        id: r1h6f1viwhbxm
+      description: Delete a discipline by ID
   /shooter:
     post:
       summary: Add shooter
@@ -178,7 +191,20 @@ paths:
       operationId: get-shooter
       x-stoplight:
         id: 26nf97y2c8xq6
-      description: Get shooter by ID
+      description: Get a shooter by ID
+    delete:
+      summary: Delete shooter
+      tags:
+        - shooter
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+      operationId: delete-shooter
+      x-stoplight:
+        id: 26nf97y2c8xq6
+      description: Delete a shooter by ID
   /device:
     post:
       summary: Add device
@@ -225,7 +251,7 @@ paths:
         - device
       x-stoplight:
         id: wnwpyt955cft9
-    parameters: [ ]
+    parameters: []
   /device/active:
     get:
       responses:
@@ -247,7 +273,7 @@ paths:
         - device
       x-stoplight:
         id: y7v3mgosrqpgi
-    parameters: [ ]
+    parameters: []
   '/device/{id}':
     get:
       responses:
@@ -269,16 +295,7 @@ paths:
         - device
       x-stoplight:
         id: opzgga0xi0rij
-    parameters:
-      - schema:
-          type: string
-          format: uuid
-        name: id
-        in: path
-        required: true
-        description: Device ID
-  '/device/{id}/update':
-    post:
+    put:
       responses:
         '202':
           description: Accepted
@@ -300,6 +317,19 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdateDevice'
+    delete:
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+      operationId: delete-device
+      summary: Delete device
+      description: Delete a device by ID
+      tags:
+        - device
+      x-stoplight:
+        id: opzgga0xi0rij
     parameters:
       - schema:
           type: string
@@ -393,6 +423,19 @@ paths:
           description: Not Found
       operationId: get-range
       description: Get a shooting range by ID
+      x-stoplight:
+        id: 3y4qn3jj2ejld
+    delete:
+      summary: Delete range
+      tags:
+        - range
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+      operationId: delete-range
+      description: Delete a shooting range by ID
       x-stoplight:
         id: 3y4qn3jj2ejld
   '/range/{id}/release':
@@ -767,10 +810,21 @@ paths:
       operationId: get-diagnostics
       x-stoplight:
         id: dddfbtx124gi4
-      description: Get diagnostic entries
+      description: Get all diagnostic entries
+    delete:
+      summary: Clear diagnostics
+      tags:
+        - diagnostics
+      responses:
+        '200':
+          description: OK
+      operationId: clear-diagnostics
+      x-stoplight:
+        id: dddfbtx124gi4
+      description: Delete all diagnostic entries
   '/diagnostics/{type}':
     get:
-      summary: Get diagnostics for type
+      summary: Get diagnostics of type
       tags:
         - diagnostics
       responses:
@@ -784,10 +838,21 @@ paths:
                   $ref: '#/components/schemas/DiagnosticEntry'
                   x-stoplight:
                     id: 8atc9f2ejdgs2
-      operationId: get-diagnostics-for-type
+      operationId: get-diagnostics-of-type
       x-stoplight:
         id: dddfbtx124gi4
-      description: Get diagnostic entries for diagnostic type
+      description: Get diagnostic entries of type
+    delete:
+      summary: Clear diagnostics of type
+      tags:
+        - diagnostics
+      responses:
+        '200':
+          description: OK
+      operationId: clear-diagnostics-of-type
+      x-stoplight:
+        id: dddfbtx124gi4
+      description: Delete all diagnostic entries of type
     parameters:
       - schema:
           type: object
@@ -798,7 +863,7 @@ paths:
         description: Diagnostics type
   '/diagnostics/{type}/{id}':
     get:
-      summary: Get diagnostics for object
+      summary: Get diagnostics of object
       tags:
         - diagnostics
       responses:
@@ -812,10 +877,21 @@ paths:
                   $ref: '#/components/schemas/DiagnosticEntry'
                   x-stoplight:
                     id: 8atc9f2ejdgs2
-      operationId: get-diagnostics-for-object
+      operationId: get-diagnostics-of-object
       x-stoplight:
         id: dddfbtx124gi4
-      description: Get diagnostic entries for diagnostic object
+      description: Get diagnostic entries for object ID
+    delete:
+      summary: Clear diagnostics of object
+      tags:
+        - diagnostics
+      responses:
+        '200':
+          description: OK
+      operationId: clear-diagnostics-of-object
+      x-stoplight:
+        id: dddfbtx124gi4
+      description: Delete all diagnostic entries for object ID
     parameters:
       - schema:
           type: object
