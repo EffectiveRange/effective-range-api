@@ -894,6 +894,12 @@ paths:
         name: type
         description: Statistic type
       - schema:
+          type: object
+          $ref: '#/components/schemas/StatisticSource'
+        in: query
+        name: source
+        description: Statistic source
+      - schema:
           type: string
           format: uuid
         in: query
@@ -1651,6 +1657,13 @@ components:
         id: xp6j6cv3u22pq
       enum:
         - latency
+    StatisticSource:
+      title: StatisticSource
+      x-stoplight:
+        id: 9z9gxv70sst7n
+      enum:
+        - server
+        - device
     StatisticEntry:
       title: StatisticEntry
       x-stoplight:
@@ -1659,6 +1672,7 @@ components:
       required:
         - id
         - type
+        - source
         - timestamp
         - device_id
         - session_id
@@ -1673,6 +1687,10 @@ components:
           $ref: '#/components/schemas/StatisticType'
           x-stoplight:
             id: c67t2snnc9rv5
+        source:
+          $ref: '#/components/schemas/StatisticSource'
+          x-stoplight:
+            id: 52qx3afj34ner
         timestamp:
           type: string
           x-stoplight:
@@ -1695,16 +1713,27 @@ components:
             - $ref: '#/components/schemas/Latency'
               x-stoplight:
                 id: 9f8shnptbkqzx
+          discriminator:
+            propertyName: type
+            mapping:
+              latency: '#/components/schemas/Latency'
     Latency:
       title: Latency
       x-stoplight:
         id: mf4bzpq5uisl7
       type: object
       required:
+        - type
         - peer_id
         - token_id
         - latency_us
       properties:
+        type:
+          type: string
+          default: latency
+          x-stoplight:
+            id: c67t2snnc9rv5
+          readOnly: true
         peer_id:
           type: string
           x-stoplight:
