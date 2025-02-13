@@ -28,6 +28,8 @@ tags:
     description: Shooting session
   - name: shooter
     description: Shooting competitor
+  - name: statistics
+    description: Statistics
 paths:
   /discipline:
     post:
@@ -822,91 +824,99 @@ paths:
       x-stoplight:
         id: dddfbtx124gi4
       description: Delete all diagnostic entries
-  '/diagnostics/{type}':
-    get:
-      summary: Get diagnostics of type
-      tags:
-        - diagnostics
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/DiagnosticEntry'
-                  x-stoplight:
-                    id: 8atc9f2ejdgs2
-      operationId: get-diagnostics-of-type
-      x-stoplight:
-        id: dddfbtx124gi4
-      description: Get diagnostic entries of type
-    delete:
-      summary: Clear diagnostics of type
-      tags:
-        - diagnostics
-      responses:
-        '200':
-          description: OK
-      operationId: clear-diagnostics-of-type
-      x-stoplight:
-        id: dddfbtx124gi4
-      description: Delete all diagnostic entries of type
     parameters:
       - schema:
           type: object
           $ref: '#/components/schemas/DiagnosticType'
+        in: query
         name: type
-        in: path
-        required: true
-        description: Diagnostics type
-  '/diagnostics/{type}/{id}':
-    get:
-      summary: Get diagnostics of object
-      tags:
-        - diagnostics
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/DiagnosticEntry'
-                  x-stoplight:
-                    id: 8atc9f2ejdgs2
-      operationId: get-diagnostics-of-object
-      x-stoplight:
-        id: dddfbtx124gi4
-      description: Get diagnostic entries for object ID
-    delete:
-      summary: Clear diagnostics of object
-      tags:
-        - diagnostics
-      responses:
-        '200':
-          description: OK
-      operationId: clear-diagnostics-of-object
-      x-stoplight:
-        id: dddfbtx124gi4
-      description: Delete all diagnostic entries for object ID
-    parameters:
-      - schema:
-          type: object
-          $ref: '#/components/schemas/DiagnosticType'
-        name: type
-        in: path
-        required: true
-        description: Diagnostics type
+        description: Diagnostic type
       - schema:
           type: string
           format: uuid
-        name: id
-        in: path
-        required: true
-        description: Object ID
+        in: query
+        name: server_id
+        description: Server ID
+      - schema:
+          type: string
+          format: uuid
+        in: query
+        name: device_id
+        description: Device ID
+      - schema:
+          type: string
+          format: uuid
+        in: query
+        name: session_id
+        description: Session ID
+      - schema:
+          type: string
+          format: uuid
+        in: query
+        name: token_id
+        description: Token ID
+  /statistics:
+    get:
+      summary: Get statistics
+      tags:
+        - statistics
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StatisticEntry'
+                  x-stoplight:
+                    id: jz6ik5zb2a25r
+      operationId: get-statistics
+      x-stoplight:
+        id: ajfy2jgh42pdc
+      description: Get all statistic entries
+    delete:
+      summary: Clear statistics
+      tags:
+        - statistics
+      responses:
+        '200':
+          description: OK
+      operationId: delete-statistics
+      x-stoplight:
+        id: jyo4pjef0dcge
+      description: Delete all statistic entries
+    parameters:
+      - schema:
+          type: object
+          $ref: '#/components/schemas/StatisticType'
+        in: query
+        name: type
+        description: Statistic type
+      - schema:
+          type: string
+          format: uuid
+        in: query
+        name: device_id
+        description: Device ID
+      - schema:
+          type: string
+          format: uuid
+        in: query
+        name: session_id
+        description: Session ID
+      - schema:
+          type: string
+          format: uuid
+        in: query
+        name: peer_id
+        description: Peer device ID
+      - schema:
+          type: string
+          format: uuid
+        in: query
+        name: token_id
+        description: Token ID
   /health/alive:
     $ref: './health.yaml#/paths/~1health~1alive'
   /health/status:
@@ -1635,3 +1645,78 @@ components:
             x-stoplight:
               id: lsvlv5ndchgkg
             type: string
+    StatisticType:
+      title: StatisticType
+      x-stoplight:
+        id: xp6j6cv3u22pq
+      enum:
+        - latency
+    StatisticEntry:
+      title: StatisticEntry
+      x-stoplight:
+        id: 6tka7ytxvdek3
+      type: object
+      required:
+        - id
+        - type
+        - timestamp
+        - device_id
+        - session_id
+        - statistic
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: 8myqdu7hfurp0
+          format: uuid
+        type:
+          $ref: '#/components/schemas/StatisticType'
+          x-stoplight:
+            id: c67t2snnc9rv5
+        timestamp:
+          type: string
+          x-stoplight:
+            id: 4gesckauuljw8
+          format: date-time
+        device_id:
+          type: string
+          x-stoplight:
+            id: nfrq7dz43d45g
+          format: uuid
+        session_id:
+          type: string
+          x-stoplight:
+            id: 1aulj2z7l9qzi
+          format: uuid
+        statistic:
+          x-stoplight:
+            id: 72v9apvwp0a8i
+          oneOf:
+            - $ref: '#/components/schemas/Latency'
+              x-stoplight:
+                id: 9f8shnptbkqzx
+    Latency:
+      title: Latency
+      x-stoplight:
+        id: mf4bzpq5uisl7
+      type: object
+      required:
+        - peer_id
+        - token_id
+        - latency_us
+      properties:
+        peer_id:
+          type: string
+          x-stoplight:
+            id: m2m6c2uaivm9h
+          format: uuid
+        token_id:
+          type: string
+          x-stoplight:
+            id: 2g9bgh7p7v4xj
+          format: uuid
+        latency_us:
+          type: integer
+          x-stoplight:
+            id: 7pipbkjf4x0wq
+          format: int64
