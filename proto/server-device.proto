@@ -64,16 +64,18 @@ message EventRequest {
   UUID device_id = 2;
   UUID token_id = 3;
   EventSource source = 4;
+  uint64 tx_timestamp = 5;
+  optional uint64 rx_timestamp = 6;
 }
 
-message HealthRequest { Component component = 1; }
+message HealthRequest {Component component = 1;}
 
 message SessionRequest {
   UUID device_id = 1;
   UUID session_id = 2;
 }
 
-message Response { optional Error error = 1; }
+message Response {optional Error error = 1;}
 
 enum SessionState {
   NOT_IN_SESSION = 0;
@@ -96,7 +98,7 @@ message LatencyStat {
 message StatRequest {
   UUID device_id = 1;
   UUID session_id = 2;
-  oneof stat { LatencyStat latency = 3; }
+  oneof stat {LatencyStat latency = 3;}
 }
 
 ///////////////////////////

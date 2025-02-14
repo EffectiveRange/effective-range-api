@@ -1410,6 +1410,7 @@ components:
         - device_id
         - token_id
         - source
+        - tx_timestamp
       properties:
         device_id:
           type: string
@@ -1425,6 +1426,18 @@ components:
           $ref: '#/components/schemas/EventSource'
           x-stoplight:
             id: 38she3jywfxp3
+        tx_timestamp:
+          type: integer
+          x-stoplight:
+            id: vl2sxsmz3x0f1
+          format: int64
+          minimum: 0
+        rx_timestamp:
+          type: integer
+          x-stoplight:
+            id: a186gug216r71
+          format: int64
+          minimum: 0
     NewDiscipline:
       title: NewDiscipline
       type: object
