@@ -45,6 +45,7 @@ LaunchFailed --> SessionEnded : EndSession/ReleaseRange
 
 ' Continue session after server restart
 LaunchActivated --> LaunchStarted : ResetSession/ResetRange
+SessionCompleted --> SessionCompleted : ResetSession/ResetRange
 
 ' Rewound session
 state SessionRewoundChoice <<choice>>
