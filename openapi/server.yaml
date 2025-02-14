@@ -1410,7 +1410,6 @@ components:
         - device_id
         - token_id
         - source
-        - tx_timestamp
       properties:
         device_id:
           type: string
