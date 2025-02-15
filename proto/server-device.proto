@@ -66,6 +66,11 @@ message EventRequest {
   EventSource source = 4;
 }
 
+message TriggerRequest{
+  EventRequest event = 1;
+  uint64 tx_timestamp = 2;
+}
+
 message HealthRequest { Component component = 1; }
 
 message SessionRequest {
@@ -85,6 +90,14 @@ enum SessionState {
 message SessionResponse {
   SessionState next_state = 1;
   optional Error error = 2;
+}
+
+message TriggerResponse {
+  SessionState next_state = 1;
+  optional Error error = 2;
+  uint64 tx_timestamp = 3;
+  uint64 rx_timestamp = 4;
+  uint64 origin_timestamp = 5;
 }
 
 message LatencyStat {
@@ -123,7 +136,7 @@ service Device {
   rpc Deactivate(SessionRequest) returns (SessionResponse) {}
   rpc StartSession(SessionRequest) returns (SessionResponse) {}
   rpc EndSession(SessionRequest) returns (SessionResponse) {}
-  rpc TriggerEvent(EventRequest) returns (SessionResponse) {}
+  rpc TriggerEvent(TriggerRequest) returns (TriggerResponse) {}
 }
 
 service Session {
