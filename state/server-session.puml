@@ -6,6 +6,7 @@ title Session state machine
 
 [*] --> SessionCreated
 SessionCreated --> SessionStarted : StartSession/ReserveRange
+SessionStarted : entry/LogSessionInfo
 SessionStarted --> TurnStarted
 TurnStarted : entry/LogTurnInfo
 TurnStarted --> LaunchStarted
@@ -60,6 +61,7 @@ state TurnEndedChoice <<choice>>
 TurnEnded --> TurnEndedChoice
 TurnEndedChoice --> TurnStarted : [IsSessionIncomplete]\n/NextTurn
 TurnEndedChoice --> SessionCompleted : [IsSessionComplete]
+SessionCompleted : entry/LogSessionInfo
 SessionCompleted --> SessionRewound : RewindSession
 SessionCompleted --> SessionEnded : EndSession/ReleaseRange
 SessionEnded --> [*]
