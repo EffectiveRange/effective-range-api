@@ -1,58 +1,10 @@
 {
   "_type": "export",
   "__export_format": 4,
-  "__export_date": "2025-02-16T17:36:08.864Z",
+  "__export_date": "2025-02-19T06:59:40.625Z",
   "__export_source": "insomnia.desktop.app:v10.3.2-beta.0",
   "resources": [
     {
-      "_id": "req_6a0c8193a5d64f418b424168dfd2d4d7",
-      "parentId": "fld_c74dcd3f82e948c9b7d5c22386bc5fd2",
-      "modified": 1739521027681,
-      "created": 1739521027681,
-      "url": "",
-      "name": "New Request",
-      "description": "",
-      "method": "GET",
-      "body": {},
-      "parameters": [],
-      "headers": [
-        {
-          "name": "User-Agent",
-          "value": "insomnia/10.3.1"
-        }
-      ],
-      "authentication": {},
-      "metaSortKey": -1739521027681,
-      "isPrivate": false,
-      "settingStoreCookies": true,
-      "settingSendCookies": true,
-      "settingDisableRenderRequestBody": false,
-      "settingEncodeUrl": true,
-      "settingRebuildPath": true,
-      "settingFollowRedirects": "global",
-      "_type": "request"
-    }, {
-      "_id": "fld_c74dcd3f82e948c9b7d5c22386bc5fd2",
-      "parentId": "wrk_e4c319b033d0480392c7c425483d0f33",
-      "modified": 1739517050919,
-      "created": 1738529835058,
-      "name": "test",
-      "description": "",
-      "environment": {},
-      "environmentPropertyOrder": null,
-      "metaSortKey": -1739514703896,
-      "environmentType": "kv",
-      "_type": "request_group"
-    }, {
-      "_id": "wrk_e4c319b033d0480392c7c425483d0f33",
-      "parentId": null,
-      "modified": 1738237146585,
-      "created": 1738237146585,
-      "name": "Effective Range Server",
-      "description": "",
-      "scope": "collection",
-      "_type": "workspace"
-    }, {
       "_id": "req_e6e0465f3bee481489c4f5c4d31a4289",
       "parentId": "fld_c74dcd3f82e948c9b7d5c22386bc5fd2",
       "modified": 1739517415577,
@@ -85,6 +37,27 @@
       "settingFollowRedirects": "global",
       "_type": "request"
     }, {
+      "_id": "fld_c74dcd3f82e948c9b7d5c22386bc5fd2",
+      "parentId": "wrk_e4c319b033d0480392c7c425483d0f33",
+      "modified": 1739517050919,
+      "created": 1738529835058,
+      "name": "test",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1739514703896,
+      "environmentType": "kv",
+      "_type": "request_group"
+    }, {
+      "_id": "wrk_e4c319b033d0480392c7c425483d0f33",
+      "parentId": null,
+      "modified": 1738237146585,
+      "created": 1738237146585,
+      "name": "Effective Range Server",
+      "description": "",
+      "scope": "collection",
+      "_type": "workspace"
+    }, {
       "_id": "req_f2334488e9704501ba8db63802367d68",
       "parentId": "fld_c74dcd3f82e948c9b7d5c22386bc5fd2",
       "modified": 1739517422080,
@@ -107,6 +80,38 @@
       ],
       "authentication": {},
       "metaSortKey": -1738529855587,
+      "isPrivate": false,
+      "afterResponseScript": "const jsonBody = insomnia.response.json();\n\ninsomnia.environment.set(\"test-range-id\", jsonBody.id);\n",
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    }, {
+      "_id": "req_a01b369487fb4d518842f7dd10f6e9e5",
+      "parentId": "fld_c74dcd3f82e948c9b7d5c22386bc5fd2",
+      "modified": 1739947839436,
+      "created": 1739947813581,
+      "url": "{{ _.base_url }}/range",
+      "name": "Add test range - [S3] - [M3]",
+      "description": "Add a shooting range",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"test-range-s3-m3\",\n  \"description\": \"Test range [S3] - [M3]\",\n  \"station_map\": {\n\t\t\"S\": \"{{ _['er-station-3-id'] }}\"\n\t},\n  \"machine_map\": {\n\t\t\"M\": \"{{ _['er-machine-3-id'] }}\"\n\t}\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "disabled": false,
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1738529855580.75,
       "isPrivate": false,
       "afterResponseScript": "const jsonBody = insomnia.response.json();\n\ninsomnia.environment.set(\"test-range-id\", jsonBody.id);\n",
       "settingStoreCookies": true,
@@ -286,10 +291,10 @@
     }, {
       "_id": "req_f9ad9e7b828d4bb78c7685b950293ede",
       "parentId": "fld_c74dcd3f82e948c9b7d5c22386bc5fd2",
-      "modified": 1739520691109,
+      "modified": 1739948313119,
       "created": 1739519037642,
       "url": "{{ _.base_url }}/session/{{ _['test-session-id'] }}/event",
-      "name": "Report test event - [S1]",
+      "name": "Manual test launch - [S1]",
       "description": "Trigger a session event",
       "method": "POST",
       "body": {
@@ -319,10 +324,10 @@
     }, {
       "_id": "req_64cb878690d14293be435d24fb3160f4",
       "parentId": "fld_c74dcd3f82e948c9b7d5c22386bc5fd2",
-      "modified": 1739521138729,
+      "modified": 1739948321798,
       "created": 1739033507316,
       "url": "{{ _.base_url }}/session/{{ _['test-session-id'] }}/event",
-      "name": "Report test event - [S2]",
+      "name": "Manual test launch - [S2]",
       "description": "Trigger a session event",
       "method": "POST",
       "body": {
@@ -340,6 +345,40 @@
       "authentication": {},
       "preRequestScript": "const host = insomnia.environment.get(\"host\")\nconst session_id = insomnia.environment.get(\"test-session-id\");\n\nconst url = \"http://localhost:8080/session/\" + session_id\n\nconst response = await new Promise((resolve, reject) => {\n  insomnia.sendRequest(\n    url,\n    (error, response) => {\n      error != null ? reject(error) : resolve(response);\n    }\n  );\n});\n\nconst tokens = JSON.parse(response.body).state.tokens\n\nif (tokens != null && tokens.length > 0) {\n\tinsomnia.environment.set(\"test-token-id\", tokens[0].id);\n\tconsole.log(\"token_id: \" + insomnia.environment.get(\"test-token-id\"))\n} else {\n\tthrow new Error(\"No active token\"); \n}\n",
       "metaSortKey": -1738529855471.375,
+      "isPrivate": false,
+      "pathParameters": [],
+      "afterResponseScript": "",
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    }, {
+      "_id": "req_2ee1616dbc4945b8ad544e555695a637",
+      "parentId": "fld_c74dcd3f82e948c9b7d5c22386bc5fd2",
+      "modified": 1739948333391,
+      "created": 1739947845671,
+      "url": "{{ _.base_url }}/session/{{ _['test-session-id'] }}/event",
+      "name": "Manual test launch - [S3]",
+      "description": "Trigger a session event",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"device_id\": \"{{ _['er-station-3-id'] }}\",\n  \"token_id\": \"{{ _['test-token-id'] }}\",\n\t\"source\": \"server\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "disabled": false,
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "preRequestScript": "const host = insomnia.environment.get(\"host\")\nconst session_id = insomnia.environment.get(\"test-session-id\");\n\nconst url = \"http://localhost:8080/session/\" + session_id\n\nconst response = await new Promise((resolve, reject) => {\n  insomnia.sendRequest(\n    url,\n    (error, response) => {\n      error != null ? reject(error) : resolve(response);\n    }\n  );\n});\n\nconst tokens = JSON.parse(response.body).state.tokens\n\nif (tokens != null && tokens.length > 0) {\n\tinsomnia.environment.set(\"test-token-id\", tokens[0].id);\n\tconsole.log(\"token_id: \" + insomnia.environment.get(\"test-token-id\"))\n} else {\n\tthrow new Error(\"No active token\"); \n}\n",
+      "metaSortKey": -1738529855469.8125,
       "isPrivate": false,
       "pathParameters": [],
       "afterResponseScript": "",
@@ -477,7 +516,7 @@
     }, {
       "_id": "req_7ae661ef10784fc184ae99c1ec9cce00",
       "parentId": "fld_3b6810550da047028e2d40af57257925",
-      "modified": 1739517368376,
+      "modified": 1739945336536,
       "created": 1738529762931,
       "url": "{{ _.base_url }}/range",
       "name": "Add demo range - [S1, S2] - [M1, M2]",
@@ -518,6 +557,38 @@
       "metaSortKey": -1739514703871,
       "environmentType": "kv",
       "_type": "request_group"
+    }, {
+      "_id": "req_0e398bd458084f1c873f5aa533a71eca",
+      "parentId": "fld_3b6810550da047028e2d40af57257925",
+      "modified": 1739945553868,
+      "created": 1739945427834,
+      "url": "{{ _.base_url }}/range",
+      "name": "Add demo range - [S1, S2, S3] - [M1, M2, M3]",
+      "description": "Add a shooting range",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"name\": \"demo-range-s1-s2-m1-m2\",\n\t\"description\": \"Demo Range [S1, S2] - [M1, M2]\",\n\t\"station_map\": {\n\t\t\"S1\": \"{{ _['er-station-1-id'] }}\",\n\t\t\"S2\": \"{{ _['er-station-2-id'] }}\",\n\t\t\"S3\": \"{{ _['er-station-3-id'] }}\"\n\t},\n\t\"machine_map\": {\n\t\t\"M1\": \"{{ _['er-machine-1-id'] }}\",\n\t\t\"M2\": \"{{ _['er-machine-2-id'] }}\",\n\t\t\"M3\": \"{{ _['er-machine-3-id'] }}\"\n\t}\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "disabled": false,
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1738529739272,
+      "isPrivate": false,
+      "afterResponseScript": "const jsonBody = insomnia.response.json();\n\ninsomnia.environment.set(\"demo-range-id\", jsonBody.id);\n",
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
     }, {
       "_id": "req_12e90b5993da4d4f8f39d34a7fc15405",
       "parentId": "fld_3b6810550da047028e2d40af57257925",
@@ -573,6 +644,38 @@
       ],
       "authentication": {},
       "metaSortKey": -1738529739172,
+      "isPrivate": false,
+      "afterResponseScript": "const jsonBody = insomnia.response.json();\n\ninsomnia.environment.set(\"demo-discipline-id\", jsonBody.id);\n",
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    }, {
+      "_id": "req_a2d0c07135634a48a0d6b6d9c3ab4ee1",
+      "parentId": "fld_3b6810550da047028e2d40af57257925",
+      "modified": 1739946153865,
+      "created": 1739945575164,
+      "url": "{{ _.base_url }}/discipline",
+      "name": "Add demo discipline - olympic trap",
+      "description": "Add a clay shooting discipline",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"demo-discipline-3\",\n  \"description\": \"Demo discipline - olympic trap\",\n  \"shooter_order\": \"rotational\",\n  \"target_limit\": 15,\n  \"turns\": [\n    {\n      \"station_ids\": [\"S1\", \"S2\", \"S3\"],\n      \"launches\": [\n        {\n          \"machine_ids\": [\"M1\", \"M1\", \"M2\", \"M3\", \"M3\"],\n          \"machine_order\": \"randomized\"\n        }\n      ]\n    }\n  ]\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "disabled": false,
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1738529739147,
       "isPrivate": false,
       "afterResponseScript": "const jsonBody = insomnia.response.json();\n\ninsomnia.environment.set(\"demo-discipline-id\", jsonBody.id);\n",
       "settingStoreCookies": true,
@@ -719,15 +822,15 @@
     }, {
       "_id": "req_00438b577a564e67851fdd5cf3645f84",
       "parentId": "fld_3b6810550da047028e2d40af57257925",
-      "modified": 1739519081155,
+      "modified": 1739948344171,
       "created": 1739096285251,
       "url": "{{ _.base_url }}/session/{{ _['demo-session-id'] }}/event",
-      "name": "Report demo event - [S1]",
+      "name": "Manual demo launch - [S1]",
       "description": "Trigger a session event",
       "method": "POST",
       "body": {
         "mimeType": "application/json",
-        "text": "{\n  \"device_id\": \"{{ _['er-station-1-id'] }}\",\n  \"token_id\": \"{{ _['test-token-id'] }}\",\n\t\"source\": \"server\"\n}"
+        "text": "{\n  \"device_id\": \"{{ _['er-station-1-id'] }}\",\n  \"token_id\": \"{{ _['demo-token-id'] }}\",\n\t\"source\": \"server\"\n}"
       },
       "parameters": [],
       "headers": [
@@ -752,15 +855,15 @@
     }, {
       "_id": "req_434971a12ecc478db70a84e1b1fde564",
       "parentId": "fld_3b6810550da047028e2d40af57257925",
-      "modified": 1739519095515,
+      "modified": 1739948351528,
       "created": 1739519086920,
       "url": "{{ _.base_url }}/session/{{ _['demo-session-id'] }}/event",
-      "name": "Report demo event - [S2]",
+      "name": "Manual demo launch - [S2]",
       "description": "Trigger a session event",
       "method": "POST",
       "body": {
         "mimeType": "application/json",
-        "text": "{\n  \"device_id\": \"{{ _['er-station-2-id'] }}\",\n  \"token_id\": \"{{ _['test-token-id'] }}\",\n\t\"source\": \"server\"\n}"
+        "text": "{\n  \"device_id\": \"{{ _['er-station-2-id'] }}\",\n  \"token_id\": \"{{ _['demo-token-id'] }}\",\n\t\"source\": \"server\"\n}"
       },
       "parameters": [],
       "headers": [
@@ -773,6 +876,39 @@
       "authentication": {},
       "preRequestScript": "\nconst host = insomnia.environment.get(\"host\")\nconst session_id = insomnia.environment.get(\"demo-session-id\");\n\nconst url = \"http://localhost:8080/session/\" + session_id\n\nconst response = await new Promise((resolve, reject) => {\n  insomnia.sendRequest(\n    url,\n    (error, response) => {\n      error != null ? reject(error) : resolve(response);\n    }\n  );\n});\n\nconst tokens = JSON.parse(response.body).state.tokens\n\nif (tokens != null && tokens.length > 0) {\n\tinsomnia.environment.set(\"demo-token-id\", tokens[0].id);\n\tconsole.log(\"token_id: \" + insomnia.environment.get(\"demo-token-id\"))\n} else {\n\tthrow new Error(\"No active token\"); \n}\n",
       "metaSortKey": -1738529738684.5,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    }, {
+      "_id": "req_9c7ea76a0c094bfeac9e5a0feaec4000",
+      "parentId": "fld_3b6810550da047028e2d40af57257925",
+      "modified": 1739948359547,
+      "created": 1739946077998,
+      "url": "{{ _.base_url }}/session/{{ _['demo-session-id'] }}/event",
+      "name": "Manual demo launch - [S3]",
+      "description": "Trigger a session event",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"device_id\": \"{{ _['er-station-3-id'] }}\",\n  \"token_id\": \"{{ _['demo-token-id'] }}\",\n\t\"source\": \"server\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "disabled": false,
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "preRequestScript": "\nconst host = insomnia.environment.get(\"host\")\nconst session_id = insomnia.environment.get(\"demo-session-id\");\n\nconst url = \"http://localhost:8080/session/\" + session_id\n\nconst response = await new Promise((resolve, reject) => {\n  insomnia.sendRequest(\n    url,\n    (error, response) => {\n      error != null ? reject(error) : resolve(response);\n    }\n  );\n});\n\nconst tokens = JSON.parse(response.body).state.tokens\n\nif (tokens != null && tokens.length > 0) {\n\tinsomnia.environment.set(\"demo-token-id\", tokens[0].id);\n\tconsole.log(\"token_id: \" + insomnia.environment.get(\"demo-token-id\"))\n} else {\n\tthrow new Error(\"No active token\"); \n}\n",
+      "metaSortKey": -1738529738678.25,
       "isPrivate": false,
       "pathParameters": [],
       "settingStoreCookies": true,
@@ -1896,54 +2032,49 @@
     }, {
       "_id": "env_eb42561f6ee9828f8f5babffea05791280fd5255",
       "parentId": "wrk_e4c319b033d0480392c7c425483d0f33",
-      "modified": 1739727279260,
+      "modified": 1739947245310,
       "created": 1738237146594,
       "name": "Base Environment",
       "data": {
+        "scheme": "http",
+        "host": "localhost:8080",
+        "base_path": "",
         "base_url": "{{ _.scheme }}://{{ _.host }}{{ _.base_path }}",
-        "test-session-id": "93fbae16-8e60-4a80-9b05-ff63b31c8483",
-        "test-token-id": "0781b32b-26ca-4786-9ecf-873eab9f2afa",
-        "test-discipline-id": "fa1f273a-187f-43f0-a90b-ed528628a99c"
+        "er-station-1-id": "a614b6db-de68-41e4-98d5-d1008c63f3fc",
+        "er-station-2-id": "2c03ce2a-7882-4899-8791-f52a5b157789",
+        "er-station-3-id": "",
+        "er-machine-1-id": "d56b48c1-7e0a-4729-a8a8-45876dbe6285",
+        "er-machine-2-id": "47500ac3-c804-4c5f-9e21-050b3902f223",
+        "er-machine-3-id": "d6873073-0250-4ad5-ac03-22b17d825a62",
+        "test-range-id": "fd0b4a5f-4d18-4db9-beab-f5216b2dab3e",
+        "test-discipline-id": "985a6075-fa08-498e-9237-7747a1ae1227",
+        "test-shooter-id": "d68e74b5-9e3d-42da-ba0d-f3a447f053ec",
+        "test-token-id": "4d3e920e-b976-4aad-aee3-7ad656114c40",
+        "demo-range-id": "af4e6f6b-238f-42a6-af69-257d1ece4636",
+        "demo-discipline-id": "7daa4380-85ab-4255-b472-35e3afd2a458",
+        "demo-shooter-id": "02ca9d89-450f-4158-8906-f46a153872cf",
+        "demo-session-id": "15f89cba-7c8f-4392-907d-83d4e5c770fe",
+        "demo-token-id": "",
+        "test-session-id": "5c3fd8e8-6465-4329-89f7-800864acb581"
       },
       "dataPropertyOrder": {
-        "&": ["base_url", "test-session-id", "test-token-id", "test-discipline-id"]
+        "&": [
+          "scheme", "host", "base_path", "base_url", "er-station-1-id", "er-station-2-id", "er-station-3-id",
+          "er-machine-1-id", "er-machine-2-id", "er-machine-3-id", "test-range-id", "test-discipline-id",
+          "test-shooter-id", "test-token-id", "demo-range-id", "demo-discipline-id", "demo-shooter-id",
+          "demo-session-id", "demo-token-id", "test-session-id"
+        ]
       },
       "color": null,
       "isPrivate": false,
       "metaSortKey": 1738237146594,
-      "environmentType": "kv",
-      "kvPairData": [
-        {
-          "id": "envPair_16e99a58a20947cf9255d34627f78143",
-          "name": "base_url",
-          "value": "{{ _.scheme }}://{{ _.host }}{{ _.base_path }}",
-          "type": "str",
-          "enabled": true
-        }, {
-          "id": "envPair_99de3ec24d654d3d88bab2dc856de983",
-          "name": "test-session-id",
-          "value": "93fbae16-8e60-4a80-9b05-ff63b31c8483",
-          "type": "str",
-          "enabled": true
-        }, {
-          "id": "envPair_51bbfbe32c884bd3a0793e69431a0b48",
-          "name": "test-token-id",
-          "value": "0781b32b-26ca-4786-9ecf-873eab9f2afa",
-          "type": "str",
-          "enabled": true
-        }, {
-          "id": "envPair_75ec82c74c9e4ab0853a56e8bf34bb0e",
-          "name": "test-discipline-id",
-          "value": "fa1f273a-187f-43f0-a90b-ed528628a99c",
-          "type": "str",
-          "enabled": true
-        }
-      ],
+      "environmentType": "json",
+      "kvPairData": [],
       "_type": "environment"
     }, {
       "_id": "jar_eb42561f6ee9828f8f5babffea05791280fd5255",
       "parentId": "wrk_e4c319b033d0480392c7c425483d0f33",
-      "modified": 1739727279253,
+      "modified": 1739947245305,
       "created": 1738237146603,
       "name": "Default Jar",
       "cookies": [],
