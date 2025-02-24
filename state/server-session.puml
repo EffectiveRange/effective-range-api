@@ -64,6 +64,7 @@ TurnEndedChoice --> SessionCompleted : [IsSessionComplete]
 SessionCompleted : entry/LogSessionInfo
 SessionCompleted --> SessionRewound : RewindSession
 SessionCompleted --> SessionEnded : EndSession/ReleaseRange
+SessionCreated --> SessionEnded : EndSession
 SessionEnded --> [*]
 
 footer Effective Range server

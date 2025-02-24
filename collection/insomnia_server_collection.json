@@ -568,7 +568,7 @@
       "method": "POST",
       "body": {
         "mimeType": "application/json",
-        "text": "{\n\t\"name\": \"demo-range-s1-s2-m1-m2\",\n\t\"description\": \"Demo Range [S1, S2] - [M1, M2]\",\n\t\"station_map\": {\n\t\t\"S1\": \"{{ _['er-station-1-id'] }}\",\n\t\t\"S2\": \"{{ _['er-station-2-id'] }}\",\n\t\t\"S3\": \"{{ _['er-station-3-id'] }}\"\n\t},\n\t\"machine_map\": {\n\t\t\"M1\": \"{{ _['er-machine-1-id'] }}\",\n\t\t\"M2\": \"{{ _['er-machine-2-id'] }}\",\n\t\t\"M3\": \"{{ _['er-machine-3-id'] }}\"\n\t}\n}"
+        "text": "{\n\t\"name\": \"demo-range-s1-s2-s3-m1-m2-m3\",\n\t\"description\": \"Demo Range [S1, S2, S3] - [M1, M2, M3]\",\n\t\"station_map\": {\n\t\t\"S1\": \"{{ _['er-station-1-id'] }}\",\n\t\t\"S2\": \"{{ _['er-station-2-id'] }}\",\n\t\t\"S3\": \"{{ _['er-station-3-id'] }}\"\n\t},\n\t\"machine_map\": {\n\t\t\"M1\": \"{{ _['er-machine-1-id'] }}\",\n\t\t\"M2\": \"{{ _['er-machine-2-id'] }}\",\n\t\t\"M3\": \"{{ _['er-machine-3-id'] }}\"\n\t}\n}"
       },
       "parameters": [],
       "headers": [
