@@ -929,6 +929,14 @@ paths:
     $ref: './health.yaml#/paths/~1health~1status'
 components:
   schemas:
+    DeviceRole:
+      title: DeviceRole
+      x-stoplight:
+        id: yv044mpykfy7g
+      enum:
+        - station
+        - machine
+      default: station
     DeviceStatus:
       title: DeviceStatus
       x-stoplight:
@@ -973,7 +981,9 @@ components:
           x-stoplight:
             id: g104uanwf6e9g
         role:
-          type: string
+          $ref: '#/components/schemas/DeviceRole'
+          x-stoplight:
+            id: yv044mpykfy7g
         status:
           $ref: '#/components/schemas/DeviceStatus'
           x-stoplight:
@@ -1524,7 +1534,9 @@ components:
           x-stoplight:
             id: g104uanwf6e9g
         role:
-          type: string
+          $ref: '#/components/schemas/DeviceRole'
+          x-stoplight:
+            id: yv044mpykfy7g
     UpdateDevice:
       title: UpdateDevice
       x-stoplight:
@@ -1544,7 +1556,7 @@ components:
           x-stoplight:
             id: n1hpwow5oq5oc
         role:
-          type: string
+          $ref: '#/components/schemas/DeviceRole'
           x-stoplight:
             id: yv044mpykfy7g
     NewRange:
