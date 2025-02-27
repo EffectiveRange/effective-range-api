@@ -1417,10 +1417,16 @@ components:
         id: rn8y2h07bc4dw
       type: object
       required:
+        - session_id
         - device_id
         - token_id
         - source
       properties:
+        session_id:
+          type: string
+          x-stoplight:
+            id: v7yugdnwp9eky
+          format: uuid
         device_id:
           type: string
           x-stoplight:

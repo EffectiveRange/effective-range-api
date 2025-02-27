@@ -1,7 +1,7 @@
 {
   "_type": "export",
   "__export_format": 4,
-  "__export_date": "2025-02-20T15:25:33.416Z",
+  "__export_date": "2025-02-27T09:05:59.540Z",
   "__export_source": "insomnia.desktop.app:v10.3.2-beta.0",
   "resources": [
     {
@@ -18,7 +18,7 @@
       "_id": "env_304813a1aa1b031cce24ee111dbd575c6ab92e92",
       "type": "Environment",
       "parentId": "wrk_1d0489153f52464398e3ad8d4d0a7a75",
-      "modified": 1740064639628,
+      "modified": 1740646883595,
       "created": 1738240470709,
       "name": "Base Environment",
       "data": {
@@ -41,14 +41,18 @@
         "demo-discipline-id": "7daa4380-85ab-4255-b472-35e3afd2a458",
         "demo-shooter-id": "02ca9d89-450f-4158-8906-f46a153872cf",
         "demo-session-id": "15f89cba-7c8f-4392-907d-83d4e5c770fe",
-        "demo-token-id": ""
+        "demo-token-id": "",
+        "er-station-1-uri": "grpc://localhost:123456",
+        "er-station-2-uri": "grpc://localhost:123457",
+        "er-station-3-uri": "grpc://localhost:123458"
       },
       "dataPropertyOrder": {
         "&": [
           "scheme", "host", "base_path", "base_url", "er-station-1-id", "er-station-2-id", "er-station-3-id",
           "er-machine-1-id", "er-machine-2-id", "er-machine-3-id", "test-range-id", "test-discipline-id",
           "test-shooter-id", "test-session-id", "test-token-id", "demo-range-id", "demo-discipline-id",
-          "demo-shooter-id", "demo-session-id", "demo-token-id"
+          "demo-shooter-id", "demo-session-id", "demo-token-id", "er-station-1-uri", "er-station-2-uri",
+          "er-station-3-uri"
         ]
       },
       "color": null,
