@@ -19,7 +19,6 @@ state LaunchActivatedChoice <<choice>>
 
 ' Successful launch
 LaunchActivated --> LaunchActivatedChoice : ReportEvent\n/ProcessEvent
-LaunchActivatedChoice --> LaunchActivatedChoice : ReportEvent\n/ProcessEvent
 LaunchActivatedChoice --> LaunchActivated : [IsLaunchIncomplete]
 LaunchActivatedChoice --> LaunchCompleted : [IsLaunchComplete]
 LaunchCompleted : entry/DeactivateDevices
