@@ -22,6 +22,8 @@ tags:
     description: Shooting discipline
   - name: health
     description: Component health
+  - name: playbook
+    description: ansible playbook
   - name: range
     description: Shooting range
   - name: session
@@ -923,6 +925,65 @@ paths:
         in: query
         name: token_id
         description: Token ID
+  /ansible/playbook:
+    get:
+      summary: Get playbooks
+      tags:
+        - playbook
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Playbook'
+                  x-stoplight:
+                    id: vbnmkqjxwg08k
+      operationId: get-ansible-playbooks
+      x-stoplight:
+        id: 85sr8ek3jl5z1
+      description: Get all Ansible playbooks
+  '/ansible/playbook/{id}':
+    parameters:
+      - schema:
+          type: string
+          format: uuid
+        name: id
+        in: path
+        required: true
+        description: Playbook ID
+    get:
+      summary: Get playbook
+      tags:
+        - playbook
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Playbook'
+        '404':
+          description: Not Found
+      operationId: get-ansible-playbook
+      x-stoplight:
+        id: j0n7u8ipwmj67
+      description: Get Ansible playbook by ID
+    post:
+      summary: Run playbook
+      tags:
+        - playbook
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+      operationId: run-ansible-playbook
+      x-stoplight:
+        id: blfwdidxp6z89
+      description: Run Ansible playbook by ID
   /health/alive:
     $ref: './health.yaml#/paths/~1health~1alive'
   /health/status:
@@ -1767,3 +1828,26 @@ components:
           x-stoplight:
             id: 7pipbkjf4x0wq
           format: int64
+    Playbook:
+      title: Playbook
+      x-stoplight:
+        id: 06t0yuikzpbx2
+      type: object
+      required:
+        - id
+        - name
+        - yaml
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: tcj6c104h64g1
+          format: uuid
+        name:
+          type: string
+          x-stoplight:
+            id: k2lg5c90jgwmw
+        yaml:
+          type: string
+          x-stoplight:
+            id: y3aqlt7qgjgse
