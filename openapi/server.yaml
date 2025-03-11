@@ -945,6 +945,22 @@ paths:
       x-stoplight:
         id: 85sr8ek3jl5z1
       description: Get all Ansible playbooks
+    post:
+      summary: Run playbooks
+      tags:
+        - playbook
+      responses:
+        '200':
+          description: OK
+      operationId: run-ansible-playbooks
+      x-stoplight:
+        id: sa3ujlrpnmkj5
+      description: Run all Ansible playbooks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RunRequest'
   '/ansible/playbook/{id}':
     parameters:
       - schema:
@@ -984,6 +1000,65 @@ paths:
       x-stoplight:
         id: blfwdidxp6z89
       description: Run Ansible playbook by ID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RunRequest'
+  /ansible/playbook/yaml:
+    get:
+      summary: Get playbooks
+      tags:
+        - playbook
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+                properties: { }
+          headers:
+            Content-Type:
+              schema:
+                type: string
+              description: application/x-yaml
+      operationId: get-ansible-playbooks-yaml
+      description: Get all Ansible playbooks as YAML
+      x-stoplight:
+        id: 61jck5eof0ned
+  '/ansible/playbook/{id}/yaml':
+    parameters:
+      - schema:
+          type: string
+          format: uuid
+        name: id
+        in: path
+        required: true
+        description: Playbook ID
+    get:
+      summary: Get playbook
+      tags:
+        - playbook
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+                properties: { }
+          headers:
+            Content-Type:
+              schema:
+                type: string
+              description: application/x-yaml
+        '404':
+          description: Not Found
+      operationId: get-ansible-playbook-yaml
+      description: Get Ansible playbook YAML by ID
+      x-stoplight:
+        id: lurdmtj9fk3u6
   /health/alive:
     $ref: './health.yaml#/paths/~1health~1alive'
   /health/status:
@@ -1851,3 +1926,18 @@ components:
           type: string
           x-stoplight:
             id: y3aqlt7qgjgse
+    RunRequest:
+      title: RunRequest
+      x-stoplight:
+        id: l41i96mp5a83m
+      type: object
+      properties:
+        device_ids:
+          type: array
+          x-stoplight:
+            id: 1uynpsbd4nqx8
+          items:
+            x-stoplight:
+              id: b65l9ypsy16zz
+            type: string
+            format: uuid
