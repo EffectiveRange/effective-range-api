@@ -952,6 +952,10 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunResponse'
       operationId: run-ansible-playbooks
       x-stoplight:
         id: sa3ujlrpnmkj5
@@ -994,6 +998,10 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunResponse'
         '404':
           description: Not Found
       operationId: run-ansible-playbook
@@ -1941,3 +1949,51 @@ components:
               id: b65l9ypsy16zz
             type: string
             format: uuid
+    RunResponse:
+      title: RunResponse
+      x-stoplight:
+        id: of185loss71kk
+      type: object
+      required:
+        - hosts
+        - results
+      properties:
+        hosts:
+          type: array
+          x-stoplight:
+            id: 946pr7tyzewy8
+          uniqueItems: true
+          items:
+            x-stoplight:
+              id: qib90mpzy1rr6
+            type: string
+        results:
+          type: array
+          x-stoplight:
+            id: 4ec8s1mzzkpfk
+          items:
+            $ref: '#/components/schemas/RunResult'
+            x-stoplight:
+              id: mg1hds27r0daa
+    RunResult:
+      title: RunResult
+      x-stoplight:
+        id: iklaosmf4to85
+      type: object
+      required:
+        - playbook_id
+        - task_results
+      properties:
+        playbook_id:
+          type: string
+          x-stoplight:
+            id: udl2s3hw4o50x
+          format: uuid
+        task_results:
+          type: array
+          x-stoplight:
+            id: fogknex08uxi2
+          items:
+            x-stoplight:
+              id: vwfwrmk1wcz13
+            type: string
