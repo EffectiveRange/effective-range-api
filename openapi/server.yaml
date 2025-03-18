@@ -22,6 +22,8 @@ tags:
     description: Shooting discipline
   - name: health
     description: Component health
+  - name: playbook
+    description: ansible playbook
   - name: range
     description: Shooting range
   - name: session
@@ -923,6 +925,156 @@ paths:
         in: query
         name: token_id
         description: Token ID
+  /ansible/playbook:
+    get:
+      summary: Get playbooks
+      tags:
+        - playbook
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Playbook'
+                  x-stoplight:
+                    id: vbnmkqjxwg08k
+      operationId: get-ansible-playbooks
+      x-stoplight:
+        id: 85sr8ek3jl5z1
+      description: Get all Ansible playbooks
+    post:
+      summary: Add playbook
+      tags:
+        - playbook
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Playbook'
+        '400':
+          description: Bad Request
+      operationId: add-ansible-playbook
+      x-stoplight:
+        id: sa3ujlrpnmkj5
+      description: Add new Ansible playbook
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              type: object
+              properties: { }
+  /ansible/playbook/yaml:
+    get:
+      summary: Get playbook YAMLs
+      tags:
+        - playbook
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+                properties: { }
+      operationId: get-ansible-playbook-yamls
+      description: Get all Ansible playbooks as YAML
+      x-stoplight:
+        id: 61jck5eof0ned
+  '/ansible/playbook/{id}':
+    parameters:
+      - schema:
+          type: string
+          format: uuid
+        name: id
+        in: path
+        required: true
+        description: Playbook ID
+    get:
+      summary: Get playbook
+      tags:
+        - playbook
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Playbook'
+        '404':
+          description: Not Found
+      operationId: get-ansible-playbook
+      x-stoplight:
+        id: j0n7u8ipwmj67
+      description: Get Ansible playbook by ID
+    post:
+      summary: Run playbook
+      tags:
+        - playbook
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunResponse'
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+      operationId: run-ansible-playbook
+      description: Run Ansible playbook by ID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RunRequest'
+      x-stoplight:
+        id: n9edc3mi53ua1
+    delete:
+      summary: Delete playbook
+      tags:
+        - playbook
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+      operationId: delete-ansible-playbook
+      x-stoplight:
+        id: iahzenfvbxp7k
+      description: Delete Ansible playbook by ID
+  '/ansible/playbook/{id}/yaml':
+    parameters:
+      - schema:
+          type: string
+          format: uuid
+        name: id
+        in: path
+        required: true
+        description: Playbook ID
+    get:
+      summary: Get playbook YAML
+      tags:
+        - playbook
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+                properties: { }
+        '404':
+          description: Not Found
+      operationId: get-ansible-playbook-yaml
+      description: Get Ansible playbook YAML by ID
+      x-stoplight:
+        id: lurdmtj9fk3u6
   /health/alive:
     $ref: './health.yaml#/paths/~1health~1alive'
   /health/status:
@@ -1767,3 +1919,111 @@ components:
           x-stoplight:
             id: 7pipbkjf4x0wq
           format: int64
+    Playbook:
+      title: Playbook
+      x-stoplight:
+        id: 06t0yuikzpbx2
+      type: object
+      required:
+        - id
+        - name
+        - variables
+        - plays
+        - yaml
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: tcj6c104h64g1
+          format: uuid
+        name:
+          type: string
+          x-stoplight:
+            id: k2lg5c90jgwmw
+        variables:
+          type: object
+          x-stoplight:
+            id: 8pck9rymhy0dv
+          additionalProperties:
+            x-stoplight:
+              id: udqf8pguuwql0
+            type: string
+        plays:
+          type: array
+          x-stoplight:
+            id: y3aqlt7qgjgse
+          minItems: 1
+          items:
+            x-stoplight:
+              id: 703ndz6nua8w5
+            type: object
+            additionalProperties:
+              x-stoplight:
+                id: yp1ne16wazizh
+              type: object
+        yaml:
+          type: string
+          x-stoplight:
+            id: 7yqte989i2d8o
+    RunRequest:
+      title: RunRequest
+      x-stoplight:
+        id: l41i96mp5a83m
+      type: object
+      properties:
+        devices:
+          type: array
+          x-stoplight:
+            id: 1uynpsbd4nqx8
+          items:
+            x-stoplight:
+              id: b65l9ypsy16zz
+            type: string
+            format: uuid
+        options:
+          type: array
+          x-stoplight:
+            id: mqdtiw1zzvgrq
+          items:
+            x-stoplight:
+              id: 2hfnyfkl8p1oj
+            type: string
+        variables:
+          type: object
+          x-stoplight:
+            id: m6xweb3nderg4
+          additionalProperties:
+            x-stoplight:
+              id: 9pq9z39fjf4p6
+            type: string
+    RunResponse:
+      title: RunResponse
+      x-stoplight:
+        id: of185loss71kk
+      type: object
+      required:
+        - hosts
+        - exit_code
+        - output_lines
+      properties:
+        hosts:
+          type: array
+          x-stoplight:
+            id: 946pr7tyzewy8
+          uniqueItems: true
+          items:
+            x-stoplight:
+              id: qib90mpzy1rr6
+            type: string
+        exit_code:
+          type: integer
+          x-stoplight:
+            id: sgjt5ufndw9sl
+        output_lines:
+          type: array
+          x-stoplight:
+            id: 4ec8s1mzzkpfk
+          items:
+            x-stoplight:
+              id: mg1hds27r0daa
+            type: string
