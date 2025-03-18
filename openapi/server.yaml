@@ -946,25 +946,45 @@ paths:
         id: 85sr8ek3jl5z1
       description: Get all Ansible playbooks
     post:
-      summary: Run playbooks
+      summary: Add playbook
+      tags:
+        - playbook
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Playbook'
+        '400':
+          description: Bad Request
+      operationId: add-ansible-playbook
+      x-stoplight:
+        id: sa3ujlrpnmkj5
+      description: Add new Ansible playbook
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              type: object
+              properties: { }
+  /ansible/playbook/yaml:
+    get:
+      summary: Get playbook YAMLs
       tags:
         - playbook
       responses:
         '200':
           description: OK
           content:
-            application/json:
+            text/plain:
               schema:
-                $ref: '#/components/schemas/RunResponse'
-      operationId: run-ansible-playbooks
+                type: object
+                properties: { }
+      operationId: get-ansible-playbook-yamls
+      description: Get all Ansible playbooks as YAML
       x-stoplight:
-        id: sa3ujlrpnmkj5
-      description: Run all Ansible playbooks
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RunRequest'
+        id: 61jck5eof0ned
   '/ansible/playbook/{id}':
     parameters:
       - schema:
@@ -996,45 +1016,38 @@ paths:
       tags:
         - playbook
       responses:
-        '200':
-          description: OK
+        '202':
+          description: Accepted
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RunResponse'
+        '400':
+          description: Bad Request
         '404':
           description: Not Found
       operationId: run-ansible-playbook
-      x-stoplight:
-        id: blfwdidxp6z89
       description: Run Ansible playbook by ID
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/RunRequest'
-  /ansible/playbook/yaml:
-    get:
-      summary: Get playbooks
+      x-stoplight:
+        id: n9edc3mi53ua1
+    delete:
+      summary: Delete playbook
       tags:
         - playbook
       responses:
         '200':
           description: OK
-          content:
-            text/plain:
-              schema:
-                type: object
-                properties: { }
-          headers:
-            Content-Type:
-              schema:
-                type: string
-              description: application/x-yaml
-      operationId: get-ansible-playbooks-yaml
-      description: Get all Ansible playbooks as YAML
+        '404':
+          description: Not Found
+      operationId: delete-ansible-playbook
       x-stoplight:
-        id: 61jck5eof0ned
+        id: iahzenfvbxp7k
+      description: Delete Ansible playbook by ID
   '/ansible/playbook/{id}/yaml':
     parameters:
       - schema:
@@ -1045,7 +1058,7 @@ paths:
         required: true
         description: Playbook ID
     get:
-      summary: Get playbook
+      summary: Get playbook YAML
       tags:
         - playbook
       responses:
@@ -1056,11 +1069,6 @@ paths:
               schema:
                 type: object
                 properties: { }
-          headers:
-            Content-Type:
-              schema:
-                type: string
-              description: application/x-yaml
         '404':
           description: Not Found
       operationId: get-ansible-playbook-yaml
@@ -1919,6 +1927,8 @@ components:
       required:
         - id
         - name
+        - variables
+        - plays
         - yaml
       properties:
         id:
@@ -1930,17 +1940,38 @@ components:
           type: string
           x-stoplight:
             id: k2lg5c90jgwmw
+        variables:
+          type: object
+          x-stoplight:
+            id: 8pck9rymhy0dv
+          additionalProperties:
+            x-stoplight:
+              id: udqf8pguuwql0
+            type: string
+        plays:
+          type: array
+          x-stoplight:
+            id: y3aqlt7qgjgse
+          minItems: 1
+          items:
+            x-stoplight:
+              id: 703ndz6nua8w5
+            type: object
+            additionalProperties:
+              x-stoplight:
+                id: yp1ne16wazizh
+              type: object
         yaml:
           type: string
           x-stoplight:
-            id: y3aqlt7qgjgse
+            id: 7yqte989i2d8o
     RunRequest:
       title: RunRequest
       x-stoplight:
         id: l41i96mp5a83m
       type: object
       properties:
-        device_ids:
+        devices:
           type: array
           x-stoplight:
             id: 1uynpsbd4nqx8
@@ -1949,6 +1980,22 @@ components:
               id: b65l9ypsy16zz
             type: string
             format: uuid
+        options:
+          type: array
+          x-stoplight:
+            id: mqdtiw1zzvgrq
+          items:
+            x-stoplight:
+              id: 2hfnyfkl8p1oj
+            type: string
+        variables:
+          type: object
+          x-stoplight:
+            id: m6xweb3nderg4
+          additionalProperties:
+            x-stoplight:
+              id: 9pq9z39fjf4p6
+            type: string
     RunResponse:
       title: RunResponse
       x-stoplight:
@@ -1956,7 +2003,8 @@ components:
       type: object
       required:
         - hosts
-        - results
+        - exit_code
+        - output_lines
       properties:
         hosts:
           type: array
@@ -1967,33 +2015,15 @@ components:
             x-stoplight:
               id: qib90mpzy1rr6
             type: string
-        results:
+        exit_code:
+          type: integer
+          x-stoplight:
+            id: sgjt5ufndw9sl
+        output_lines:
           type: array
           x-stoplight:
             id: 4ec8s1mzzkpfk
           items:
-            $ref: '#/components/schemas/RunResult'
             x-stoplight:
               id: mg1hds27r0daa
-    RunResult:
-      title: RunResult
-      x-stoplight:
-        id: iklaosmf4to85
-      type: object
-      required:
-        - playbook_id
-        - task_results
-      properties:
-        playbook_id:
-          type: string
-          x-stoplight:
-            id: udl2s3hw4o50x
-          format: uuid
-        task_results:
-          type: array
-          x-stoplight:
-            id: fogknex08uxi2
-          items:
-            x-stoplight:
-              id: vwfwrmk1wcz13
             type: string
