@@ -1,0 +1,469 @@
+openapi: 3.0.4
+info:
+  title: Effective-Range API
+  description: API definition for Effective Range.
+  version: 0.1.9
+
+servers:
+  - url: http://api.effective-range.com/v1
+    description: Main production endpoint
+  - url: http://testapi.effective-range.com/v1
+    description: the future endpoint for testing
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT 
+  schemas:
+    activation_code:
+      description: An 8-character hex string (e.g., a1b2c3d4)
+      type: string
+      minLength: 8
+      maxLength: 8
+      # Regex ensures only characters 0-9 and a-f (case-insensitive) are accepted
+      pattern: '^[0-9a-fA-F]{8}$'
+      example: 'A1B2C3D4'
+    hostname:
+      type: string
+      minLength: 16 # 'er-edge-' is 8 chars + 8 hex chars = 16 total
+      maxLength: 16
+      # Regex enforces 'er-edge-' followed exactly by 8 hex characters
+      pattern: '^er-edge-[0-9a-fA-F]{8}$'
+      example: 'er-edge-A1B2C3D4'
+    UUID:
+      type: string
+      description: "UUID"
+      # Regex strictly enforces the 8-4-4-4-12 hex digit format
+      pattern: '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$'
+      example: '123e4567-e89b-12d3-a456-426614174000'
+    site:
+      type: object
+      required:
+        - name
+        - id
+        - country
+        - contact
+        - site_type
+        - server
+        - port
+        - vpn_ip_range
+        - cells
+      properties:
+        name:
+          type: string
+          description: "Site name, human fiendly"
+          example: "Murony-Hungary"
+        id:
+          $ref: '#/components/schemas/UUID'
+        country:
+          type: string
+          example: "Hungary"
+        contact:
+          $ref: '#/components/schemas/contact'
+        site_type:
+          type: string
+          enum: [agriculture,sniper]
+          example: agriculture
+        server:
+          type: string
+          example: "agriculture.effective-range.com"
+        port:
+          type: integer
+          example: 8282
+        vpn_ip_range:
+          type: string
+          example: "10.8.0.0/24"
+        cells:
+          type: array
+          items:
+            $ref: '#/components/schemas/cell'
+    cell:
+      type: object
+      required:
+        - name
+        - id
+        - devices
+      properties:
+        name:
+          type: string
+          description: "Unique cell name under a site"
+          example: "Cell1"
+        id:
+          $ref: '#/components/schemas/UUID'
+        devices:
+          type: array
+          items:
+            $ref: '#/components/schemas/device'
+    device:
+      type: object
+      required:
+        - name
+        - type
+        - hostname
+        - status
+        - lat
+        - long
+        - direction
+      properties:
+        name:
+          type: string
+          description: "Unique device name under a cell"
+          example: "cannon1"
+        id:
+          $ref: '#/components/schemas/UUID'
+        type:
+          type: string
+          enum: [cannon-gas, cannon-sound, camera-scarecrow, camera-sniper]
+          example: cannon-gas
+        hostname:
+          $ref: '#/components/schemas/hostname'
+        status:
+          type: string
+          enum: [new, preactive, activating, active, faulty, returned]
+          example: active
+        lat:
+          type: number
+          format: double
+          minimum: -90.0
+          maximum: 90.0
+          example: 46.756153
+          description: "Latitude in decimal degrees (Range: -90 to 90)"
+        long:
+          type: number
+          format: double
+          minimum: -180.0
+          maximum: 180.0
+          example: 21.050204
+          description: "Longitude in decimal degrees (Range: -180 to 180)"
+        direction:
+          type: number
+          format: double
+          minimum: 0
+          maximum: 360.0
+          example: 21.6
+          description: "Angle of direction relative to north"
+    contact:
+      type: object
+      required:
+        - name
+        - email
+        - mobile
+      properties:
+        name:
+          type: string
+          example: "Mr Bean Bond"
+        email:
+          type: string
+          example: "bean@example.com"
+        mobile:
+          type: string
+          example: "+36701234567"
+    activation:
+      type: object
+      required:
+        - activation_result
+        - error_code
+        - error_description
+        - activation_config
+        - config_assets
+        - config_post_processing
+      properties:
+        activation_result:
+          type: string
+          enum: [success, failure]
+          example: success
+        error_code:
+          type: integer
+          example: 0
+        error_description:
+          type: string
+          example: "no error"
+        activation_config:
+          type: string
+          description: base64 encoded zip flat file holding all the config_assets
+          example: "UEsDBBQACAAIAPmwNl0AAAAAAAAAAAAAAAAhACAAZXItc2NhcmUtc2l0ZS0wLWNlbGwtMS1jYW0t..."
+        config_assets:
+          type: array
+          description: "This array defined which file from the zip shall be deployed to what path."
+          items: 
+            $ref: '#/components/schemas/config_asset'
+    config_asset:
+      type: object
+      required:
+        - file_description
+        - file_type
+        - file_name_zip
+        - file_full_path
+      properties:
+        file_description:
+          type: string
+          example: "vpn config"
+        file_type:
+          type: string
+          enum: [ascii-text,json,xml,config]
+          example: ascii-text
+        file_name_zip:
+          type: string
+          example: "er-config.cfg"
+        file_full_path:
+          type: string
+          example: "/etc/effective-range/er-edge-cam1.cfg"
+
+
+security:
+  - bearerAuth: []
+
+
+
+
+paths:
+  /auth:
+    post:
+      summary: Authenticate user and get Bearer token
+      description:  Pass user credentials to receive a JWT access token.
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+                - password
+              properties:
+                username:
+                  type: string
+                  example: johndoe@example.com
+                password:
+                  type: string
+                  format: password
+                  example: supersecret123
+      responses:
+        '200':
+          description: Authentication successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token_type:
+                    type: string
+                    example: Bearer
+                  access_token:
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        '401':
+          description: Invalid credentials
+  /scarecrow/sites:
+    get:
+      summary: Returns all sites details available for the user
+      description: Returns an array of sites available for the user with all the site/cell setup and device details.
+      responses:
+        "200": # status code
+          description: A JSON array of sites
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/site'
+  /scarecrow/sites/{siteId}:
+    get:
+      summary: Site details of a specific site
+      description: Returns all details of a specific site available for the user with all the site/cell setup and device details.
+      parameters:
+        - in: path
+          name: siteId
+          schema:
+            $ref: '#/components/schemas/UUID'
+          required: true
+          description: UUID of the site to get
+      security:
+        - bearerAuth: []
+      responses:
+        "200": # status code
+          description: A JSON array of sites
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/site"
+  /scarecrow/sites/{siteId}/cells:
+    get:
+      summary: Site details of a specific site
+      description: Returns all details of a specific site available for the user with all the site/cell setup and device details.
+      parameters:
+        - in: path
+          name: siteId
+          schema:
+            $ref: '#/components/schemas/UUID'
+          required: true
+          description: UUID of the site to get
+      security:
+        - bearerAuth: []
+      responses:
+        "200": # status code
+          description: A JSON array of sites
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/cell"
+  /scarecrow/sites/{siteId}/cells/{cellId}:
+    get:
+      summary: Site details of a specific site
+      description: Returns all details of a specific site available for the user with all the site/cell setup and device details.
+      parameters:
+        - in: path
+          name: siteId
+          schema:
+            $ref: '#/components/schemas/UUID'
+          required: true
+          description: Numeric ID of the site to get
+        - in: path
+          name: cellId
+          schema:
+            $ref: '#/components/schemas/UUID'
+          required: true
+          description: UUID of the cell to get
+      security:
+        - bearerAuth: []
+      responses:
+        "200": # status code
+          description: A JSON array of sites
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/cell"
+  /scarecrow/sites/{siteId}/cells/{cellId}/devices:
+    get:
+      summary: Returns all sites details available for the user
+      description: Returns an array of sites available for the user with all the site/cell setup and device details.
+      parameters:
+        - in: path
+          name: siteId
+          schema:
+            type: integer
+          required: true
+          description: UUID of the site to get
+        - in: path
+          name: cellId
+          schema:
+            $ref: '#/components/schemas/UUID'
+          required: true
+          description: UUID of the cell to get
+      security:
+        - bearerAuth: []
+      responses:
+        "200": # status code
+          description: A JSON array of sites
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/device'
+  /scarecrow/sites/{siteId}/cells/{cellId}/devices/{deviceId}:
+    get:
+      summary: Returns all sites details available for the user
+      description: Returns an array of sites available for the user with all the site/cell setup and device details.
+      parameters:
+        - in: path
+          name: siteId
+          schema:
+            $ref: '#/components/schemas/UUID'
+          required: true
+          description: UUID of the site to get
+        - in: path
+          name: cellId
+          schema:
+            $ref: '#/components/schemas/UUID'
+          required: true
+          description: UUID of the cell to get
+        - in: path
+          name: deviceId
+          schema:
+            $ref: '#/components/schemas/UUID'
+          required: true
+          description: UUID of the device to get
+      security:
+        - bearerAuth: []
+      responses:
+        "200": # status code
+          description: A JSON array of sites
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/device'
+  /scarecrow/sites/{siteId}/cells/{cellId}/devices/{deviceId}/activationCode:
+    get:
+      summary: Returns all sites details available for the user
+      description: Returns an array of sites available for the user with all the site/cell setup and device details.
+      parameters:
+        - in: path
+          name: siteId
+          schema:
+            $ref: '#/components/schemas/UUID'
+          required: true
+          description: UUID of the site to get
+        - in: path
+          name: cellId
+          schema:
+            $ref: '#/components/schemas/UUID'
+          required: true
+          description: UUID of the cell to get
+        - in: path
+          name: deviceId
+          schema:
+            $ref: '#/components/schemas/UUID'
+          required: true
+          description: UUID of the device to get
+      security:
+        - bearerAuth: []
+      responses:
+        "200": # status code
+          description: A JSON object having the code property as activation code.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                properties:
+                  code:
+                    type: string
+                    minLength: 8
+                    maxLength: 8
+                    pattern: '^[0-9a-fA-F]{8}$'
+                example: 
+                  code: "A93CB6E8"
+        '403':
+          description: Authentication required.
+  /scarecrow/activate:
+    get:
+      summary: Activates an edge hardware for the specific site device
+      description: Verifies if the hardware host was shipped for the site being activated and it is in good state for activation, also verifies the activation code and identifies the device definition. It is returning all activation details and edge device configuration and post activation action list.
+      parameters:
+        - name: hostname
+          in: query
+          required: true
+          description: Total string including the 'er-edge-' prefix followed by 8 hex characters.
+          schema:
+            $ref: '#/components/schemas/hostname'
+        - name: code
+          in: query
+          required: true
+          description: An 8-character hex string (e.g., a1b2c3d4)
+          schema:
+            $ref: '#/components/schemas/activation_code'
+      security: []
+      responses:
+        "200": # status code
+          description: A JSON array of sites
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/activation'
