@@ -1,13 +1,13 @@
-openapi: 3.0.4
+openapi: 3.1.0
 info:
   title: Effective-Range API
   description: API definition for Effective Range.
-  version: 0.1.9
+  version: 0.2.0
 
 servers:
-  - url: http://api.effective-range.com/v1
+  - url: https://api.effective-range.com/v1
     description: Main production endpoint
-  - url: http://testapi.effective-range.com/v1
+  - url: https://testapi.effective-range.com/v1
     description: the future endpoint for testing
 
 components:
@@ -16,6 +16,28 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT 
+  parameters:
+    siteId:
+      name: siteId
+      in: path
+      required: true
+      description: UUID of the site to get
+      schema:
+        $ref: '#/components/schemas/UUID'
+    cellId:
+      name: cellId
+      in: path
+      required: true
+      description: UUID of the cell to get
+      schema:
+        $ref: '#/components/schemas/UUID'
+    deviceId:
+      name: deviceId
+      in: path
+      required: true
+      description: UUID of the device to get
+      schema:
+        $ref: '#/components/schemas/UUID'
   schemas:
     activation_code:
       description: An 8-character hex string (e.g., a1b2c3d4)
@@ -211,16 +233,13 @@ components:
           type: string
           example: "/etc/effective-range/er-edge-cam1.cfg"
 
-
 security:
   - bearerAuth: []
-
-
-
 
 paths:
   /auth:
     post:
+      operationId: authenticate
       summary: Authenticate user and get Bearer token
       description:  Pass user credentials to receive a JWT access token.
       security: []
@@ -259,6 +278,7 @@ paths:
           description: Invalid credentials
   /scarecrow/sites:
     get:
+      operationId: listSites
       summary: Returns all sites details available for the user
       description: Returns an array of sites available for the user with all the site/cell setup and device details.
       responses:
@@ -272,15 +292,11 @@ paths:
                   $ref: '#/components/schemas/site'
   /scarecrow/sites/{siteId}:
     get:
+      operationId: getSite
       summary: Site details of a specific site
       description: Returns all details of a specific site available for the user with all the site/cell setup and device details.
       parameters:
-        - in: path
-          name: siteId
-          schema:
-            $ref: '#/components/schemas/UUID'
-          required: true
-          description: UUID of the site to get
+        - $ref: '#/components/parameters/siteId'
       security:
         - bearerAuth: []
       responses:
@@ -292,15 +308,11 @@ paths:
                 $ref: "#/components/schemas/site"
   /scarecrow/sites/{siteId}/cells:
     get:
+      operationId: listSiteCells
       summary: Site details of a specific site
       description: Returns all details of a specific site available for the user with all the site/cell setup and device details.
       parameters:
-        - in: path
-          name: siteId
-          schema:
-            $ref: '#/components/schemas/UUID'
-          required: true
-          description: UUID of the site to get
+        - $ref: '#/components/parameters/siteId'
       security:
         - bearerAuth: []
       responses:
@@ -314,21 +326,12 @@ paths:
                   $ref: "#/components/schemas/cell"
   /scarecrow/sites/{siteId}/cells/{cellId}:
     get:
+      operationId: getSiteCell
       summary: Site details of a specific site
       description: Returns all details of a specific site available for the user with all the site/cell setup and device details.
       parameters:
-        - in: path
-          name: siteId
-          schema:
-            $ref: '#/components/schemas/UUID'
-          required: true
-          description: Numeric ID of the site to get
-        - in: path
-          name: cellId
-          schema:
-            $ref: '#/components/schemas/UUID'
-          required: true
-          description: UUID of the cell to get
+        - $ref: '#/components/parameters/siteId'
+        - $ref: '#/components/parameters/cellId'
       security:
         - bearerAuth: []
       responses:
@@ -340,21 +343,12 @@ paths:
                 $ref: "#/components/schemas/cell"
   /scarecrow/sites/{siteId}/cells/{cellId}/devices:
     get:
+      operationId: listCellDevices
       summary: Returns all sites details available for the user
       description: Returns an array of sites available for the user with all the site/cell setup and device details.
       parameters:
-        - in: path
-          name: siteId
-          schema:
-            type: integer
-          required: true
-          description: UUID of the site to get
-        - in: path
-          name: cellId
-          schema:
-            $ref: '#/components/schemas/UUID'
-          required: true
-          description: UUID of the cell to get
+        - $ref: '#/components/parameters/siteId'
+        - $ref: '#/components/parameters/cellId'
       security:
         - bearerAuth: []
       responses:
@@ -368,27 +362,13 @@ paths:
                   $ref: '#/components/schemas/device'
   /scarecrow/sites/{siteId}/cells/{cellId}/devices/{deviceId}:
     get:
+      operationId: getCellDevice
       summary: Returns all sites details available for the user
       description: Returns an array of sites available for the user with all the site/cell setup and device details.
       parameters:
-        - in: path
-          name: siteId
-          schema:
-            $ref: '#/components/schemas/UUID'
-          required: true
-          description: UUID of the site to get
-        - in: path
-          name: cellId
-          schema:
-            $ref: '#/components/schemas/UUID'
-          required: true
-          description: UUID of the cell to get
-        - in: path
-          name: deviceId
-          schema:
-            $ref: '#/components/schemas/UUID'
-          required: true
-          description: UUID of the device to get
+        - $ref: '#/components/parameters/siteId'
+        - $ref: '#/components/parameters/cellId'
+        - $ref: '#/components/parameters/deviceId'
       security:
         - bearerAuth: []
       responses:
@@ -400,27 +380,13 @@ paths:
                 $ref: '#/components/schemas/device'
   /scarecrow/sites/{siteId}/cells/{cellId}/devices/{deviceId}/activationCode:
     get:
+      operationId: getDeviceActivationCode
       summary: Returns all sites details available for the user
       description: Returns an array of sites available for the user with all the site/cell setup and device details.
       parameters:
-        - in: path
-          name: siteId
-          schema:
-            $ref: '#/components/schemas/UUID'
-          required: true
-          description: UUID of the site to get
-        - in: path
-          name: cellId
-          schema:
-            $ref: '#/components/schemas/UUID'
-          required: true
-          description: UUID of the cell to get
-        - in: path
-          name: deviceId
-          schema:
-            $ref: '#/components/schemas/UUID'
-          required: true
-          description: UUID of the device to get
+        - $ref: '#/components/parameters/siteId'
+        - $ref: '#/components/parameters/cellId'
+        - $ref: '#/components/parameters/deviceId'
       security:
         - bearerAuth: []
       responses:
@@ -444,6 +410,7 @@ paths:
           description: Authentication required.
   /scarecrow/activate:
     get:
+      operationId: activateDevice
       summary: Activates an edge hardware for the specific site device
       description: Verifies if the hardware host was shipped for the site being activated and it is in good state for activation, also verifies the activation code and identifies the device definition. It is returning all activation details and edge device configuration and post activation action list.
       parameters:

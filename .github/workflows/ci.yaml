@@ -1,0 +1,75 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+    tags: [ v*.*.* ]
+
+  pull_request:
+    branches: [ main ]
+    types:
+      - synchronize
+      - opened
+      - reopened
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install OpenAPI validator
+        run: python -m pip install openapi-spec-validator==0.7.2
+
+      - name: Validate OpenAPI specification
+        run: python -m openapi_spec_validator openapi/effective-range-api.yaml
+
+  release:
+    needs: validate
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      RELEASE_TAG: ${{ github.ref_name }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install YAML converter
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes yq
+
+      - name: Verify release version
+        run: |
+          tag_version="${RELEASE_TAG#v}"
+          spec_version=$(yq -er '.info.version' openapi/effective-range-api.yaml)
+          if [ "$tag_version" != "$spec_version" ]; then
+            echo "::error::Tag version '$tag_version' does not match info.version '$spec_version'"
+            exit 1
+          fi
+
+      - name: Prepare release artifacts
+        run: |
+          version="${RELEASE_TAG#v}"
+          mkdir -p dist
+          cp openapi/effective-range-api.yaml "dist/effective-range-api_${version}.yaml"
+          yq '.' openapi/effective-range-api.yaml > "dist/effective-range-api_${version}.json"
+
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          version="${RELEASE_TAG#v}"
+          gh release create "$RELEASE_TAG" \
+            --verify-tag \
+            --title "$RELEASE_TAG" \
+            --generate-notes \
+            "dist/effective-range-api_${version}.yaml" \
+            "dist/effective-range-api_${version}.json"
